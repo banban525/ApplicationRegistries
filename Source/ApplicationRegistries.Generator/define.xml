@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationRegistryDefine
+  xmlns="https://github.com/banban525/ApplicationRegistries/schemas/ApplicationRegistryDefine.xsd">
+  <Entry id="InstallDir" Type="string">
+    <Description>Installed Directory</Description>
+    <Registory>
+      <Key>HKLM\SOFTWARE\banban525\ApplicationRegistries\Install</Key>
+      <Name>Directory</Name>
+      <DefaultValue>None</DefaultValue>
+    </Registory>
+  </Entry>
+  <Entry id="ApplicationName" Type="string">
+    <Description>Application Name</Description>
+    <StaticValue>
+      <Value>ApplicationRegistries</Value>
+    </StaticValue>
+  </Entry>
+  <Entry id="IsDebug" Type="bool">
+    <Description>Debug Mode</Description>
+    <CommandLineArgument ignoreCase="true">
+      <ArgumentName>/Debug</ArgumentName>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
+  </Entry>
+  <Entry id="LogginUser" Type="string">
+    <Description>Loggined user</Description>
+    <EnvironmentVariable>
+      <VariableName>USERNAME</VariableName>
+      <DefaultValue>Unknown</DefaultValue>
+    </EnvironmentVariable>
+  </Entry>
+</ApplicationRegistryDefine>

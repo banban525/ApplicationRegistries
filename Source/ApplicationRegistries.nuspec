@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ApplicationRegistries</id>
+    <version>1.0.0</version>
+    <title>ApplicationRegistries</title>
+    <authors>banban525</authors>
+    <owners>banban525</owners>
+    <licenseUrl>https://github.com/banban525/ApplicationRegistries</licenseUrl>
+    <projectUrl>https://github.com/banban525/ApplicationRegistries</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>description</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright banban525 2015</copyright>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="ApplicationRegistry\bin\release\*" target="lib\net40"/>
+    <file src="..\schemas\*" target="Content\schemas"/>
+    <file src="ApplicationRegistries.Generator\bin\Release\*" target="tools"/>
+  </files>
+</package>
