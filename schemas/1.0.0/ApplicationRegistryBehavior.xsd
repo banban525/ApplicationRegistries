@@ -2,14 +2,14 @@
   <xs:schema 
   attributeFormDefault="unqualified" 
   elementFormDefault="qualified"
-  targetNamespace="https://github.com/banban525/ApplicationRegistries/schemas/ApplicationRegistryBehavior.xsd"
-  xmlns="https://github.com/banban525/ApplicationRegistries/schemas/ApplicationRegistryBehavior.xsd"
-  xmlns:df="https://github.com/banban525/ApplicationRegistries/schemas/ApplicationRegistryDefine.xsd"
+  targetNamespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryBehavior.xsd"
+  xmlns="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryBehavior.xsd"
+  xmlns:df="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd"
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xs:import 
       schemaLocation="ApplicationRegistryDefine.xsd"
-      namespace="https://github.com/banban525/ApplicationRegistries/schemas/ApplicationRegistryDefine.xsd"
+      namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd"
       />
     <xs:element name="ApplicationRegistry">
       <xs:complexType>

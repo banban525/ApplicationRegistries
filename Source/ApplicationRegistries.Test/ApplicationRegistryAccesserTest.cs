@@ -16,7 +16,7 @@ namespace ApplicationRegistries.Test
         {
             _defineXml = @"<?xml version='1.0' encoding='utf-8' ?>
 <ApplicationRegistryDefine
-  xmlns='https://github.com/banban525/ApplicationRegistries/schemas/ApplicationRegistryDefine.xsd'>
+  xmlns='https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd'>
   <Entry id='InstallDir' Type='string'>
     <Description>Installed Directory</Description>
     <Registory>
