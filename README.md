@@ -17,7 +17,7 @@ Examples of XML definition
 
     <?xml version="1.0" encoding="utf-8" ?>
     <ApplicationRegistryDefine
-      xmlns="https://github.com/banban525/ApplicationRegistries/schemas/ApplicationRegistryDefine.xsd">
+      xmlns="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd">
       <Entry id="InstallDir" Type="string">
         <Description>Installed Directory</Description>
         <Registory>
@@ -59,15 +59,33 @@ Generated wrapper class is as follows:
 
 
 
-## VS. 
-
 ## Requirement
+
+ApplicationRegistries.dll refer to .NET Framework 4.0 only.
+
+ApplicationRegistries.Generator.exe is refer to follows:
+
+* Antlr4.StringTemplate
+* Command Line Parser Library
+
 
 ## Usage
 
-## Install
+    Usage: ApplicationRegistries.Generator.exe <options>
+    
+    options:
+    
+      -m, --mode         Required. (Default: Code) Select Mode for generation type.
+      -o, --output       Required. Output file path.
+      -i, --input        Required. Input file path.
+      -c, --classname    (Default: Registries) class name for *.cs Code
+      -n, --namespace    (Default: ApplicationRegistries) namespace for *.cs Code.
+      -t, --template     (Default: ) template name for --Mode Other
+      --help             Display this help screen.
+
 
 ## Contribution
+
 
 ## Licence
 
