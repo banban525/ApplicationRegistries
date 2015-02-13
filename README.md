@@ -54,7 +54,26 @@ How to generate a wrapper class:
 
 Generated wrapper class is as follows:
 
+     public class Registries
+    {
+        public Registries()
+        {
+            ...
+        }
+
+        /// <summary>
+        /// Installed Directory
+        /// </summary>
+        public String InstallDir
+        {
+            get
+            {
+                ...
+            }
+        }
+    ...
     
+    }
 
 
 
@@ -86,6 +105,7 @@ ApplicationRegistries.Generator.exe is refer to follows:
 
 ## Contribution
 
+now writing.
 
 ## Licence
 
