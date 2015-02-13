@@ -58,7 +58,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
             "ine.xsd")]
         [System.Xml.Serialization.XmlElementAttribute("EnvironmentVariable", typeof(EnvironmentVariable), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
             "ine.xsd")]
-        [System.Xml.Serialization.XmlElementAttribute("Registory", typeof(Registory), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
+        [System.Xml.Serialization.XmlElementAttribute("Registry", typeof(Registry), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
             "ine.xsd")]
         [System.Xml.Serialization.XmlElementAttribute("StaticValue", typeof(StaticValue), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
             "ine.xsd")]
@@ -177,7 +177,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
         "ine.xsd")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
         "ine.xsd", IsNullable=false)]
-    public partial class Registory {
+    public partial class Registry {
         
         private string keyField;
         
@@ -296,7 +296,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("CommandLineArgument", typeof(CommandLineArgument))]
         [System.Xml.Serialization.XmlElementAttribute("EnvironmentVariable", typeof(EnvironmentVariable))]
-        [System.Xml.Serialization.XmlElementAttribute("Registory", typeof(Registory))]
+        [System.Xml.Serialization.XmlElementAttribute("Registry", typeof(Registry))]
         [System.Xml.Serialization.XmlElementAttribute("StaticValue", typeof(StaticValue))]
         public object Item {
             get {

@@ -6,7 +6,7 @@ namespace ApplicationRegistries.GeneratedXmlObject
     {
         internal RegistryEntry CreateRegistryEntry(EntryDefine define)
         {
-            var registryXml = Item as Registory;
+            var registryXml = Item as Registry;
             if (registryXml == null)
             {
                 throw new InvalidOleVariantTypeException();
@@ -58,7 +58,7 @@ namespace ApplicationRegistries.GeneratedXmlObject
 
         internal bool HasRegistryEntry
         {
-            get { return Item is Registory; }
+            get { return Item is Registry; }
         }
         internal bool HasStaticValue
         {

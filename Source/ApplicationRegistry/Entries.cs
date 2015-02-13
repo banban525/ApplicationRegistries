@@ -113,14 +113,14 @@ namespace ApplicationRegistries
         private static Entries Parse(Entries baseEntries, ApplicationRegistry xmlObject)
         {
             var entries = new List<IEntry>();
-            foreach (var entry in xmlObject.Entry.Where(_ => _.Item is GeneratedXmlObject.Registory))
+            foreach (var entry in xmlObject.Entry.Where(_ => _.Item is GeneratedXmlObject.Registry))
             {
                 var baseEntry = baseEntries.GetEntry(entry.id);
                 if (baseEntry == null)
                 {
                     continue;
                 }
-                var registryXml = entry.Item as GeneratedXmlObject.Registory;
+                var registryXml = entry.Item as GeneratedXmlObject.Registry;
                 if (registryXml == null)
                 {
                     throw new InvalidOleVariantTypeException();

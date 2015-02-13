@@ -12,19 +12,29 @@
       namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd"
       />
     <xs:element name="ApplicationRegistry">
+      <xs:annotation>
+        <xs:documentation>Settings for overriding entries.</xs:documentation>
+      </xs:annotation>
       <xs:complexType>
         <xs:sequence>
           <xs:element maxOccurs="unbounded" name="Entry">
+            <xs:annotation>
+              <xs:documentation>Entry to change the behavior</xs:documentation>
+            </xs:annotation>
             <xs:complexType>
               <xs:sequence>
                 <xs:choice maxOccurs="1">
-                  <xs:element ref="df:Registory"/>
+                  <xs:element ref="df:Registry"/>
                   <xs:element ref="df:StaticValue"/>
                   <xs:element ref="df:CommandLineArgument"/>
                   <xs:element ref="df:EnvironmentVariable"/>
                 </xs:choice>
               </xs:sequence>
-              <xs:attribute name="id" type="xs:ID" use="required" />
+              <xs:attribute name="id" type="xs:ID" use="required">
+                <xs:annotation>
+                  <xs:documentation>ID for override target</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
             </xs:complexType>
           </xs:element>
         </xs:sequence>
