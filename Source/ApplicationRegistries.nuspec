@@ -23,5 +23,6 @@
     <file src="ApplicationRegistries.Generator\bin\Release\ApplicationRegistries.dll" target="tools"/>
     <file src="ApplicationRegistries.Generator\bin\Release\ApplicationRegistries.Generator.exe" target="tools"/>
     <file src="ApplicationRegistries.Generator\bin\Release\CommandLine.dll" target="tools"/>
+    <file src="ApplicationRegistries.Generator\bin\Release\Readme.txt" target="tools"/>
   </files>
 </package>

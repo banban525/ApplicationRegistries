@@ -100,6 +100,15 @@ namespace ApplicationRegistries.Test
             Assert.That(val, Is.EqualTo("localhost"));
         }
 
+        [TestCase]
+        [SetEnvironmentVarialbe]
+        public void OverrideEntry()
+        {
+            _accesser.AddOverrideBehavior("Proxy", () => "192.168.0.1");
+            var val = _accesser.GetString("Proxy");
+            Assert.That(val, Is.EqualTo("192.168.0.1"));
+        }
+
         [AttributeUsage(AttributeTargets.Method)]
         class SetCommandLineArgumentsAttribute : Attribute, ITestAction
         {

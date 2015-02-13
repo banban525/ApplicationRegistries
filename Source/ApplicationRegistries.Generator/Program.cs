@@ -25,6 +25,7 @@ namespace ApplicationRegistries.Generator
                 ClassName = options.ClassName,
                 Namespace = options.Namespace,
                 Entries = entries,
+                InputXml = File.ReadAllText(defineXmlPath).Replace("\"","\"\""),
             };
 
             TemplateInfo templateInfo = null;

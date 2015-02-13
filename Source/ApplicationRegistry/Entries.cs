@@ -98,6 +98,20 @@ namespace ApplicationRegistries
             var xmlObject = (GeneratedXmlObject.ApplicationRegistry)serializer.Deserialize(setting);
             
 
+            return Parse(baseEntries, xmlObject);
+        }
+
+
+
+        public static Entries Parse(Entries baseEntries, XmlReader reader)
+        {
+            var serializer = new XmlSerializer(typeof(GeneratedXmlObject.ApplicationRegistry));
+            var xmlObject = (GeneratedXmlObject.ApplicationRegistry)serializer.Deserialize(reader);
+
+            return Parse(baseEntries, xmlObject);
+        }
+        private static Entries Parse(Entries baseEntries, ApplicationRegistry xmlObject)
+        {
             var entries = new List<IEntry>();
             foreach (var entry in xmlObject.Entry.Where(_ => _.Item is GeneratedXmlObject.Registory))
             {
@@ -135,7 +149,7 @@ namespace ApplicationRegistries
                 entries.Add(new StaticValueEntry(baseEntry.Define, value));
             }
 
-            foreach (var entry in xmlObject.Entry.Where(_=>_.Item is GeneratedXmlObject.CommandLineArgument))
+            foreach (var entry in xmlObject.Entry.Where(_ => _.Item is GeneratedXmlObject.CommandLineArgument))
             {
                 var baseEntry = baseEntries.GetEntry(entry.id);
                 if (baseEntry == null)
@@ -154,7 +168,7 @@ namespace ApplicationRegistries
                     ignoreCase, defaultValue));
             }
 
-            foreach (var entry in xmlObject.Entry.Where(_=>_.Item is GeneratedXmlObject.EnvironmentVariable))
+            foreach (var entry in xmlObject.Entry.Where(_ => _.Item is GeneratedXmlObject.EnvironmentVariable))
             {
                 var baseEntry = baseEntries.GetEntry(entry.id);
                 if (baseEntry == null)
@@ -216,12 +230,23 @@ namespace ApplicationRegistries
             get { return _entries; }
         }
 
+        public IEnumerable<EntryDefine> Defines
+        {
+            get { return _entries.Select(_ => _.Define); }
+        }
+
         internal void SetCommandLineArguments(string[] commandLineArguments)
         {
             foreach (var commandLineArgumentEntry in CommandLineArgumentEntries)
             {
                 commandLineArgumentEntry.SetCommandLineArguments(commandLineArguments);
             }
+        }
+
+        public Entries Replace(IEntry entry)
+        {
+            var newEntries = _entries.Where(_ => _.Define.ID != entry.Define.ID).Concat(new IEntry[] {entry});
+            return new Entries(newEntries);
         }
     }
 }
