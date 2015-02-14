@@ -47,7 +47,7 @@ try
 
     & $msbuild (Join-Path $scriptDir "ApplicationRegistries.sln")  /p:Configuration=Release "/p:Platform=Any CPU"  /t:Rebuild
 
-    $nuget = Join-Path $scriptDir "tools\nuget"
+    $nuget = Join-Path $scriptDir ".nuget\nuget.exe"
     & "$nuget" "pack" "-Version" "$version"
 }
 finally
