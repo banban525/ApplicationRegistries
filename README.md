@@ -124,7 +124,7 @@ You can install with nuget. The command is follows:
 
 ## Licence
 
-[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
+[MIT](https://github.com/banban525/ApplicationRegistries/blob/master/LICENSE)
 
 ## Author
 

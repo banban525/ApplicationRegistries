@@ -124,7 +124,7 @@ XML定義の例は以下の通り。
 
 ## ライセンス
 
-[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
+[MIT](https://github.com/banban525/ApplicationRegistries/blob/master/LICENSE)
 
 ## 開発者
 
