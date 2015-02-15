@@ -11,6 +11,21 @@ This library solve the problem by abstracting the registry and environment varia
 According to the definition described in XML, ApplicaitonRegistry create a wrapper class that accesses the external Configuration.
 If you use this wrapper class, you can change the external configuration without changing the application code and the actual external configuration.
 
+## Demo
+
+![Demo Animation](Samples/Readmecontents/Readme_images.gif) 
+
+
+## Requirement
+
+ApplicationRegistries.dll refer to .NET Framework 4.0 only.
+
+ApplicationRegistries.Generator.exe is refer to follows:
+
+* Antlr4.StringTemplate
+* Command Line Parser Library
+
+
 ## Usage
 
 Examples of XML definition
@@ -76,19 +91,7 @@ Generated wrapper class is as follows:
     }
 
 
-
-
-## Requirement
-
-ApplicationRegistries.dll refer to .NET Framework 4.0 only.
-
-ApplicationRegistries.Generator.exe is refer to follows:
-
-* Antlr4.StringTemplate
-* Command Line Parser Library
-
-
-## Usage
+### The generator tool Usage
 
     Usage: ApplicationRegistries.Generator.exe <options>
     
@@ -102,10 +105,20 @@ ApplicationRegistries.Generator.exe is refer to follows:
       -t, --template     (Default: ) template name for --Mode Other
       --help             Display this help screen.
 
+## Install
+
+You can install with nuget. The command is follows:
+
+    PM> Install-Package ApplicationRegistries
 
 ## Contribution
 
-now writing.
+1. Fork it ( https://github.com/banban525/ApplicationRegistries/fork )
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create new Pull Request
+
 
 ## Licence
 
