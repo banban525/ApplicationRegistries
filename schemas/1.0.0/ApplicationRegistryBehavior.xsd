@@ -11,7 +11,7 @@
       schemaLocation="ApplicationRegistryDefine.xsd"
       namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd"
       />
-    <xs:element name="ApplicationRegistry">
+    <xs:element name="ApplicationRegistryBehavior">
       <xs:annotation>
         <xs:documentation>Settings for overriding entries.</xs:documentation>
       </xs:annotation>

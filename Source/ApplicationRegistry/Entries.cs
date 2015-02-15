@@ -94,8 +94,8 @@ namespace ApplicationRegistries
 
         public static Entries Parse(Entries baseEntries, Stream setting)
         {
-            var serializer = new XmlSerializer(typeof (GeneratedXmlObject.ApplicationRegistry));
-            var xmlObject = (GeneratedXmlObject.ApplicationRegistry)serializer.Deserialize(setting);
+            var serializer = new XmlSerializer(typeof(GeneratedXmlObject.ApplicationRegistryBehavior));
+            var xmlObject = (GeneratedXmlObject.ApplicationRegistryBehavior)serializer.Deserialize(setting);
             
 
             return Parse(baseEntries, xmlObject);
@@ -105,12 +105,12 @@ namespace ApplicationRegistries
 
         public static Entries Parse(Entries baseEntries, XmlReader reader)
         {
-            var serializer = new XmlSerializer(typeof(GeneratedXmlObject.ApplicationRegistry));
-            var xmlObject = (GeneratedXmlObject.ApplicationRegistry)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof(GeneratedXmlObject.ApplicationRegistryBehavior));
+            var xmlObject = (GeneratedXmlObject.ApplicationRegistryBehavior)serializer.Deserialize(reader);
 
             return Parse(baseEntries, xmlObject);
         }
-        private static Entries Parse(Entries baseEntries, ApplicationRegistry xmlObject)
+        private static Entries Parse(Entries baseEntries, ApplicationRegistryBehavior xmlObject)
         {
             var entries = new List<IEntry>();
             foreach (var entry in xmlObject.Entry.Where(_ => _.Item is GeneratedXmlObject.Registry))

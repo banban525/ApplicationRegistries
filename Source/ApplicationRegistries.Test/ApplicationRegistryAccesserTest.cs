@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml;
 using Microsoft.Win32;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace ApplicationRegistries.Test
 {
@@ -48,7 +49,6 @@ namespace ApplicationRegistries.Test
 </ApplicationRegistryDefine>
 ";
             _accesser = new ApplicationRegistryAccesser(XmlReader.Create(new StringReader(_defineXml)));
-
         }
         [TestCase]
         [SetRegistry]
@@ -108,6 +108,53 @@ namespace ApplicationRegistries.Test
             var val = _accesser.GetString("Proxy");
             Assert.That(val, Is.EqualTo("192.168.0.1"));
         }
+
+        [TestCase]
+        public void OverrideByBehaiviorXml()
+        {
+            var overrideXml = @"<?xml version='1.0' encoding='utf-8' ?>
+<ApplicationRegistryBehavior
+  xmlns='https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryBehavior.xsd'
+  xmlns:df='https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd'>
+  <Entry id='InstallDir'>
+    <df:EnvironmentVariable>
+      <df:VariableName>ApplicationRegistriesInstallDir</df:VariableName>
+      <df:DefaultValue>c:\tools</df:DefaultValue>
+    </df:EnvironmentVariable>
+  </Entry>
+  <Entry id='ApplicationName'>
+    <df:CommandLineArgument ignoreCase='true'>
+      <df:ArgumentName>/ApplicationName</df:ArgumentName>
+      <df:DefaultValue>OverridedApplicationRegistries</df:DefaultValue>
+    </df:CommandLineArgument>
+  </Entry>
+  <Entry id='IsDebug'>
+    <df:StaticValue>
+      <df:Value>True</df:Value>
+    </df:StaticValue>
+  </Entry>
+  <Entry id='Proxy'>
+    <df:Registry>
+      <df:Key>HKEY_CURRENT_USER\SOFTWARE\banban525\ApplicationRegistries</df:Key>
+      <df:Name>Proxy</df:Name>
+      <df:DefaultValue>None</df:DefaultValue>
+    </df:Registry>
+  </Entry>
+</ApplicationRegistryBehavior>";
+
+            _accesser.AddOverrideFile(XmlNodeReader.Create(new StringReader(overrideXml)));
+
+            var installDir = _accesser.GetString("InstallDir");
+            Assert.That(installDir, Is.EqualTo(@"c:\tools"));
+            var applicationName = _accesser.GetString("ApplicationName");
+            Assert.That(applicationName, Is.EqualTo("OverridedApplicationRegistries"));
+            var isDebug = _accesser.GetBoolean("IsDebug");
+            Assert.That(isDebug, Is.True);
+            var proxy = _accesser.GetString("Proxy");
+            Assert.That(proxy, Is.EqualTo("192.168.0.2"));
+
+        }
+
 
         [AttributeUsage(AttributeTargets.Method)]
         class SetCommandLineArgumentsAttribute : Attribute, ITestAction

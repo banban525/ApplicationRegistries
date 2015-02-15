@@ -20,17 +20,17 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryBeh" +
-        "avior.xsd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryBeh" +
-        "avior.xsd", IsNullable=false)]
-    public partial class ApplicationRegistry {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryBehavior.xsd")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryBehavior.xsd", IsNullable=false)]
+    public partial class ApplicationRegistryBehavior {
         
-        private ApplicationRegistryEntry[] entryField;
+        private ApplicationRegistryBehaviorEntry[] entryField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Entry")]
-        public ApplicationRegistryEntry[] Entry {
+        public ApplicationRegistryBehaviorEntry[] Entry {
             get {
                 return this.entryField;
             }
@@ -45,23 +45,23 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryBeh" +
-        "avior.xsd")]
-    public partial class ApplicationRegistryEntry {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryBehavior.xsd")]
+    public partial class ApplicationRegistryBehaviorEntry {
         
         private object itemField;
         
         private string idField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CommandLineArgument", typeof(CommandLineArgument), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-            "ine.xsd")]
-        [System.Xml.Serialization.XmlElementAttribute("EnvironmentVariable", typeof(EnvironmentVariable), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-            "ine.xsd")]
-        [System.Xml.Serialization.XmlElementAttribute("Registry", typeof(Registry), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-            "ine.xsd")]
-        [System.Xml.Serialization.XmlElementAttribute("StaticValue", typeof(StaticValue), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-            "ine.xsd")]
+        [System.Xml.Serialization.XmlElementAttribute("CommandLineArgument", typeof(CommandLineArgument), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+            "tryDefine.xsd")]
+        [System.Xml.Serialization.XmlElementAttribute("EnvironmentVariable", typeof(EnvironmentVariable), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+            "tryDefine.xsd")]
+        [System.Xml.Serialization.XmlElementAttribute("Registry", typeof(Registry), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+            "tryDefine.xsd")]
+        [System.Xml.Serialization.XmlElementAttribute("StaticValue", typeof(StaticValue), Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+            "tryDefine.xsd")]
         public object Item {
             get {
                 return this.itemField;
@@ -88,10 +88,10 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd", IsNullable=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd", IsNullable=false)]
     public partial class CommandLineArgument {
         
         private string argumentNameField;
@@ -137,10 +137,10 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd", IsNullable=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd", IsNullable=false)]
     public partial class EnvironmentVariable {
         
         private string variableNameField;
@@ -173,10 +173,10 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd", IsNullable=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd", IsNullable=false)]
     public partial class Registry {
         
         private string keyField;
@@ -221,10 +221,10 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd", IsNullable=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd", IsNullable=false)]
     public partial class StaticValue {
         
         private string valueField;
@@ -245,14 +245,14 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd", IsNullable=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd", IsNullable=false)]
     public partial class ApplicationRegistryDefine {
         
         private ApplicationRegistryDefineEntry[] entryField;
-                
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Entry")]
         public ApplicationRegistryDefineEntry[] Entry {
@@ -263,7 +263,6 @@ namespace ApplicationRegistries.GeneratedXmlObject {
                 this.entryField = value;
             }
         }
-        
     }
     
     /// <remarks/>
@@ -271,8 +270,8 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd")]
     public partial class ApplicationRegistryDefineEntry {
         
         private string descriptionField;
@@ -333,8 +332,8 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDef" +
-        "ine.xsd")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd")]
     public enum TypeEnum {
         
         /// <remarks/>
