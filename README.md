@@ -1,6 +1,8 @@
 ApplicationRegistries
 ======================
 
+[To Japanese](https://github.com/banban525/ApplicationRegistries/blob/master/README.ja.md)
+
 ApplicaitonRegistries is a .NET library to abstract the configuration of the application.
 
 ## Description

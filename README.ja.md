@@ -1,6 +1,8 @@
 ApplicationRegistries
 ======================
 
+[To English](https://github.com/banban525/ApplicationRegistries/blob/master/README.md)
+
 ApplicaitonRegistries はアプリケーションの設定を抽象化する.NETライブラリです。
 
 ## 説明
