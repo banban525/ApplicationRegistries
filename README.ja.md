@@ -1,40 +1,40 @@
 ApplicationRegistries
 ======================
 
-ApplicaitonRegistries is a .NET library to abstract the configuration of the application.
+ApplicaitonRegistries はアプリケーションの設定を抽象化する.NETライブラリです。
 
-## Description
+## 説明
 
-Most of the applications are designed to change the behavior in accordance with external configurations, for example the registry and environment variables.
-However, in order to easier to perform unit tests, these external configurations should be able to dynamically change the settings.
-This library solve the problem by abstracting the registry and environment variables as objects.
-According to the definition described in XML, ApplicaitonRegistries create a wrapper class that accesses the external Configuration.
-If you use this wrapper class, you can change the external configuration without changing the application code and the actual external configuration.
+多くのアプリケーションは、レジストリや環境変数といった外部設定にしたがって挙動を変えるようになっています。
+しかし、テスト容易性を考えるとこれらの外部設定は動的に変更できるようにしておくべきです。
+このライブラリは、レジストリや環境変数を抽象化することでこの問題を解決します。
+外部設定の定義をXMLに記述することで、ApplicationRegistriesは外部設定にアクセスするラッパークラスを生成します。
+このラッパークラスを使うことで、アプリケーションコードを変更せずに外部設定の参照先を変更することができます。
 
-## Demo
+## デモ
 
-![Demo Animation](https://github.com/banban525/ApplicationRegistries/blob/master/Samples/ReadmeContents/Readme_images.gif?raw=true) 
+![Demo Animation](https://github.com/banban525/ApplicationRegistries/blob/master/Samples/ReadmeContents/Readme_images.ja.gif?raw=true) 
 
 
-## Requirement
+## 依存
 
-ApplicationRegistries.dll refer to .NET Framework 4.0 only.
+ApplicationRegistries.dll は、.NET Framework 4.0 のみに依存します。
 
-ApplicationRegistries.Generator.exe is refer to follows:
+ApplicationRegistries.Generator.exe は次のライブラリに依存します。
 
 * Antlr4.StringTemplate
 * Command Line Parser Library
 
 
-## Usage
+## 使い方
 
-Examples of XML definition
+XML定義の例は以下の通り。
 
     <?xml version="1.0" encoding="utf-8" ?>
     <ApplicationRegistryDefine
       xmlns="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd">
       <Entry id="InstallDir" Type="string">
-        <Description>Installed Directory</Description>
+        <Description>インストール先のフォルダ</Description>
         <Registory>
           <Key>HKLM\SOFTWARE\banban525\ApplicationRegistries\Install</Key>
           <Name>Directory</Name>
@@ -42,20 +42,20 @@ Examples of XML definition
         </Registory>
       </Entry>
       <Entry id="ApplicationName" Type="string">
-        <Description>Application Name</Description>
+        <Description>アプリケーション名</Description>
         <StaticValue>
           <Value>ApplicationRegistries</Value>
         </StaticValue>
       </Entry>
       <Entry id="IsDebug" Type="bool">
-        <Description>Debug Mode</Description>
+        <Description>デバッグモードかどうか</Description>
         <CommandLineArgument ignoreCase="true">
           <ArgumentName>/Debug</ArgumentName>
           <DefaultValue>0</DefaultValue>
         </CommandLineArgument>
       </Entry>
       <Entry id="LogginUser" Type="string">
-        <Description>Loggined user</Description>
+        <Description>ログイン中ユーザ</Description>
         <EnvironmentVariable>
           <VariableName>USERNAME</VariableName>
           <DefaultValue>Unknown</DefaultValue>
@@ -63,11 +63,11 @@ Examples of XML definition
       </Entry>
     </ApplicationRegistryDefine>
 
-How to generate a wrapper class:
+ラッパークラスの出力方法
 
     ApplicationRegistries.Generator.exe --mode Code --input define.xml --output Registries.cs
 
-Generated wrapper class is as follows:
+以下のようなラッパークラスが生成されます。
 
      public class Registries
     {
@@ -77,7 +77,7 @@ Generated wrapper class is as follows:
         }
 
         /// <summary>
-        /// Installed Directory
+        /// インストール先のフォルダ
         /// </summary>
         public String InstallDir
         {
@@ -91,7 +91,7 @@ Generated wrapper class is as follows:
     }
 
 
-### The generator tool Usage
+### 生成ツールの使い方
 
     Usage: ApplicationRegistries.Generator.exe <options>
     
@@ -105,25 +105,25 @@ Generated wrapper class is as follows:
       -t, --template     (Default: ) template name for --Mode Other
       --help             Display this help screen.
 
-## Install
+## インストール方法
 
-You can install with nuget. The command is follows:
+以下のコマンドでnugetからインストールできます。
 
     PM> Install-Package ApplicationRegistries
 
-## Contribution
+## 開発方法
 
-1. Fork it ( https://github.com/banban525/ApplicationRegistries/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create new Pull Request
+1. フォークしてください ( https://github.com/banban525/ApplicationRegistries/fork )
+2. 機能ブランチを作ってください (git checkout -b my-new-feature)
+3. コミットしてください (git commit -am 'Add some feature')
+4. ブランチをプッシュしてください (git push origin my-new-feature)
+5. プルリクエストを送ってください
 
 
-## Licence
+## ライセンス
 
 [MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
 
-## Author
+## 開発者
 
 [banban525](https://github.com/banban525)
