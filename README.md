@@ -13,7 +13,7 @@ If you use this wrapper class, you can change the external configuration without
 
 ## Demo
 
-![Demo Animation](Samples/Readmecontents/Readme_images.gif) 
+![Demo Animation](https://github.com/banban525/ApplicationRegistries/blob/master/Samples/ReadmeContents/Readme_images.gif?raw=true) 
 
 
 ## Requirement
