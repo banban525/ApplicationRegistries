@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml;
 
-namespace ApplicationRegistries.Samples
+namespace ApplicationRegistries
 {
     public class Registries
     {
@@ -12,11 +12,11 @@ namespace ApplicationRegistries.Samples
   xmlns=""https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd"">
   <Entry id=""InstallDir"" Type=""string"">
     <Description>Installed Directory</Description>
-    <Registory>
+    <Registry>
       <Key>HKEY_CURRENT_USER\SOFTWARE\banban525\ApplicationRegistries\Install</Key>
       <Name>Directory</Name>
       <DefaultValue>None</DefaultValue>
-    </Registory>
+    </Registry>
   </Entry>
   <Entry id=""ApplicationName"" Type=""string"">
     <Description>Application Name</Description>
@@ -105,5 +105,6 @@ namespace ApplicationRegistries.Samples
                 return _accesser.GetString("Proxy");
             }
         }
+
     }
 }
