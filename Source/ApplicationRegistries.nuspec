@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>ApplicationRegistries</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>ApplicationRegistries</title>
     <authors>banban525</authors>
     <owners>banban525</owners>
@@ -16,7 +16,7 @@
   </metadata>
   <files>
     <file src="ApplicationRegistry\bin\release\*" target="lib\net40"/>
-    <file src="..\schemas\*" target="Content\schemas"/>
+    <file src="..\schemas\1.0.0\*" target="Content\schemas"/>
     <file src="ApplicationRegistries.Generator\bin\Release\MyTemplate\*" target="tools\MyTemplate"/>
     <file src="ApplicationRegistries.Generator\bin\Release\templates\*" target="tools\templates"/>
     <file src="ApplicationRegistries.Generator\bin\Release\Antlr4.StringTemplate.dll" target="tools"/>
