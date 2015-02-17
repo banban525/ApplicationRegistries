@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>ApplicationRegistries</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>ApplicationRegistries</title>
     <authors>banban525</authors>
     <owners>banban525</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/banban525/ApplicationRegistries</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ApplicaitonRegistry is a .NET library to abstract the configuration of the application.</description>
-    <releaseNotes>A bug fix: Schemas are not included in the nupkg.</releaseNotes>
+    <releaseNotes>A bug fix: No 'using ApplicationRegistries' in generated cs code.</releaseNotes>
     <copyright>Copyright banban525 2015</copyright>
     <tags></tags>
   </metadata>

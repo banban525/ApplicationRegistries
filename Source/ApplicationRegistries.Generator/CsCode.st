@@ -6,7 +6,7 @@ namespace $_output.Namespace$
 {
     public class $_output.ClassName$
     {
-        readonly ApplicationRegistryAccesser _accesser;
+        readonly ApplicationRegistries.ApplicationRegistryAccesser _accesser;
         const string DefineXml = @"$_output.InputXml$";
 
         public $_output.ClassName$(string[] commandlineArguments = null)
