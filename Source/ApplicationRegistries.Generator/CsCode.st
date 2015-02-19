@@ -11,7 +11,7 @@ namespace $_output.Namespace$
 
         public $_output.ClassName$(string[] commandlineArguments = null)
         {
-            _accesser = new ApplicationRegistryAccesser(XmlReader.Create(new StringReader(DefineXml)), commandlineArguments);
+            _accesser = new ApplicationRegistries.ApplicationRegistryAccesser(XmlReader.Create(new StringReader(DefineXml)), commandlineArguments);
         }
         
         public void AddOverrideFile(string filePath)
