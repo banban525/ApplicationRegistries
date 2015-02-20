@@ -20,6 +20,11 @@ namespace ApplicationRegistries.Generator
             var defineXmlPath = new FileInfo(options.DefineFile).FullName;
             var entries = Entries.Parse(defineXmlPath);
 
+            if (options.EscapeBackSlash)
+            {
+                entries = entries.ReplaceAll("\\", "\\\\");
+            }
+
             var outputObject = new OutputObject()
             {
                 ClassName = options.ClassName,
@@ -37,15 +42,15 @@ namespace ApplicationRegistries.Generator
             }
             else if(options.Mode == Mode.Rst)
             {
-                templateInfo = LoadTemplateFromFolder("rst");
+                templateInfo = LoadTemplateFromFolder("rst", null);
             }
             else if (options.Mode == Mode.md)
             {
-                templateInfo = LoadTemplateFromFolder("md");
+                templateInfo = LoadTemplateFromFolder("md", null);
             }
             else
             {
-                templateInfo = LoadTemplateFromFolder(options.TemplateName);
+                templateInfo = LoadTemplateFromFolder(options.TemplateName, options.TemplateFilePath);
             }
             if (templateInfo == null)
             {
@@ -56,7 +61,7 @@ namespace ApplicationRegistries.Generator
 
             if (NeedsGenerateOutput(outputFilePath, defineXmlPath, templateInfo) == false)
             {
-                Console.WriteLine("出力先ファイルが新しいので作成不要");
+                Console.WriteLine("Not output becuase template file is older than output file.");
                 return 0;
             }
 
@@ -107,8 +112,13 @@ namespace ApplicationRegistries.Generator
             public DateTime LastUpdated { get; private set; }
         }
 
-        private static TemplateInfo LoadTemplateFromFolder(string key)
+        private static TemplateInfo LoadTemplateFromFolder(string key, string templateFilePath)
         {
+            if (string.IsNullOrEmpty(templateFilePath) == false && File.Exists(templateFilePath))
+            {
+                return new TemplateInfo(File.ReadAllText(templateFilePath), new FileInfo(templateFilePath).LastWriteTime);
+            }
+
             var templatesFolders = new[]
             {
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "templates"),

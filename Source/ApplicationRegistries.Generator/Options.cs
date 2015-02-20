@@ -17,6 +17,10 @@ namespace ApplicationRegistries.Generator
         public string Namespace { get; set; }
         [Option('t', "template", DefaultValue = "", HelpText = "template name for --Mode Other")]
         public string TemplateName { get; set; }
+        [Option('b', "escapeBackSlash", HelpText = "\\ to \\\\ in md or rst, other without *.cs code.")]
+        public bool EscapeBackSlash { get; set; }
+        [Option('f', "templatefile", HelpText = "template file path for --Mode Other")]
+        public string TemplateFilePath { get; set; }
 
         [HelpOption]
         public string GetUsage()

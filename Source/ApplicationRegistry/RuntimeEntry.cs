@@ -28,5 +28,10 @@ namespace ApplicationRegistries
         {
             return true;
         }
+
+        public IEntry Repace(string from, string to)
+        {
+            return new RuntimeEntry(_define.Replace(from,to), _getValueFunc);
+        }
     }
 }

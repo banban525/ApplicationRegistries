@@ -64,5 +64,10 @@ namespace ApplicationRegistries
                 return hashCode;
             }
         }
+
+        public EntryDefine Replace(string from, string to)
+        {
+            return new EntryDefine(_id.Replace(from, to), _type, _description.Replace(from, to));
+        }
     }
 }

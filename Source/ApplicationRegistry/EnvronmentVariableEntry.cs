@@ -45,5 +45,13 @@ namespace ApplicationRegistries
             var value = Environment.GetEnvironmentVariable(VariableName);
             return value != null;
         }
+
+        public IEntry Repace(string from, string to)
+        {
+            return new EnvronmentVariableEntry(
+                _define.Replace(from, to), 
+                _variableName.Replace(from, to),
+                _defaultValue.Replace(from, to));
+        }
     }
 }

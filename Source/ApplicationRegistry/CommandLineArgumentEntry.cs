@@ -81,6 +81,15 @@ namespace ApplicationRegistries
             return false;
         }
 
+        public IEntry Repace(string @from, string to)
+        {
+            return new CommandLineArgumentEntry(
+                _define.Replace(from, to),
+                _argumentName.Replace(from, to),
+                _ignoreCase,
+                _defaultValue.Replace(from, to));
+        }
+
 
         public void SetCommandLineArguments(string[] commandLineArguments)
         {

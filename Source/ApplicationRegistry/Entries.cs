@@ -248,5 +248,17 @@ namespace ApplicationRegistries
             var newEntries = _entries.Where(_ => _.Define.ID != entry.Define.ID).Concat(new IEntry[] {entry});
             return new Entries(newEntries);
         }
+
+        public Entries ReplaceAll(string from, string to)
+        {
+            var entries = new List<IEntry>();
+
+            foreach (var entry in _entries)
+            {
+                var newEntry = entry.Repace(from, to);
+                entries.Add(newEntry);
+            }
+            return new Entries(entries);
+        }
     }
 }

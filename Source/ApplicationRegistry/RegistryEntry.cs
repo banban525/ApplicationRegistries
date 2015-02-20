@@ -52,5 +52,14 @@ namespace ApplicationRegistries
             var obj = Registry.GetValue(Key, Name, null);
             return obj != null;
         }
+
+        public IEntry Repace(string from, string to)
+        {
+            return new RegistryEntry(
+                _define.Replace(from, to), 
+                _key.Replace(from, to),
+                _name.Replace(from, to),
+                _defaultValue.Replace(from, to));
+        }
     }
 }

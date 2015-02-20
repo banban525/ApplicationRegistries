@@ -30,5 +30,10 @@
         {
             return true;
         }
+
+        public IEntry Repace(string from, string to)
+        {
+            return new StaticValueEntry(_define.Replace(from, to), _value.Replace(from, to));
+        }
     }
 }
