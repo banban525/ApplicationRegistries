@@ -16,6 +16,8 @@
             get { return _define; }
         }
 
+        public string Behavior { get { return GetType().Name; } }
+
         public string Value
         {
             get { return _value; }
@@ -31,6 +33,10 @@
             return true;
         }
 
+        public ValidateResults Validate()
+        {
+            return ValidateResults.Empty;
+        }
         public IEntry Repace(string from, string to)
         {
             return new StaticValueEntry(_define.Replace(from, to), _value.Replace(from, to));

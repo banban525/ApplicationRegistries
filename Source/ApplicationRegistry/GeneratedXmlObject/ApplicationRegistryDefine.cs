@@ -9,14 +9,14 @@
 //------------------------------------------------------------------------------
 
 // 
-// このソース コードは xsd によって自動生成されました。Version=4.0.30319.1 です。
+// このソース コードは xsd によって自動生成されました。Version=4.0.30319.33440 です。
 // 
 namespace ApplicationRegistries.GeneratedXmlObject {
     using System.Xml.Serialization;
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -41,7 +41,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -84,7 +84,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -96,9 +96,20 @@ namespace ApplicationRegistries.GeneratedXmlObject {
         
         private string argumentNameField;
         
+        private string patternField;
+        
         private string defaultValueField;
         
         private bool ignoreCaseField;
+        
+        private CommandLineType typeField;
+        
+        private bool isMultipleField;
+        
+        public CommandLineArgument() {
+            this.typeField = CommandLineType.useNextValue;
+            this.isMultipleField = false;
+        }
         
         /// <remarks/>
         public string ArgumentName {
@@ -107,6 +118,16 @@ namespace ApplicationRegistries.GeneratedXmlObject {
             }
             set {
                 this.argumentNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Pattern {
+            get {
+                return this.patternField;
+            }
+            set {
+                this.patternField = value;
             }
         }
         
@@ -130,10 +151,51 @@ namespace ApplicationRegistries.GeneratedXmlObject {
                 this.ignoreCaseField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(CommandLineType.useNextValue)]
+        public CommandLineType type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool isMultiple {
+            get {
+                return this.isMultipleField;
+            }
+            set {
+                this.isMultipleField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
+        "tryDefine.xsd")]
+    public enum CommandLineType {
+        
+        /// <remarks/>
+        useNextValue,
+        
+        /// <remarks/>
+        hasArgument,
+        
+        /// <remarks/>
+        parsePattern,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -169,7 +231,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -217,7 +279,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -241,7 +303,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -266,7 +328,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -330,7 +392,7 @@ namespace ApplicationRegistries.GeneratedXmlObject {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegis" +
         "tryDefine.xsd")]
@@ -344,5 +406,9 @@ namespace ApplicationRegistries.GeneratedXmlObject {
         
         /// <remarks/>
         @bool,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("string[]")]
+        string1,
     }
 }

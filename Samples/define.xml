@@ -17,7 +17,7 @@
   </Entry>
   <Entry id="IsDebug" Type="bool">
     <Description>Debug Mode</Description>
-    <CommandLineArgument ignoreCase="true">
+    <CommandLineArgument ignoreCase="true" type="hasArgument">
       <ArgumentName>/Debug</ArgumentName>
       <DefaultValue>0</DefaultValue>
     </CommandLineArgument>
@@ -28,5 +28,20 @@
       <VariableName>PROXY</VariableName>
       <DefaultValue>localhost</DefaultValue>
     </EnvironmentVariable>
+  </Entry>
+  <Entry id="InputFiles" Type="string[]">
+    <Description>Soufce files.</Description>
+    <CommandLineArgument ignoreCase="true" isMultiple="true">
+      <ArgumentName>/input</ArgumentName>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
+  </Entry>
+  <Entry id="OutputFile" Type="string">
+    <Description>An output file path.</Description>
+    <CommandLineArgument ignoreCase="true" type="parsePattern">
+      <ArgumentName>/input</ArgumentName>
+      <Pattern>/Output:(.+)</Pattern>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
   </Entry>
 </ApplicationRegistryDefine>

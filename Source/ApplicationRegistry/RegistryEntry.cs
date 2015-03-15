@@ -22,6 +22,8 @@ namespace ApplicationRegistries
             get { return _define; }
         }
 
+        public string Behavior { get { return GetType().Name; } }
+
         public string Key
         {
             get { return _key; }
@@ -51,6 +53,15 @@ namespace ApplicationRegistries
         {
             var obj = Registry.GetValue(Key, Name, null);
             return obj != null;
+        }
+
+        public ValidateResults Validate()
+        {
+            if (_define.Type == TypeEnum.StringArray)
+            {
+                return ValidateResults.Empty + new ValidateDetail(ValidateErrorLevel.Error, "The RegistryEntity is not support a string[] type.");
+            }
+            return ValidateResults.Empty;
         }
 
         public IEntry Repace(string from, string to)

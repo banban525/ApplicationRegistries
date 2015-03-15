@@ -66,5 +66,11 @@ namespace ApplicationRegistries
 
             _entries = _entries.Replace(new RuntimeEntry(define, getValueFunc));
         }
+
+        public string[] GetStringArray(string key)
+        {
+            var val = _entries.GetValue(key).ToString();
+            return val.Split('\t');
+        }
     }
 }

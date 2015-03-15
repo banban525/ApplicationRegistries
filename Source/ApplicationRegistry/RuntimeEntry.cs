@@ -19,6 +19,12 @@ namespace ApplicationRegistries
             get { return _define; }
         }
 
+        public string Behavior { get { return GetType().Name; } }
+        public ValidateResults Validate()
+        {
+            return ValidateResults.Empty;
+        }
+
         public string GetValue()
         {
             return _getValueFunc();

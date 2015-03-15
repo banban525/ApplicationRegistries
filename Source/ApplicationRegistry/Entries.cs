@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 using ApplicationRegistries.GeneratedXmlObject;
 
@@ -77,7 +79,20 @@ namespace ApplicationRegistries
                 }
             }
 
-            return new Entries(entries);
+
+            var result = new Entries(entries);
+
+            return result;
+        }
+
+        public ValidateResults Validate()
+        {
+            var result = ValidateResults.Empty;
+            foreach (var entry in _entries)
+            {
+                result += entry.Validate();
+            }
+            return result;
         }
 
         public static Entries Parse(Entries baseEntries, string filePath)
@@ -164,8 +179,11 @@ namespace ApplicationRegistries
                 var argumentName = commandLineXml.ArgumentName;
                 var ignoreCase = commandLineXml.ignoreCase;
                 var defaultValue = commandLineXml.DefaultValue;
+                var isMultiple = commandLineXml.isMultiple;
+                var type = commandLineXml.type.ToDomainType();
+                var pattern = commandLineXml.Pattern;
                 entries.Add(new CommandLineArgumentEntry(baseEntry.Define, argumentName,
-                    ignoreCase, defaultValue));
+                    ignoreCase, defaultValue, type, isMultiple, pattern));
             }
 
             foreach (var entry in xmlObject.Entry.Where(_ => _.Item is GeneratedXmlObject.EnvironmentVariable))

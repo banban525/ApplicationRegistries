@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
+using StringArray= System.Collections.Generic.IList<string>;
 
 namespace $_output.Namespace$
 {

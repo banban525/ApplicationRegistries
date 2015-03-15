@@ -7,6 +7,7 @@ namespace ApplicationRegistries
         String,
         Int32,
         Boolean,
+        StringArray,
     }
 
 
@@ -22,6 +23,8 @@ namespace ApplicationRegistries
                     return TypeEnum.Int32;
                 case GeneratedXmlObject.TypeEnum.@string:
                     return TypeEnum.String;
+                case GeneratedXmlObject.TypeEnum.string1:
+                    return TypeEnum.StringArray;
             }
             throw new ArgumentException();
         }

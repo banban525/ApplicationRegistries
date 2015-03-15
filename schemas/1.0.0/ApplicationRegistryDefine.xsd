@@ -96,6 +96,11 @@
             <xs:documentation>Search keyword in commandline arguments. For example /Output or -Input. Return the following values ​​of this. </xs:documentation>
           </xs:annotation>
         </xs:element>
+        <xs:element name="Pattern" type="xs:string" maxOccurs="1" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation></xs:documentation>
+          </xs:annotation>
+        </xs:element>
         <xs:element name="DefaultValue" type="xs:string">
           <xs:annotation>
             <xs:documentation>This value returned if ArgumentName is not found.</xs:documentation>
@@ -105,6 +110,16 @@
       <xs:attribute name="ignoreCase" type="xs:boolean" use="required">
         <xs:annotation>
           <xs:documentation>Ignore case</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="type" type="CommandLineType" use="optional" default="useNextValue">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="isMultiple" type="xs:boolean" use="optional" default="false">
+        <xs:annotation>
+          <xs:documentation>Set true if ArgumentName is contained in commandline arguments</xs:documentation>
         </xs:annotation>
       </xs:attribute>
     </xs:complexType>
@@ -128,12 +143,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:simpleType name="TypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="string"/>
       <xs:enumeration value="int"/>
       <xs:enumeration value="bool"/>
+      <xs:enumeration value="string[]"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CommandLineType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="useNextValue"/>
+      <xs:enumeration value="hasArgument"/>
+      <xs:enumeration value="parsePattern"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

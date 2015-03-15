@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
+using StringArray= System.Collections.Generic.IList<string>;
 
 namespace ApplicationRegistries
 {
     public class Registries
     {
-        readonly ApplicationRegistryAccesser _accesser;
+        readonly ApplicationRegistries.ApplicationRegistryAccesser _accesser;
         const string DefineXml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <ApplicationRegistryDefine
   xmlns=""https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd"">
@@ -26,7 +27,7 @@ namespace ApplicationRegistries
   </Entry>
   <Entry id=""IsDebug"" Type=""bool"">
     <Description>Debug Mode</Description>
-    <CommandLineArgument ignoreCase=""true"">
+    <CommandLineArgument ignoreCase=""true"" type=""hasArgument"">
       <ArgumentName>/Debug</ArgumentName>
       <DefaultValue>0</DefaultValue>
     </CommandLineArgument>
@@ -38,11 +39,26 @@ namespace ApplicationRegistries
       <DefaultValue>localhost</DefaultValue>
     </EnvironmentVariable>
   </Entry>
+  <Entry id=""InputFiles"" Type=""string[]"">
+    <Description>Soufce files.</Description>
+    <CommandLineArgument ignoreCase=""true"" isMultiple=""true"">
+      <ArgumentName>/input</ArgumentName>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
+  </Entry>
+  <Entry id=""OutputFile"" Type=""string"">
+    <Description>An output file path.</Description>
+    <CommandLineArgument ignoreCase=""true"" type=""parsePattern"">
+      <ArgumentName>/input</ArgumentName>
+      <Pattern>/Output:(.+)</Pattern>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
+  </Entry>
 </ApplicationRegistryDefine>";
 
         public Registries(string[] commandlineArguments = null)
         {
-            _accesser = new ApplicationRegistryAccesser(XmlReader.Create(new StringReader(DefineXml)), commandlineArguments);
+            _accesser = new ApplicationRegistries.ApplicationRegistryAccesser(XmlReader.Create(new StringReader(DefineXml)), commandlineArguments);
         }
 
         public void AddOverrideFile(string filePath)
@@ -103,6 +119,26 @@ namespace ApplicationRegistries
             get
             {
                 return _accesser.GetString("Proxy");
+            }
+        }
+        /// <summary>
+        /// Soufce files.
+        /// </summary>
+        public StringArray InputFiles
+        {
+            get
+            {
+                return _accesser.GetStringArray("InputFiles");
+            }
+        }
+        /// <summary>
+        /// An output file path.
+        /// </summary>
+        public String OutputFile
+        {
+            get
+            {
+                return _accesser.GetString("OutputFile");
             }
         }
 

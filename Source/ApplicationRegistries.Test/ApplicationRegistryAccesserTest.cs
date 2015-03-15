@@ -20,11 +20,11 @@ namespace ApplicationRegistries.Test
   xmlns='https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd'>
   <Entry id='InstallDir' Type='string'>
     <Description>Installed Directory</Description>
-    <Registory>
+    <Registry>
       <Key>HKEY_CURRENT_USER\SOFTWARE\banban525\ApplicationRegistries\Install</Key>
       <Name>Directory</Name>
       <DefaultValue>None</DefaultValue>
-    </Registory>
+    </Registry>
   </Entry>
   <Entry id='ApplicationName' Type='string'>
     <Description>Application Name</Description>
@@ -34,7 +34,7 @@ namespace ApplicationRegistries.Test
   </Entry>
   <Entry id='IsDebug' Type='bool'>
     <Description>Debug Mode</Description>
-    <CommandLineArgument ignoreCase='true'>
+    <CommandLineArgument ignoreCase='true' type='hasArgument'>
       <ArgumentName>/Debug</ArgumentName>
       <DefaultValue>0</DefaultValue>
     </CommandLineArgument>
@@ -45,6 +45,21 @@ namespace ApplicationRegistries.Test
       <VariableName>PROXY</VariableName>
       <DefaultValue>localhost</DefaultValue>
     </EnvironmentVariable>
+  </Entry>
+  <Entry id='InputFiles' Type='string[]'>
+    <Description>Soufce files.</Description>
+    <CommandLineArgument ignoreCase='true' isMultiple='true'>
+      <ArgumentName>/input</ArgumentName>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
+  </Entry>
+  <Entry id='OutputFile' Type='string'>
+    <Description>An output file path.</Description>
+    <CommandLineArgument ignoreCase='true' type='parsePattern'>
+      <ArgumentName>/input</ArgumentName>
+      <Pattern>/Output:(.+)</Pattern>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
   </Entry>
 </ApplicationRegistryDefine>
 ";
@@ -73,8 +88,8 @@ namespace ApplicationRegistries.Test
         }
 
         [TestCase]
-        [SetCommandLineArguments]
-        public void AccessToCommandlineArguments()
+        [SetCommandLineArguments("/Debug")]
+        public void AccessToCommandlineArgumentsExists()
         {
             var val = _accesser.GetBoolean("IsDebug");
             Assert.That(val, Is.True);
@@ -86,6 +101,23 @@ namespace ApplicationRegistries.Test
             var val = _accesser.GetBoolean("IsDebug");
             Assert.That(val, Is.False);
         }
+
+        [TestCase]
+        [SetCommandLineArguments("/input", "file1", "/input", "file2")]
+        public void AccessToCommandlineArgumentsMultipleArguments()
+        {
+            var val = _accesser.GetStringArray("InputFiles");
+            CollectionAssert.AreEqual(val, new[]{"file1","file2"});
+        }
+
+        [TestCase]
+        [SetCommandLineArguments("/output:file3")]
+        public void AccessToCommandlineArgumentsPatternMatching()
+        {
+            var val = _accesser.GetString("OutputFile");
+            Assert.That(val, Is.EqualTo("file3"));
+        }
+
         [TestCase]
         [SetEnvironmentVarialbe]
         public void AccessToEnvironmentVariable()
@@ -109,6 +141,69 @@ namespace ApplicationRegistries.Test
             Assert.That(val, Is.EqualTo("192.168.0.1"));
         }
 
+
+        [TestCase]
+        public void ValidateNeedsMultipleType()
+        {
+            _defineXml = @"<?xml version='1.0' encoding='utf-8' ?>
+<ApplicationRegistryDefine
+  xmlns='https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd'>
+  <Entry id='InstallDir' Type='string[]'>
+    <Description>Installed Directory</Description>
+    <CommandLineArgument ignoreCase='true' type='parsePattern' isMultiple='false'>
+      <ArgumentName>/input</ArgumentName>
+      <Pattern>/Output:(.+)</Pattern>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
+  </Entry>
+</ApplicationRegistryDefine>";
+
+            var entities = Entries.Parse(XmlReader.Create(new StringReader(_defineXml)));
+            var result = entities.Validate();
+            Assert.That(result.ErrorLevel, Is.EqualTo(ValidateErrorLevel.Error));
+        }
+
+        [TestCase]
+        public void ValidateNeedsStringArrayType()
+        {
+            _defineXml = @"<?xml version='1.0' encoding='utf-8' ?>
+<ApplicationRegistryDefine
+  xmlns='https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd'>
+  <Entry id='InstallDir' Type='string'>
+    <Description>Installed Directory</Description>
+    <CommandLineArgument ignoreCase='true' type='parsePattern' isMultiple='true'>
+      <ArgumentName>/input</ArgumentName>
+      <Pattern>/Output:(.+)</Pattern>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
+  </Entry>
+</ApplicationRegistryDefine>";
+
+            var entities = Entries.Parse(XmlReader.Create(new StringReader(_defineXml)));
+            var result = entities.Validate();
+            Assert.That(result.ErrorLevel, Is.EqualTo(ValidateErrorLevel.Error));
+        }
+
+        [TestCase]
+        public void ValidateHasArgumentTypeCannotMultiple()
+        {
+            _defineXml = @"<?xml version='1.0' encoding='utf-8' ?>
+<ApplicationRegistryDefine
+  xmlns='https://github.com/banban525/ApplicationRegistries/schemas/1.0.0/ApplicationRegistryDefine.xsd'>
+  <Entry id='InstallDir' Type='string[]'>
+    <Description>Installed Directory</Description>
+    <CommandLineArgument ignoreCase='true' type='hasArgument' isMultiple='true'>
+      <ArgumentName>/input</ArgumentName>
+      <Pattern>/Output:(.+)</Pattern>
+      <DefaultValue>0</DefaultValue>
+    </CommandLineArgument>
+  </Entry>
+</ApplicationRegistryDefine>";
+
+            var entities = Entries.Parse(XmlReader.Create(new StringReader(_defineXml)));
+            var result = entities.Validate();
+            Assert.That(result.ErrorLevel, Is.EqualTo(ValidateErrorLevel.Error));
+        }
         [TestCase]
         public void OverrideByBehaiviorXml()
         {
@@ -151,7 +246,7 @@ namespace ApplicationRegistries.Test
             var isDebug = _accesser.GetBoolean("IsDebug");
             Assert.That(isDebug, Is.True);
             var proxy = _accesser.GetString("Proxy");
-            Assert.That(proxy, Is.EqualTo("192.168.0.2"));
+            Assert.That(proxy, Is.EqualTo("None"));
 
         }
 
@@ -159,13 +254,17 @@ namespace ApplicationRegistries.Test
         [AttributeUsage(AttributeTargets.Method)]
         class SetCommandLineArgumentsAttribute : Attribute, ITestAction
         {
+            private string[] _arguments;
+            internal SetCommandLineArgumentsAttribute(params string[] arguments)
+            {
+                _arguments = arguments;
+            }
             public void BeforeTest(TestDetails testDetails)
             {
                 var testFixture = testDetails.Fixture as ApplicationRegistryAccesserTest;
                 testFixture._accesser = new ApplicationRegistryAccesser(
                     XmlReader.Create(new StringReader(testFixture._defineXml)),
-                    new[] { "/Debug", "1"}
-                    );
+                    _arguments);
             }
 
             public void AfterTest(TestDetails testDetails)

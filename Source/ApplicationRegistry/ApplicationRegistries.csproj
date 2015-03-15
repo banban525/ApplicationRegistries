@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ApplicationRegistryAccesser.cs" />
     <Compile Include="CommandLineArgumentEntry.cs" />
+    <Compile Include="CommandlineType.cs" />
     <Compile Include="Entries.cs" />
     <Compile Include="EntryDefine.cs" />
     <Compile Include="EnvronmentVariableEntry.cs" />
@@ -57,6 +58,9 @@
     <Compile Include="RuntimeEntry.cs" />
     <Compile Include="StaticValueEntry.cs" />
     <Compile Include="TypeEnum.cs" />
+    <Compile Include="ValidateDetail.cs" />
+    <Compile Include="ValidateErrorLevel.cs" />
+    <Compile Include="ValidateResults.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

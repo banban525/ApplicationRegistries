@@ -20,6 +20,8 @@ namespace ApplicationRegistries
             get { return _define; }
         }
 
+        public string Behavior { get { return GetType().Name; } }
+
         public string VariableName
         {
             get { return _variableName; }
@@ -38,6 +40,15 @@ namespace ApplicationRegistries
                 return DefaultValue;
             }
             return value;
+        }
+
+        public ValidateResults Validate()
+        {
+            if (_define.Type == TypeEnum.StringArray)
+            {
+                return ValidateResults.Empty + new ValidateDetail(ValidateErrorLevel.Error, "The EnvronmentValiable is not support a string[] type.");
+            }
+            return ValidateResults.Empty;
         }
 
         public bool ExistsValue()
