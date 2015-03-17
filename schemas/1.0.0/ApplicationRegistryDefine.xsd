@@ -114,7 +114,7 @@
       </xs:attribute>
       <xs:attribute name="type" type="CommandLineType" use="optional" default="useNextValue">
         <xs:annotation>
-          <xs:documentation></xs:documentation>
+          <xs:documentation>Paseing type for commandline arguments</xs:documentation>
         </xs:annotation>
       </xs:attribute>
     </xs:complexType>
@@ -149,9 +149,21 @@
   </xs:simpleType>
   <xs:simpleType name="CommandLineType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="useNextValue"/>
-      <xs:enumeration value="hasArgument"/>
-      <xs:enumeration value="parsePattern"/>
+      <xs:enumeration value="useNextValue">
+        <xs:annotation>
+          <xs:documentation>It returns a next value that matches the Name in commandline arguments.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="hasArgument">
+        <xs:annotation>
+          <xs:documentation>It returns true, if the Name is contains in commandline arguments.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="parsePattern">
+        <xs:annotation>
+          <xs:documentation>It returns a value that matches the Pattern element. Required Pattern element.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
