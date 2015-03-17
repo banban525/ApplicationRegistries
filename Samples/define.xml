@@ -39,7 +39,7 @@
   <Entry id="OutputFile" Type="string">
     <Description>An output file path.</Description>
     <CommandLineArgument ignoreCase="true" type="parsePattern">
-      <ArgumentName>/input</ArgumentName>
+      <ArgumentName>/Output</ArgumentName>
       <Pattern>/Output:(.+)</Pattern>
       <DefaultValue>0</DefaultValue>
     </CommandLineArgument>

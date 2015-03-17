@@ -47,9 +47,21 @@ ID: $entry.Define.ID$
 $entry.Define.Description$
 
 * Type: $entry.Define.Type$
-* Name: $entry.ArgumentName$
 * Ignore Case: $entry.IgnoreCase$
 * Default: $entry.DefaultValue$
+$if(entry.IsTypeHasArgument)$
+* Name: $entry.ArgumentName$
+* ParseType: If the Name contains in commandline arguments, the value is true.
+$endif$
+$if(entry.IsTypeUseNextValue)$
+* Name: $entry.ArgumentName$
+* ParseType: If the Name contains in commandline arguments, the value is a next commandline argument.
+$endif$
+$if(entry.IsTypeParsePattern)$
+* ParseType: If a commandline argument is matched by the Pattern, the value is returned.
+* Pattern : $entry.Pattern$
+$endif$
+
 
 }$
 

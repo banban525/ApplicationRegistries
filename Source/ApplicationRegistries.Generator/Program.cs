@@ -48,9 +48,13 @@ namespace ApplicationRegistries.Generator
             {
                 templateInfo = LoadTemplateFromFolder("md", null);
             }
-            else
+            else if(options.Mode == Mode.Other)
             {
                 templateInfo = LoadTemplateFromFolder(options.TemplateName, options.TemplateFilePath);
+            }
+            else
+            {
+                throw new ArgumentException();
             }
             if (templateInfo == null)
             {

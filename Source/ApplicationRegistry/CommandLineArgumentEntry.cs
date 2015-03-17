@@ -67,6 +67,10 @@ namespace ApplicationRegistries
             get { return _pattern; }
         }
 
+        public bool IsTypeHasArgument { get { return Type == CommandlineType.HasArgument; } }
+        public bool IsTypeUseNextValue { get { return Type == CommandlineType.UseNextValue; } }
+        public bool IsTypeParsePattern { get { return Type == CommandlineType.ParsePattern; } }
+
         public string GetValue()
         {
             var result = new List<string>();
@@ -169,7 +173,7 @@ namespace ApplicationRegistries
                 _defaultValue.Replace(from, to),
                 _type,
                 _isMultiple,
-                _pattern.Replace(from, to));
+                _pattern == null ? null : _pattern.Replace(from, to));
         }
 
 
