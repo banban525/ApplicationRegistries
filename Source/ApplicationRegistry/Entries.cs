@@ -179,11 +179,10 @@ namespace ApplicationRegistries
                 var argumentName = commandLineXml.ArgumentName;
                 var ignoreCase = commandLineXml.ignoreCase;
                 var defaultValue = commandLineXml.DefaultValue;
-                var isMultiple = commandLineXml.isMultiple;
                 var type = commandLineXml.type.ToDomainType();
                 var pattern = commandLineXml.Pattern;
                 entries.Add(new CommandLineArgumentEntry(baseEntry.Define, argumentName,
-                    ignoreCase, defaultValue, type, isMultiple, pattern));
+                    ignoreCase, defaultValue, type, pattern));
             }
 
             foreach (var entry in xmlObject.Entry.Where(_ => _.Item is GeneratedXmlObject.EnvironmentVariable))

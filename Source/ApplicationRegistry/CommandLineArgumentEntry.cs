@@ -12,20 +12,18 @@ namespace ApplicationRegistries
         private readonly bool _ignoreCase;
         private string[] _commandLineArguments = Environment.GetCommandLineArgs();
         private readonly CommandlineType _type;
-        private readonly bool _isMultiple;
         private readonly string _pattern;
 
         public CommandLineArgumentEntry(
             EntryDefine define, 
             string argumentName, 
             bool ignoreCase, 
-            string defaultValue, CommandlineType type, bool isMultiple, string pattern)
+            string defaultValue, CommandlineType type, string pattern)
         {
             _define = define;
             _argumentName = argumentName;
             _defaultValue = defaultValue;
             _type = type;
-            _isMultiple = isMultiple;
             _pattern = pattern;
             _ignoreCase = ignoreCase;
         }
@@ -55,11 +53,6 @@ namespace ApplicationRegistries
         public CommandlineType Type
         {
             get { return _type; }
-        }
-
-        public bool IsMultiple
-        {
-            get { return _isMultiple; }
         }
 
         public string Pattern
@@ -117,7 +110,7 @@ namespace ApplicationRegistries
             {
                 return DefaultValue;
             }
-            if (IsMultiple)
+            if (_define.Type.IsArray())
             {
                 return string.Join("\t", result);
             }
@@ -172,7 +165,6 @@ namespace ApplicationRegistries
                 _ignoreCase,
                 _defaultValue.Replace(from, to),
                 _type,
-                _isMultiple,
                 _pattern == null ? null : _pattern.Replace(from, to));
         }
 
@@ -191,15 +183,7 @@ namespace ApplicationRegistries
 
         public ValidateResults Validate()
         {
-            if (Define.Type == TypeEnum.StringArray && _isMultiple == false)
-            {
-                return ValidateResults.Empty + new ValidateDetail(ValidateErrorLevel.Error, "A string[] type is required isMultiple in CommandlineArgument Entry.");
-            }
-            if (Define.Type != TypeEnum.StringArray && _isMultiple == true)
-            {
-                return ValidateResults.Empty + new ValidateDetail(ValidateErrorLevel.Error, "A isMultiple attribute is required string[] type.");
-            }
-            if (_isMultiple && Type == CommandlineType.HasArgument)
+            if (_define.Type.IsArray() && Type == CommandlineType.HasArgument)
             {
                 return ValidateResults.Empty + new ValidateDetail(ValidateErrorLevel.Error, "A hasArgument type is not return string[] type.");
             }

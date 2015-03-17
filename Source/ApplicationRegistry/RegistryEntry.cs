@@ -57,9 +57,9 @@ namespace ApplicationRegistries
 
         public ValidateResults Validate()
         {
-            if (_define.Type == TypeEnum.StringArray)
+            if (_define.Type.IsArray())
             {
-                return ValidateResults.Empty + new ValidateDetail(ValidateErrorLevel.Error, "The RegistryEntity is not support a string[] type.");
+                return ValidateResults.Empty + new ValidateDetail(ValidateErrorLevel.Error, "The RegistryEntity is not support a array type.");
             }
             return ValidateResults.Empty;
         }

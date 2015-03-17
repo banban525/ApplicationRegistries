@@ -104,11 +104,8 @@ namespace ApplicationRegistries.GeneratedXmlObject {
         
         private CommandLineType typeField;
         
-        private bool isMultipleField;
-        
         public CommandLineArgument() {
             this.typeField = CommandLineType.useNextValue;
-            this.isMultipleField = false;
         }
         
         /// <remarks/>
@@ -161,18 +158,6 @@ namespace ApplicationRegistries.GeneratedXmlObject {
             }
             set {
                 this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool isMultiple {
-            get {
-                return this.isMultipleField;
-            }
-            set {
-                this.isMultipleField = value;
             }
         }
     }

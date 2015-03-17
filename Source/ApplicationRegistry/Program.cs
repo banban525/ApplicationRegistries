@@ -40,11 +40,10 @@ namespace ApplicationRegistries.GeneratedXmlObject
             var argumentName = commandLineXml.ArgumentName;
             var ignoreCase = commandLineXml.ignoreCase;
             var defaultValue = commandLineXml.DefaultValue;
-            var isMultiple = commandLineXml.isMultiple;
             var type = commandLineXml.type.ToDomainType();
             var pattern = commandLineXml.Pattern;
             return new CommandLineArgumentEntry(define, argumentName,
-                ignoreCase, defaultValue, type, isMultiple, pattern);
+                ignoreCase, defaultValue, type, pattern);
         }
 
         internal EnvronmentVariableEntry CreateEnvironmentVariableEntry(EntryDefine define)

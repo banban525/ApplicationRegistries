@@ -28,5 +28,10 @@ namespace ApplicationRegistries
             }
             throw new ArgumentException();
         }
+
+        public static bool IsArray(this TypeEnum type)
+        {
+            return type == TypeEnum.StringArray;
+        }
     }
 }

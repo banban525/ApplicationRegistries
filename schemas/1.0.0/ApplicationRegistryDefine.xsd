@@ -117,11 +117,6 @@
           <xs:documentation></xs:documentation>
         </xs:annotation>
       </xs:attribute>
-      <xs:attribute name="isMultiple" type="xs:boolean" use="optional" default="false">
-        <xs:annotation>
-          <xs:documentation>Set true if ArgumentName is contained in commandline arguments</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="EnvironmentVariable">
