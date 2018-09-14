@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C40C3C1D-3EC9-4D03-B230-F16669388C8F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ApplicationRegistries2</RootNamespace>
+    <AssemblyName>ApplicationRegistries2</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccesserTypeBuilder.cs" />
+    <Compile Include="AccessorBase.cs" />
+    <Compile Include="AccessorDefinition.cs" />
+    <Compile Include="AccessorRepository.cs" />
+    <Compile Include="Accessors\PropertiesSettingsAccessor.cs" />
+    <Compile Include="Accessors\RegistoryAccessor.cs" />
+    <Compile Include="Accessors\CommandlineArgumentsAccessor.cs" />
+    <Compile Include="Accessors\DefaultValueAccessor.cs" />
+    <Compile Include="Accessors\EnvironmentVariableAccessor.cs" />
+    <Compile Include="Accessors\IAccessor.cs" />
+    <Compile Include="Accessors\XmlFileAccessor.cs" />
+    <Compile Include="ApplicationRegistry.cs" />
+    <Compile Include="ApplicationRegistryManager.cs" />
+    <Compile Include="Attributes\PropertiesSettingsNameAttribute.cs" />
+    <Compile Include="Attributes\PropertiesSettingsTypeAttribute.cs" />
+    <Compile Include="Attributes\ApplicationRegistryAttribute.cs" />
+    <Compile Include="Attributes\CommandlineArgumentNameAttribute.cs" />
+    <Compile Include="Attributes\CommandlineArgumentPrefixAttribute.cs" />
+    <Compile Include="Attributes\DefaultValueAttribute.cs" />
+    <Compile Include="Attributes\EnvironmentVariableNameAttribute.cs" />
+    <Compile Include="Attributes\EnvironmentVariablePrefixAttribute.cs" />
+    <Compile Include="Attributes\RegistryKeyAttribute.cs" />
+    <Compile Include="Attributes\RegistryNameAttribute.cs" />
+    <Compile Include="Attributes\XmlFileAttribute.cs" />
+    <Compile Include="Attributes\XmlNameAttribute.cs" />
+    <Compile Include="BuiltInAccessors.cs" />
+    <Compile Include="AccessorFieldDefinition.cs" />
+    <Compile Include="DataNotFoundException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryAccessorCache.cs" />
+    <Compile Include="RepositoryAccessorInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations">
+      <Version>2018.2.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
