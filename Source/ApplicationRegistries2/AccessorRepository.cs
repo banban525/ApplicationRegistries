@@ -16,6 +16,7 @@ namespace ApplicationRegistries2
             {BuiltInAccessors.PropertiesSettings, new PropertiesSettingsAccessor()},
         };
 
+        public IEnumerable<string> AllKeys => _accessors.Keys;
 
         public IAccessor GetAccessor(string key)
         {

@@ -40,7 +40,8 @@ namespace ApplicationRegistries2
             return new AccessorDefinition(type.Name, type,
                 fields.ToArray(), 
                 Attribute.GetCustomAttributes(type, true),
-                accessor);
+                accessor,
+                att.Keys.ToArray());
         }
 
         internal TypeInfo Build(AccessorDefinition definition)

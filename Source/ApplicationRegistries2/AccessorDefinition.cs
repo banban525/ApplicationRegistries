@@ -16,15 +16,19 @@ namespace ApplicationRegistries2
 
         public IEnumerable<Attribute> Attributes;
 
+        public IEnumerable<string> Keys { get; }
+
         public AccessorDefinition(string name, Type targetInterfaceType, 
             IReadOnlyCollection<AccessorFieldDefinition> fields, IReadOnlyCollection<Attribute> attributes, 
-            IReadOnlyCollection<IAccessor> accessToList)
+            IReadOnlyCollection<IAccessor> accessToList,
+            IReadOnlyCollection<string> keys)
         {
             Name = name;
             TargetInterfaceType = targetInterfaceType;
             Fields = fields;
             Attributes = attributes;
             AccessToList = accessToList;
+            Keys = keys;
         }
 
 

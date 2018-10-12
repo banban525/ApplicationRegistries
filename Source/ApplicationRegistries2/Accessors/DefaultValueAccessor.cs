@@ -26,5 +26,32 @@ namespace ApplicationRegistries2.Accessors
             return defaultValueAttribute != null;
         }
 
+        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        {
+            var defaultValueAttribute = field.GetAttribute<DefaultValueAttribute>();
+            if (defaultValueAttribute == null)
+            {
+                throw new DataNotFoundException();
+            }
+
+            return new DefaultValueAccessorReportData(BuiltInAccessors.DefaultValue, defaultValueAttribute.DefaultValue);
+        }
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        {
+            return new EmptyInterfaceAccessorReportData(BuiltInAccessors.CommandlineArguments);
+        }
+
+
+        public class DefaultValueAccessorReportData : IPropertyAccessorReportData
+        {
+            public DefaultValueAccessorReportData(string accessorKey, object value)
+            {
+                AccessorKey = accessorKey;
+                Value = value;
+            }
+
+            public object Value { get; }
+            public string AccessorKey { get; }
+        }
     }
 }

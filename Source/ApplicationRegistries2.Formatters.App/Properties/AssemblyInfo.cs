@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("ApplicationRegistries2")]
+[assembly: AssemblyTitle("ApplicationRegistries2.Formatters.App")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ApplicationRegistries2")]
+[assembly: AssemblyProduct("ApplicationRegistries2.Formatters.App")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("c40c3c1d-3ec9-4d03-b230-f16669388c8f")]
+[assembly: Guid("73a58166-9f5b-454c-8f4c-fae0d253bf62")]
 
 // アセンブリのバージョン情報は次の 4 つの値で構成されています:
 //
@@ -30,10 +30,7 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 // すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
-// 以下のように '*' を使用します:
+// 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
-
-[assembly: InternalsVisibleTo("ApplicationRegistries2.Test")]
-[assembly: InternalsVisibleTo("ApplicationRegistries2.Formatters")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

@@ -45,6 +45,10 @@
     <Compile Include="AccessorBase.cs" />
     <Compile Include="AccessorDefinition.cs" />
     <Compile Include="AccessorRepository.cs" />
+    <Compile Include="Accessors\EmptyInterfaceAccessorReportData.cs" />
+    <Compile Include="Accessors\EmptyPropertyAccessorReportData.cs" />
+    <Compile Include="Accessors\IInterfaceAccessorReportData.cs" />
+    <Compile Include="Accessors\IPropertyAccessorReportData.cs" />
     <Compile Include="Accessors\PropertiesSettingsAccessor.cs" />
     <Compile Include="Accessors\RegistoryAccessor.cs" />
     <Compile Include="Accessors\CommandlineArgumentsAccessor.cs" />

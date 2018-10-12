@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD36408A-ACDC-4363-9E87-AE7B56943D5A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApplicationRegistries2.Formatters</RootNamespace>
-    <AssemblyName>ApplicationRegistries2.Formatters</AssemblyName>
+    <ProjectGuid>{73A58166-9F5B-454C-8F4C-FAE0D253BF62}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ApplicationRegistries2.Formatters.App</RootNamespace>
+    <AssemblyName>ApplicationRegistries2.Formatters.App</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -20,8 +21,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ApplicationRegistries2.Formatters.App.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,33 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessorFormatters\CommandlineArgumentFormatter.cs" />
-    <Compile Include="AccessorFormatters\EnvironmentVariableFormatter.cs" />
-    <Compile Include="AccessorFormatters\IPropertyFormatter.cs" />
-    <Compile Include="AccessorFormatters\PropertiesSettingsFormatter.cs" />
-    <Compile Include="AccessorFormatters\RegistryFormatter.cs" />
-    <Compile Include="AccessorFormatters\XmlFileFormatter.cs" />
-    <Compile Include="Formatter.cs" />
-    <Compile Include="InterfaceReportData.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyReportData.cs" />
-    <Compile Include="ReportData.cs" />
-    <Compile Include="ReportDataCreator.cs" />
-    <Compile Include="SummaryInterfaceReportData.cs" />
-    <Compile Include="SummaryPropertyReportData.cs" />
-    <Compile Include="SummaryReportData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="DefaultTemplate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationRegistries2.Formatters\ApplicationRegistries2.Formatters.csproj">
+      <Project>{bd36408a-acdc-4363-9e87-ae7b56943d5a}</Project>
+      <Name>ApplicationRegistries2.Formatters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationRegistries2\ApplicationRegistries2.csproj">
       <Project>{c40c3c1d-3ec9-4d03-b230-f16669388c8f}</Project>
       <Name>ApplicationRegistries2</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="RazorEngine">
-      <Version>3.10.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

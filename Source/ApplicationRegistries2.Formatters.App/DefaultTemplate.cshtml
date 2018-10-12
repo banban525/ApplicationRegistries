@@ -1,0 +1,146 @@
+﻿@using ApplicationRegistries2
+@using ApplicationRegistries2.Accessors
+@using ApplicationRegistries2.Formatters
+@model ApplicationRegistries2.Formatters.ReportData
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>外部設定レポート</title>
+    <style type="text/css">
+
+        table.parameter {
+            border-collapse: collapse;
+            width: 300px;
+        }
+
+            table.parameter tbody tr th {
+                border-top: #888888 1px dotted;
+                border-bottom: #888888 1px dotted;
+                background: lightgray;
+                text-align: left;
+                padding: 10px;
+            }
+
+            table.parameter tbody tr td {
+                border-top: #888888 1px dotted;
+                border-bottom: #888888 1px dotted;
+                padding: 10px;
+            }
+
+
+        table.registry {
+            border-collapse: collapse;
+        }
+
+            table.registry tbody tr th {
+                border-top: #888888 1px dotted;
+                border-bottom: #888888 1px dotted;
+                background: lightgray;
+                text-align: left;
+                padding: 10px;
+            }
+
+            table.registry tbody tr td {
+                border-top: #888888 1px dotted;
+                border-bottom: #888888 1px dotted;
+                padding: 10px;
+            }
+
+        div.commandline {
+            background-color: #202020;
+            border: 4px solid #c0c0c0;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            box-shadow: 2px 2px 3px #6e6e6e;
+            color: #e2e2e2;
+            display: inline-block;
+            line-height: 1.2em;
+            overflow: auto;
+            padding: 15px;
+            width: 95%;
+        }
+
+            div.commandline pre {
+                margin: 0px;
+            }
+
+            div.commandline code {
+                font: 1.25em consolas,'andale mono','lucida console',monospace;
+            }
+
+        div.registry {
+            background-color: #f7f7f7;
+            border: 4px solid #c0c0c0;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            box-shadow: 2px 2px 3px #6e6e6e, 2px 2px 3px #6e6e6e inset;
+            color: #202020;
+            display: inline-block;
+            line-height: 1.2em;
+            overflow: auto;
+            padding: 15px;
+            width: 95%;
+        }
+
+            div.registry pre {
+                margin: 0px;
+            }
+
+            div.registry code {
+                font: 1.25em consolas,'andale mono','lucida console',monospace;
+            }
+    </style>
+
+</head>
+<body>
+    
+@{
+    ReportData data = Model;
+}
+@foreach (InterfaceReportData typeData in data.Interfaces)
+{
+    <h1>@typeData.FullName</h1>
+    <p>@typeData.Description</p>
+                          
+    foreach(PropertyReportData prop in typeData.Properties)
+    {
+        <h2>@prop.FildDefinition.Name</h2>
+        <p>@prop.Description</p>
+
+        <table class="parameter">
+            <tbody>
+            <tr>
+                <th>型</th>
+                <td>@prop.FildDefinition.Type.Name</td>
+            </tr>
+            <tr>
+                <th>初期値</th>
+                <td>
+                    @prop.DefaultValue
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        foreach (IPropertyAccessorReportData propertyAccessorReportData in prop.PropertyAccessors)
+        {
+            string rawContent = data.FormatProperty(typeData.Definition, prop.FildDefinition, propertyAccessorReportData);
+            @Raw(rawContent)
+        }
+    }
+
+}
+
+
+@foreach (string key in data.Keys)
+{
+    <h1>@data.GetAccessorTitle(key)</h1>
+    @Raw(data.FormatSummary(key))
+}
+
+</body>
+</html>

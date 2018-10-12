@@ -11,7 +11,7 @@ namespace ApplicationRegistries2
             if (_cache.Exists(typeof(T))==false)
             {
                 var builder = new AccessorTypeBuilder();
-                var define = builder.Parse(typeof(T), _accessorRepository);
+                var define = builder.Parse(typeof(T), AccessorRepository);
                 var typeInfo = builder.Build(define);
 
                 var a = typeInfo.AsType().GetConstructor(new []{typeof(AccessorBase) });
@@ -26,10 +26,10 @@ namespace ApplicationRegistries2
 
         public void RegistCustomAccessor(string key, IAccessor accessor)
         {
-            _accessorRepository.RegistCustomAccessor(key, accessor);
+            AccessorRepository.RegistCustomAccessor(key, accessor);
         }
 
-        private readonly AccessorRepository _accessorRepository = new AccessorRepository();
+        internal AccessorRepository AccessorRepository{ get; } = new AccessorRepository();
         private readonly RepositoryAccessorCache _cache = new RepositoryAccessorCache();
     }
 }

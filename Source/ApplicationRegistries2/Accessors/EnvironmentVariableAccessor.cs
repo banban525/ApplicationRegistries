@@ -28,6 +28,17 @@ namespace ApplicationRegistries2.Accessors
             return val != null;
         }
 
+        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        {
+            return new EnvironmentVariableAccessorReportData(BuiltInAccessors.EnvironmenetVariable,
+                GetEnvironmentVariableName(accessorDefinition, field));
+        }
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        {
+            return new EmptyInterfaceAccessorReportData(BuiltInAccessors.CommandlineArguments);
+        }
+
+
         private string GetEnvironmentVariableName(AccessorDefinition accessorDefinition,
             AccessorFieldDefinition field)
         {
@@ -43,6 +54,19 @@ namespace ApplicationRegistries2.Accessors
 
             return $"{prefix}_{name}";
 
+        }
+
+
+        public class EnvironmentVariableAccessorReportData : IPropertyAccessorReportData
+        {
+            public EnvironmentVariableAccessorReportData(string accessorKey, string environmentVariableName)
+            {
+                AccessorKey = accessorKey;
+                EnvironmentVariableName = environmentVariableName;
+            }
+
+            public string EnvironmentVariableName { get; }
+            public string AccessorKey { get; }
         }
 
     }

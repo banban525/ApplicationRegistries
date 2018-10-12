@@ -8,5 +8,10 @@ namespace ApplicationRegistries2.Accessors
             AccessorFieldDefinition accessorFieldDefinition);
 
         bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field);
+
+        IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition,
+            AccessorFieldDefinition field);
+
+        IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition);
     }
 }

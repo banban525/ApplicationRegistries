@@ -24,28 +24,38 @@ namespace ApplicationRegistries2.Accessors
         public object Read(Type returnType, AccessorDefinition accessorDefinition,
             AccessorFieldDefinition accessorFieldDefinition)
         {
-            var assemblyName = accessorDefinition.TargetInterfaceType.Assembly.GetName().Name;
-            var interfaceName = accessorDefinition.TargetInterfaceType.Name;
-
-            var registoKeyAttribute = accessorDefinition.GetAttribute<RegistryKeyAttribute>();
-            var key = registoKeyAttribute?.Key ?? $@"Software\ApplicationRegistries\{assemblyName}\{interfaceName}";
-
-            var registoNameAttribute = accessorFieldDefinition.GetAttribute<RegistryNameAttribute>();
-            var name = registoNameAttribute?.Name ?? accessorFieldDefinition.Name;
+            var data = (RegistryAccessorReportData)GetPropertyData(accessorDefinition, accessorFieldDefinition);
             using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
-                ? Registry.LocalMachine.OpenSubKey(key)
-                : Registry.CurrentUser.OpenSubKey(key))
+                ? Registry.LocalMachine.OpenSubKey(data.Key)
+                : Registry.CurrentUser.OpenSubKey(data.Key))
             {
-                if (registrykey?.GetValueNames().All(_ => _ != name) ?? true)
+                if (registrykey?.GetValueNames().All(_ => _ != data.ValueName) ?? true)
                 {
                     return null;
                 }
                 
-                return Convert.ChangeType(registrykey.GetValue(name), returnType);
+                return Convert.ChangeType(registrykey.GetValue(data.ValueName), returnType);
             }
         }
 
         public bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        {
+            var data = (RegistryAccessorReportData)GetPropertyData(accessorDefinition, field);
+            using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
+                ? Registry.LocalMachine.OpenSubKey(data.Key)
+                : Registry.CurrentUser.OpenSubKey(data.Key))
+            {
+
+                if (registrykey?.GetValueNames().All(_ => _ != data.ValueName) ?? true)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
         {
             var assemblyName = accessorDefinition.TargetInterfaceType.Assembly.GetName().Name;
             var interfaceName = accessorDefinition.TargetInterfaceType.Name;
@@ -55,19 +65,57 @@ namespace ApplicationRegistries2.Accessors
 
             var registoNameAttribute = field.GetAttribute<RegistryNameAttribute>();
             var name = registoNameAttribute?.Name ?? field.Name;
-            using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
-                ? Registry.LocalMachine.OpenSubKey(key)
-                : Registry.CurrentUser.OpenSubKey(key))
-            {
 
-                if (registrykey?.GetValueNames().All(_ => _ != name) ?? true)
-                {
-                    return false;
-                }
+            return new RegistryAccessorReportData(
+                _registryRoot == RegistryRoot.LocalMachine ? BuiltInAccessors.MachineRegistry : BuiltInAccessors.UserRegistry,
+                key,
+                name
+                );
+        }
+
+
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        {
+            var assemblyName = accessorDefinition.TargetInterfaceType.Assembly.GetName().Name;
+            var interfaceName = accessorDefinition.TargetInterfaceType.Name;
+
+            var registoKeyAttribute = accessorDefinition.GetAttribute<RegistryKeyAttribute>();
+            var key = registoKeyAttribute?.Key ?? $@"Software\ApplicationRegistries\{assemblyName}\{interfaceName}";
+
+
+            return new RegistryInterfaceAccessorReportData(
+                _registryRoot == RegistryRoot.LocalMachine ? BuiltInAccessors.MachineRegistry : BuiltInAccessors.UserRegistry,
+                key);
+        }
+
+        public class RegistryInterfaceAccessorReportData : IInterfaceAccessorReportData
+        {
+            public RegistryInterfaceAccessorReportData(string accessorKey, string key)
+            {
+                AccessorKey = accessorKey;
+                Key = key;
             }
 
-            return true;
+            public string AccessorKey { get; }
+
+            public string Key { get; }
         }
+
+
+        public class RegistryAccessorReportData : IPropertyAccessorReportData
+        {
+            public RegistryAccessorReportData(string accessorKey, string key, string valueName)
+            {
+                AccessorKey = accessorKey;
+                Key = key;
+                ValueName = valueName;
+            }
+
+            public string Key { get; }
+            public string ValueName { get; }
+            public string AccessorKey { get; }
+        }
+
 
     }
 }
