@@ -63,7 +63,7 @@ class Program
 
 ## Dependency
 
-ApplicationRegistries2.dll depends only on .NET Framework 4.6.1.
+ApplicationRegistries2.dll depends only on .NET Framework 4.5.
 
 ## How to install
 

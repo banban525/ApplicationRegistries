@@ -62,7 +62,7 @@ class Program
 
 ## 依存関係
 
-ApplicationRegistries2.dll は、.NET Framework 4.6.1 のみに依存します。
+ApplicationRegistries2.dll は、.NET Framework 4.5 のみに依存します。
 
 ## インストール方法
 
