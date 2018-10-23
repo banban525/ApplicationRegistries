@@ -10,7 +10,7 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
     class XmlFileFormatter: IPropertyFormatter
     {
         public string Key => BuiltInAccessors.XmlFile;
-        public string Title => "XMLファイル";
+        public string Title => Properties.Resources.XmlFileFormatter_Title;
 
         public string Format(AccessorDefinition definition, AccessorFieldDefinition field, IPropertyAccessorReportData reportData)
         {

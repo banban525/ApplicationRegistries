@@ -10,7 +10,7 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
     public class CommandlineArgumentFormatter: IPropertyFormatter
     {
         public string Key => BuiltInAccessors.CommandlineArguments;
-        public string Title => "コマンドライン引数";
+        public string Title => Properties.Resources.CommandlineArgumentFormatter_Title;
 
         public string Format(AccessorDefinition definition, AccessorFieldDefinition field, IPropertyAccessorReportData reportData)
         {
@@ -19,11 +19,11 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
             var exampleValue = "";
             if (field.Type == typeof(int))
             {
-                exampleValue = "(数値)";
+                exampleValue = "(integer)";
             }
             else if (field.Type == typeof(string))
             {
-                exampleValue = "(文字列)";
+                exampleValue = "(string)";
             }
 
             var result = $@"

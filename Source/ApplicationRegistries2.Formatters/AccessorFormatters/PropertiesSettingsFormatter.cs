@@ -19,15 +19,15 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
             var exampleValue = "";
             if (field.Type == typeof(int))
             {
-                exampleValue = "(数値)";
+                exampleValue = "(integer)";
             }
             else if (field.Type == typeof(string))
             {
-                exampleValue = "(文字列)";
+                exampleValue = "(string)";
             }
 
             var result = $@"
-<h3>アプリケーション構成ファイル</h3>
+<h3>{Title}</h3>
 <div class=""registry"">
   <pre><code>{data.Parent.FullName}.{data.Name} = {exampleValue};</code></pre>
 </div>";

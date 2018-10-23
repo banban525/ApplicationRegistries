@@ -20,27 +20,25 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
             ? BuiltInAccessors.MachineRegistry
             : BuiltInAccessors.UserRegistry;
         public string Title => _root == RegistoryAccessor.RegistryRoot.LocalMachine ? 
-            "レジストリ(HKLM)":"レジストリ(HKCU)";
+            Properties.Resources.MachineRegistryFormatter_Title: Properties.Resources.UserRegistryFormatter_Title;
 
         public string Format(AccessorDefinition definition, AccessorFieldDefinition field, IPropertyAccessorReportData reportData)
         {
             var data = (RegistoryAccessor.RegistryAccessorReportData)reportData;
 
-            var title = _root == RegistoryAccessor.RegistryRoot.LocalMachine ? "レジストリ(HKLM)" : "レジストリ(HKCU)";
-
             var exampleValue = "";
             if (field.Type == typeof(int))
             {
-                exampleValue = "dword:(数値)";
+                exampleValue = "dword:(Value)";
             }
             else if (field.Type == typeof(string))
             {
-                exampleValue = "text:(文字列)";
+                exampleValue = "text:(Value)";
             }
 
 
             var result = $@"
-<h3>{title}</h3>
+<h3>{Title}</h3>
 <div class=""registry"">
   <pre><code>[{data.Key}]
 ""{data.ValueName}""={exampleValue}</code></pre>
