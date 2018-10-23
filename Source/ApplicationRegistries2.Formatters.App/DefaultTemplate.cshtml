@@ -108,14 +108,14 @@
                           
     foreach(PropertyReportData prop in typeData.Properties)
     {
-        <h2>@prop.FildDefinition.Name</h2>
+        <h2>@prop.FieldDeclaration.Name</h2>
         <p>@prop.Description</p>
 
         <table class="parameter">
             <tbody>
             <tr>
                 <th>Type</th>
-                <td>@prop.FildDefinition.Type.Name</td>
+                <td>@prop.FieldDeclaration.Type.Name</td>
             </tr>
             <tr>
                 <th>Default</th>
@@ -128,7 +128,7 @@
 
         foreach (IPropertyAccessorReportData propertyAccessorReportData in prop.PropertyAccessors)
         {
-            string rawContent = data.FormatProperty(typeData.Definition, prop.FildDefinition, propertyAccessorReportData);
+            string rawContent = data.FormatProperty(typeData.TypeDeclaration, prop.FieldDeclaration, propertyAccessorReportData);
             @Raw(rawContent)
         }
     }

@@ -5,12 +5,12 @@ using ApplicationRegistries2.Accessors;
 
 namespace ApplicationRegistries2
 {
-    public class AccessorDefinition
+    public class AccessorTypeDeclaration
     {
         public string Name { get; }
         public Type TargetInterfaceType { get; }
 
-        public IEnumerable<AccessorFieldDefinition> Fields { get; }
+        public IEnumerable<AccessorFieldDeclaration> Fields { get; }
 
         public IEnumerable<IAccessor> AccessToList { get; }
 
@@ -18,8 +18,8 @@ namespace ApplicationRegistries2
 
         public IEnumerable<string> Keys { get; }
 
-        public AccessorDefinition(string name, Type targetInterfaceType, 
-            IReadOnlyCollection<AccessorFieldDefinition> fields, IReadOnlyCollection<Attribute> attributes, 
+        public AccessorTypeDeclaration(string name, Type targetInterfaceType, 
+            IReadOnlyCollection<AccessorFieldDeclaration> fields, IReadOnlyCollection<Attribute> attributes, 
             IReadOnlyCollection<IAccessor> accessToList,
             IReadOnlyCollection<string> keys)
         {
@@ -37,7 +37,7 @@ namespace ApplicationRegistries2
             return (T)Attributes.FirstOrDefault(_ => _ is T);
         }
 
-        public AccessorFieldDefinition GetField(string name)
+        public AccessorFieldDeclaration GetField(string name)
         {
             return Fields.FirstOrDefault(_ => _.Name == name) ?? throw new InvalidOperationException();
         }

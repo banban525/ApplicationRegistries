@@ -5,16 +5,16 @@ namespace ApplicationRegistries2.Formatters
 {
     public class InterfaceReportData
     {
-        public InterfaceReportData(AccessorDefinition definition, string description, IEnumerable<PropertyReportData> properties)
+        public InterfaceReportData(AccessorTypeDeclaration accessorTypeDeclaration, string description, IEnumerable<PropertyReportData> properties)
         {
             Properties = properties;
             Description = description;
-            Definition = definition;
+            TypeDeclaration = accessorTypeDeclaration;
         }
 
-        public Type InterfaceType => Definition.TargetInterfaceType;
+        public Type InterfaceType => TypeDeclaration.TargetInterfaceType;
 
-        public AccessorDefinition Definition { get; }
+        public AccessorTypeDeclaration TypeDeclaration { get; }
 
         public string Name => InterfaceType.Name;
 

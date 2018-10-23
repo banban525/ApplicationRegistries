@@ -120,4 +120,16 @@
   <data name="CommandlineArgumentFormatter_Title" xml:space="preserve">
     <value>Commandline Arguments</value>
   </data>
+  <data name="EnvironmentVariableFormatter_Title" xml:space="preserve">
+    <value>Environment Variable</value>
+  </data>
+  <data name="MachineRegistryFormatter_Title" xml:space="preserve">
+    <value>Registry(HKLM)</value>
+  </data>
+  <data name="UserRegistryFormatter_Title" xml:space="preserve">
+    <value>Registry(HKCU)</value>
+  </data>
+  <data name="XmlFileFormatter_Title" xml:space="preserve">
+    <value>Xml File</value>
+  </data>
 </root>

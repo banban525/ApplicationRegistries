@@ -9,17 +9,17 @@ namespace ApplicationRegistries2.Formatters
 {
     public class SummaryInterfaceReportData
     {
-        public SummaryInterfaceReportData(AccessorDefinition definition, string description, IInterfaceAccessorReportData reportData, IEnumerable<SummaryPropertyReportData> properties)
+        public SummaryInterfaceReportData(AccessorTypeDeclaration accessorTypeDeclaration, string description, IInterfaceAccessorReportData reportData, IEnumerable<SummaryPropertyReportData> properties)
         {
             Properties = properties;
             Description = description;
-            Definition = definition;
+            TypeDeclaration = accessorTypeDeclaration;
             ReportData = reportData;
         }
 
-        public Type InterfaceType => Definition.TargetInterfaceType;
+        public Type InterfaceType => TypeDeclaration.TargetInterfaceType;
 
-        public AccessorDefinition Definition { get; }
+        public AccessorTypeDeclaration TypeDeclaration { get; }
 
         public string Name => InterfaceType.Name;
 

@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace ApplicationRegistries2
 {
-    public class AccessorFieldDefinition
+    public class AccessorFieldDeclaration
     {
         public string Name { get; }
         public Type Type { get; }
 
         private readonly Attribute[] _attributes;
 
-        internal AccessorFieldDefinition(string name, Type type, Attribute[] attributes)
+        internal AccessorFieldDeclaration(string name, Type type, Attribute[] attributes)
         {
             Name = name;
             Type = type;

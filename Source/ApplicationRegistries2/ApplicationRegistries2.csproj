@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="AccesserTypeBuilder.cs" />
     <Compile Include="AccessorBase.cs" />
-    <Compile Include="AccessorDefinition.cs" />
+    <Compile Include="AccessorTypeDeclaration.cs" />
     <Compile Include="AccessorRepository.cs" />
     <Compile Include="Accessors\EmptyInterfaceAccessorReportData.cs" />
     <Compile Include="Accessors\EmptyPropertyAccessorReportData.cs" />
@@ -71,7 +71,7 @@
     <Compile Include="Attributes\XmlFileAttribute.cs" />
     <Compile Include="Attributes\XmlNameAttribute.cs" />
     <Compile Include="BuiltInAccessors.cs" />
-    <Compile Include="AccessorFieldDefinition.cs" />
+    <Compile Include="AccessorFieldDeclaration.cs" />
     <Compile Include="DataNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryAccessorCache.cs" />

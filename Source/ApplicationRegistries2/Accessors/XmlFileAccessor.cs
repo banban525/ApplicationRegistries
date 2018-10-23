@@ -10,10 +10,10 @@ namespace ApplicationRegistries2.Accessors
     /// <inheritdoc />
     class XmlFileAccessor : IAccessor
     {
-        public object Read(Type returnType, AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition accessorFieldDefinition)
+        public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var propertyData = (XmlFileAccessorReportData)GetPropertyData(accessorDefinition, accessorFieldDefinition);
+            var propertyData = (XmlFileAccessorReportData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
             if (File.Exists(propertyData.FilePath) == false)
             {
                 return false;
@@ -26,9 +26,9 @@ namespace ApplicationRegistries2.Accessors
             return element == null ? null : Convert.ChangeType(element.Value, returnType);
         }
 
-        public bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var propertyData = (XmlFileAccessorReportData)GetPropertyData(accessorDefinition, field);
+            var propertyData = (XmlFileAccessorReportData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
             if (File.Exists(propertyData.FilePath) == false)
             {
                 return false;
@@ -41,18 +41,18 @@ namespace ApplicationRegistries2.Accessors
             return element != null;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var xmlFileAttribute = accessorDefinition.GetAttribute<XmlFileAttribute>();
+            var xmlFileAttribute = accessorTypeDeclaration.GetAttribute<XmlFileAttribute>();
 
             var filePath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
                 throw new InvalidOperationException(),
                 xmlFileAttribute?.FilePath ?? @".\ApplicationRegisties.xml");
-            var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorDefinition.Name;
+            var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorTypeDeclaration.Name;
 
-            var xmlNameAttribute = field.GetAttribute<XmlNameAttribute>();
-            var xPath = xmlNameAttribute?.XPath ?? field.Name;
+            var xmlNameAttribute = accessorFieldDeclaration.GetAttribute<XmlNameAttribute>();
+            var xPath = xmlNameAttribute?.XPath ?? accessorFieldDeclaration.Name;
 
             return new XmlFileAccessorReportData(BuiltInAccessors.XmlFile, 
                 filePath,
@@ -60,15 +60,15 @@ namespace ApplicationRegistries2.Accessors
                 xPath);
         }
 
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
-            var xmlFileAttribute = accessorDefinition.GetAttribute<XmlFileAttribute>();
+            var xmlFileAttribute = accessorTypeDeclaration.GetAttribute<XmlFileAttribute>();
 
             var filePath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
                 throw new InvalidOperationException(),
                 xmlFileAttribute?.FilePath ?? @".\ApplicationRegisties.xml");
-            var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorDefinition.Name;
+            var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorTypeDeclaration.Name;
 
             
             return new XmlFileInterfaceAccessorReportData(BuiltInAccessors.XmlFile,

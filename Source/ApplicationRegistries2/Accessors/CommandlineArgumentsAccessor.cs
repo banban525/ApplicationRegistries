@@ -6,10 +6,10 @@ namespace ApplicationRegistries2.Accessors
     /// <inheritdoc />
     class CommandlineArgumentsAccessor : IAccessor
     {
-        public object Read(Type returnType, AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition accessorFieldDefinition)
+        public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var commandlineName = GetCommandlineName(accessorDefinition, accessorFieldDefinition);
+            var commandlineName = GetCommandlineName(accessorTypeDeclaration, accessorFieldDeclaration);
 
             var args = GetCommandlineArguments();
             string val = null;
@@ -36,9 +36,9 @@ namespace ApplicationRegistries2.Accessors
             return Convert.ChangeType(val, returnType);
         }
 
-        public bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration field)
         {
-            var commandlineName = GetCommandlineName(accessorDefinition, field);
+            var commandlineName = GetCommandlineName(accessorTypeDeclaration, field);
 
             var args = GetCommandlineArguments();
             for (var i = 0; i < args.Length; i++)
@@ -57,14 +57,14 @@ namespace ApplicationRegistries2.Accessors
             return false;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration field)
         {
-            var name = GetCommandlineName(accessorDefinition, field);
+            var name = GetCommandlineName(accessorTypeDeclaration, field);
 
             return new CommandlineArgumentsAccessorReportData(BuiltInAccessors.CommandlineArguments, name);
         }
 
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
             return new EmptyInterfaceAccessorReportData(BuiltInAccessors.CommandlineArguments);
         }
@@ -82,18 +82,18 @@ namespace ApplicationRegistries2.Accessors
             public string AccessorKey { get; }
         }
 
-        private static string GetCommandlineName(AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition accessorFieldDefinition)
+        private static string GetCommandlineName(AccessorTypeDeclaration accessorTypeDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var interfaceName = accessorDefinition.TargetInterfaceType.Name;
+            var interfaceName = accessorTypeDeclaration.TargetInterfaceType.Name;
 
             var commandlineArgumentPrefixAttribute =
-                accessorDefinition.GetAttribute<CommandlineArgumentPrefixAttribute>();
+                accessorTypeDeclaration.GetAttribute<CommandlineArgumentPrefixAttribute>();
             var prefix = commandlineArgumentPrefixAttribute?.Prefix ?? $@"{interfaceName}";
 
             var commandlineArgumentNameAttribute =
-                accessorFieldDefinition.GetAttribute<CommandlineArgumentNameAttribute>();
-            var name = commandlineArgumentNameAttribute?.Name ?? accessorFieldDefinition.Name;
+                accessorFieldDeclaration.GetAttribute<CommandlineArgumentNameAttribute>();
+            var name = commandlineArgumentNameAttribute?.Name ?? accessorFieldDeclaration.Name;
 
             return prefix == "" ? $"--{name}" : $"--{prefix}_{name}";
         }

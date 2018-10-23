@@ -9,10 +9,10 @@ namespace ApplicationRegistries2.Accessors
     /// <inheritdoc />
     class PropertiesSettingsAccessor : IAccessor
     {
-        public object Read(Type returnType, AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition accessorFieldDefinition)
+        public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var propertyData = (PropertiesSettingsPropertyData)GetPropertyData(accessorDefinition, accessorFieldDefinition);
+            var propertyData = (PropertiesSettingsPropertyData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
 
 
             var settings =
@@ -30,9 +30,9 @@ namespace ApplicationRegistries2.Accessors
             return Convert.ChangeType(val, returnType);
         }
 
-        public bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var propertyData = (PropertiesSettingsPropertyData)GetPropertyData(accessorDefinition, field);
+            var propertyData = (PropertiesSettingsPropertyData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
 
             var settings =
                 (ApplicationSettingsBase)Activator.CreateInstance(propertyData.Parent);
@@ -48,24 +48,24 @@ namespace ApplicationRegistries2.Accessors
             return true;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var appConfigTypeAttribute = accessorDefinition.GetAttribute<PropertiesSettingsTypeAttribute>();
+            var appConfigTypeAttribute = accessorTypeDeclaration.GetAttribute<PropertiesSettingsTypeAttribute>();
             if (appConfigTypeAttribute == null)
             {
                 throw new DataNotFoundException();
             }
-            var appConfigNameAttribute = field.GetAttribute<PropertiesSettingsNameAttribute>();
-            var name = appConfigNameAttribute?.Name ?? field.Name;
+            var appConfigNameAttribute = accessorFieldDeclaration.GetAttribute<PropertiesSettingsNameAttribute>();
+            var name = appConfigNameAttribute?.Name ?? accessorFieldDeclaration.Name;
 
             return new PropertiesSettingsPropertyData(BuiltInAccessors.PropertiesSettings,
                 appConfigTypeAttribute.Parent,
                 name);
         }
 
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
-            var appConfigTypeAttribute = accessorDefinition.GetAttribute<PropertiesSettingsTypeAttribute>();
+            var appConfigTypeAttribute = accessorTypeDeclaration.GetAttribute<PropertiesSettingsTypeAttribute>();
             if (appConfigTypeAttribute == null)
             {
                 throw new DataNotFoundException();

@@ -12,16 +12,16 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Key => BuiltInAccessors.CommandlineArguments;
         public string Title => Properties.Resources.CommandlineArgumentFormatter_Title;
 
-        public string Format(AccessorDefinition definition, AccessorFieldDefinition field, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
         {
             var data = (CommandlineArgumentsAccessor.CommandlineArgumentsAccessorReportData)reportData;
 
             var exampleValue = "";
-            if (field.Type == typeof(int))
+            if (fieldDeclaration.Type == typeof(int))
             {
                 exampleValue = "(integer)";
             }
-            else if (field.Type == typeof(string))
+            else if (fieldDeclaration.Type == typeof(string))
             {
                 exampleValue = "(string)";
             }

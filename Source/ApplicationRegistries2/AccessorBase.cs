@@ -2,22 +2,22 @@
 {
     public class AccessorBase
     {
-        private readonly AccessorDefinition _accessorDefinition;
-        internal AccessorBase(AccessorDefinition accessorDefinition)
+        private readonly AccessorTypeDeclaration _accessorTypeDeclaration;
+        internal AccessorBase(AccessorTypeDeclaration accessorDeclaration)
         {
-            _accessorDefinition = accessorDefinition;
+            _accessorTypeDeclaration = accessorDeclaration;
         }
 
         public object Get(string name)
         {
-            var field = _accessorDefinition.GetField(name);
+            var field = _accessorTypeDeclaration.GetField(name);
 
 
-            foreach (var accessor in _accessorDefinition.AccessToList)
+            foreach (var accessor in _accessorTypeDeclaration.AccessToList)
             {
-                if (accessor.Exists(field.Type, _accessorDefinition, field))
+                if (accessor.Exists(field.Type, _accessorTypeDeclaration, field))
                 {
-                    return accessor.Read(field.Type, _accessorDefinition, field);
+                    return accessor.Read(field.Type, _accessorTypeDeclaration, field);
                 }
             }
 

@@ -6,14 +6,14 @@ namespace ApplicationRegistries2.Formatters
 {
     public class PropertyReportData
     {
-        public PropertyReportData(AccessorFieldDefinition fildDefinition,string description, IEnumerable<IPropertyAccessorReportData> propertyAccessors)
+        public PropertyReportData(AccessorFieldDeclaration accessorFieldDeclaration, string description, IEnumerable<IPropertyAccessorReportData> propertyAccessors)
         {
-            FildDefinition = fildDefinition;
+            FieldDeclaration = accessorFieldDeclaration;
             Description = description;
             PropertyAccessors = propertyAccessors;
         }
 
-        public AccessorFieldDefinition FildDefinition { get; }
+        public AccessorFieldDeclaration FieldDeclaration { get; }
         public IEnumerable<IPropertyAccessorReportData> PropertyAccessors { get; }
         public string Description { get; }
         public bool ExistsAccessor(string key)

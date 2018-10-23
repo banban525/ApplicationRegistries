@@ -12,22 +12,22 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Key => BuiltInAccessors.XmlFile;
         public string Title => Properties.Resources.XmlFileFormatter_Title;
 
-        public string Format(AccessorDefinition definition, AccessorFieldDefinition field, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
         {
             var data = (XmlFileAccessor.XmlFileAccessorReportData)reportData;
 
             var exampleValue = "";
-            if (field.Type == typeof(int))
+            if (fieldDeclaration.Type == typeof(int))
             {
                 exampleValue = "integer";
             }
-            else if (field.Type == typeof(string))
+            else if (fieldDeclaration.Type == typeof(string))
             {
                 exampleValue = "string";
             }
 
             var result = $@"
-<h3>XMLファイル</h3>
+<h3>{Title}</h3>
 <div class=""registry"">
   <pre><code>{data.FilePath}
 XPath: {data.XmlRootPath}
@@ -56,7 +56,7 @@ Type: {exampleValue}
                     return $@"
     <tr>
         <td>{reportData.XmlValuePath}</td>
-        <td>{propertyReportData.FildDefinition.Type.Name}</td>
+        <td>{propertyReportData.FieldDeclaration.Type.Name}</td>
         <td>{propertyReportData.Description}</td>
     </tr>";
                 }).ToArray();

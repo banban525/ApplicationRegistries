@@ -52,46 +52,34 @@ namespace ApplicationRegistries2.Formatters
             return RazorEngine.Engine.Razor.RunCompile(razorTemplate, "templateKey", typeof(ReportData), reportData);
         }
 
-        //private static IEnumerable<SummaryReportData> CreateSummaryReportData(InterfaceReportData interfaceReportData, AccessorRepository repository)
-        //{
-        //    return interfaceReportData.Definition.Keys.Select(key=>
-        //        new SummaryReportData(key,
-        //        CreateSummaryPropertyReportData(key, interfaceReportData, repository)));
-        //}
-
-        //private static SummaryInterfaceReportData CreateSummaryPropertyReportData(string key, InterfaceReportData interfaceReportData, AccessorRepository repository)
-        //{
-        //    return new SummaryInterfaceReportData(interfaceReportData.Definition, interfaceReportData.Description, repository.GetAccessor(key).GetInterfaceData(interfaceReportData.Definition), interfaceReportData.Properties.Select(prop => new SummaryPropertyReportData(prop.FildDefinition, prop.Description, prop.PropertyAccessors.First(_ => _.AccessorKey == key))));
-        //}
-
-        private static InterfaceReportData CreateReportData(AccessorDefinition definition)
+        private static InterfaceReportData CreateReportData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
             XElement xDoc = null;
             var typeDescription = "";
-            var xmlCommentFilePath = Path.ChangeExtension(definition.TargetInterfaceType.Assembly.Location, ".xml");
+            var xmlCommentFilePath = Path.ChangeExtension(accessorTypeDeclaration.TargetInterfaceType.Assembly.Location, ".xml");
             if (File.Exists(xmlCommentFilePath))
             {
                 xDoc = XElement.Load(xmlCommentFilePath);
                 var summaryElements = xDoc.XPathSelectElements(
                     "/members/member/summary");
                 typeDescription = summaryElements.FirstOrDefault(_ =>
-                    _.Parent.Attribute("name").Value == "T:" + definition.TargetInterfaceType.FullName).Value;
+                    _.Parent.Attribute("name").Value == "T:" + accessorTypeDeclaration.TargetInterfaceType.FullName).Value;
             }
 
-            var propertyReportDataList = definition.Fields.Select(_ => new PropertyReportData(_,
-                    GetDescription(definition, _, xDoc),
-                    definition.AccessToList.Select(accessor => accessor.GetPropertyData(definition, _))))
+            var propertyReportDataList = accessorTypeDeclaration.Fields.Select(_ => new PropertyReportData(_,
+                    GetDescription(accessorTypeDeclaration, _, xDoc),
+                    accessorTypeDeclaration.AccessToList.Select(accessor => accessor.GetPropertyData(accessorTypeDeclaration, _))))
                 .ToArray();
 
-            return new InterfaceReportData(definition, typeDescription, propertyReportDataList);
+            return new InterfaceReportData(accessorTypeDeclaration, typeDescription, propertyReportDataList);
         }
 
-        private static string GetDescription(AccessorDefinition definition, AccessorFieldDefinition field, XElement xDoc)
+        private static string GetDescription(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration, XElement xDoc)
         {
             var summaryElements = xDoc.XPathSelectElements(
                 "/members/member/summary");
             return summaryElements.FirstOrDefault(_ =>
-                _.Parent.Attribute("name").Value == $"P:{definition.TargetInterfaceType.FullName}.{field.Name}").Value;
+                _.Parent.Attribute("name").Value == $"P:{accessorTypeDeclaration.TargetInterfaceType.FullName}.{accessorFieldDeclaration.Name}").Value;
 
         }
     }

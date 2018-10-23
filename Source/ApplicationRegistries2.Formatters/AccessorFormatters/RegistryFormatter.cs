@@ -22,16 +22,16 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Title => _root == RegistoryAccessor.RegistryRoot.LocalMachine ? 
             Properties.Resources.MachineRegistryFormatter_Title: Properties.Resources.UserRegistryFormatter_Title;
 
-        public string Format(AccessorDefinition definition, AccessorFieldDefinition field, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
         {
             var data = (RegistoryAccessor.RegistryAccessorReportData)reportData;
 
             var exampleValue = "";
-            if (field.Type == typeof(int))
+            if (fieldDeclaration.Type == typeof(int))
             {
                 exampleValue = "dword:(Value)";
             }
-            else if (field.Type == typeof(string))
+            else if (fieldDeclaration.Type == typeof(string))
             {
                 exampleValue = "text:(Value)";
             }
@@ -60,11 +60,11 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
                     key = reportData.Key;
 
                     var typeDescription = "";
-                    if (propertyReportData.FildDefinition.Type == typeof(int))
+                    if (propertyReportData.FieldDeclaration.Type == typeof(int))
                     {
                         typeDescription = "dword";
                     }
-                    else if (propertyReportData.FildDefinition.Type == typeof(string))
+                    else if (propertyReportData.FieldDeclaration.Type == typeof(string))
                     {
                         typeDescription = "text";
                     }

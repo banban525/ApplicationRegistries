@@ -21,10 +21,10 @@ namespace ApplicationRegistries2.Accessors
 
         private readonly RegistryRoot _registryRoot;
 
-        public object Read(Type returnType, AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition accessorFieldDefinition)
+        public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var data = (RegistryAccessorReportData)GetPropertyData(accessorDefinition, accessorFieldDefinition);
+            var data = (RegistryAccessorReportData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
             using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
                 ? Registry.LocalMachine.OpenSubKey(data.Key)
                 : Registry.CurrentUser.OpenSubKey(data.Key))
@@ -38,9 +38,9 @@ namespace ApplicationRegistries2.Accessors
             }
         }
 
-        public bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var data = (RegistryAccessorReportData)GetPropertyData(accessorDefinition, field);
+            var data = (RegistryAccessorReportData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
             using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
                 ? Registry.LocalMachine.OpenSubKey(data.Key)
                 : Registry.CurrentUser.OpenSubKey(data.Key))
@@ -55,16 +55,16 @@ namespace ApplicationRegistries2.Accessors
             return true;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var assemblyName = accessorDefinition.TargetInterfaceType.Assembly.GetName().Name;
-            var interfaceName = accessorDefinition.TargetInterfaceType.Name;
+            var assemblyName = accessorTypeDeclaration.TargetInterfaceType.Assembly.GetName().Name;
+            var interfaceName = accessorTypeDeclaration.TargetInterfaceType.Name;
 
-            var registoKeyAttribute = accessorDefinition.GetAttribute<RegistryKeyAttribute>();
+            var registoKeyAttribute = accessorTypeDeclaration.GetAttribute<RegistryKeyAttribute>();
             var key = registoKeyAttribute?.Key ?? $@"Software\ApplicationRegistries\{assemblyName}\{interfaceName}";
 
-            var registoNameAttribute = field.GetAttribute<RegistryNameAttribute>();
-            var name = registoNameAttribute?.Name ?? field.Name;
+            var registoNameAttribute = accessorFieldDeclaration.GetAttribute<RegistryNameAttribute>();
+            var name = registoNameAttribute?.Name ?? accessorFieldDeclaration.Name;
 
             return new RegistryAccessorReportData(
                 _registryRoot == RegistryRoot.LocalMachine ? BuiltInAccessors.MachineRegistry : BuiltInAccessors.UserRegistry,
@@ -74,12 +74,12 @@ namespace ApplicationRegistries2.Accessors
         }
 
 
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
-            var assemblyName = accessorDefinition.TargetInterfaceType.Assembly.GetName().Name;
-            var interfaceName = accessorDefinition.TargetInterfaceType.Name;
+            var assemblyName = accessorTypeDeclaration.TargetInterfaceType.Assembly.GetName().Name;
+            var interfaceName = accessorTypeDeclaration.TargetInterfaceType.Name;
 
-            var registoKeyAttribute = accessorDefinition.GetAttribute<RegistryKeyAttribute>();
+            var registoKeyAttribute = accessorTypeDeclaration.GetAttribute<RegistryKeyAttribute>();
             var key = registoKeyAttribute?.Key ?? $@"Software\ApplicationRegistries\{assemblyName}\{interfaceName}";
 
 

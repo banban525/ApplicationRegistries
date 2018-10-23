@@ -57,7 +57,6 @@
     </Compile>
     <Compile Include="PropertyReportData.cs" />
     <Compile Include="ReportData.cs" />
-    <Compile Include="ReportDataCreator.cs" />
     <Compile Include="SummaryInterfaceReportData.cs" />
     <Compile Include="SummaryPropertyReportData.cs" />
     <Compile Include="SummaryReportData.cs" />

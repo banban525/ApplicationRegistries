@@ -4,14 +4,14 @@ namespace ApplicationRegistries2.Accessors
 {
     public interface IAccessor
     {
-        object Read(Type returnType, AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition accessorFieldDefinition);
+        object Read(Type returnType, AccessorTypeDeclaration accessorDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration);
 
-        bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field);
+        bool Exists(Type fieldType, AccessorTypeDeclaration accessorDeclaration, AccessorFieldDeclaration accessorFieldDeclaration);
 
-        IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition field);
+        IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration);
 
-        IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition);
+        IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorDeclaration);
     }
 }

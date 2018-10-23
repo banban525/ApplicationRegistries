@@ -8,10 +8,10 @@ namespace ApplicationRegistries2.Accessors
     /// <inheritdoc />
     class DefaultValueAccessor : IAccessor
     {
-        public object Read(Type returnType, AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition accessorFieldDefinition)
+        public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var defaultValueAttribute = accessorFieldDefinition.GetAttribute<DefaultValueAttribute>();
+            var defaultValueAttribute = accessorFieldDeclaration.GetAttribute<DefaultValueAttribute>();
             if (defaultValueAttribute == null)
             {
                 throw new DataNotFoundException();
@@ -20,15 +20,15 @@ namespace ApplicationRegistries2.Accessors
             return Convert.ChangeType(defaultValueAttribute.DefaultValue, returnType);
         }
 
-        public bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var defaultValueAttribute = field.GetAttribute<DefaultValueAttribute>();
+            var defaultValueAttribute = accessorFieldDeclaration.GetAttribute<DefaultValueAttribute>();
             return defaultValueAttribute != null;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var defaultValueAttribute = field.GetAttribute<DefaultValueAttribute>();
+            var defaultValueAttribute = accessorFieldDeclaration.GetAttribute<DefaultValueAttribute>();
             if (defaultValueAttribute == null)
             {
                 throw new DataNotFoundException();
@@ -36,7 +36,7 @@ namespace ApplicationRegistries2.Accessors
 
             return new DefaultValueAccessorReportData(BuiltInAccessors.DefaultValue, defaultValueAttribute.DefaultValue);
         }
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
             return new EmptyInterfaceAccessorReportData(BuiltInAccessors.CommandlineArguments);
         }

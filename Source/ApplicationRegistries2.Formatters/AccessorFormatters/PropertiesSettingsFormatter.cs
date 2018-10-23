@@ -12,16 +12,16 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Key => BuiltInAccessors.PropertiesSettings;
         public string Title => "Properties.Settings";
 
-        public string Format(AccessorDefinition definition, AccessorFieldDefinition field, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
         {
             var data = (PropertiesSettingsAccessor.PropertiesSettingsPropertyData)reportData;
 
             var exampleValue = "";
-            if (field.Type == typeof(int))
+            if (fieldDeclaration.Type == typeof(int))
             {
                 exampleValue = "(integer)";
             }
-            else if (field.Type == typeof(string))
+            else if (fieldDeclaration.Type == typeof(string))
             {
                 exampleValue = "(string)";
             }
@@ -52,7 +52,7 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
                     return $@"
     <tr>
         <td>{reportData.Name}</td>
-        <td>{propertyReportData.FildDefinition.Type.Name}</td>
+        <td>{propertyReportData.FieldDeclaration.Type.Name}</td>
         <td>{propertyReportData.Description}</td>
     </tr>";
                 }).ToArray();

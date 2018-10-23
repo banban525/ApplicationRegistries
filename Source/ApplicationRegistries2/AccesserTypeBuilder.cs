@@ -10,7 +10,7 @@ namespace ApplicationRegistries2
     class AccessorTypeBuilder
     {
 
-        internal AccessorDefinition Parse(Type type, AccessorRepository repository)
+        internal AccessorTypeDeclaration Parse(Type type, AccessorRepository repository)
         {
             if (type.IsInterface == false)
             {
@@ -32,19 +32,19 @@ namespace ApplicationRegistries2
             var accessor = att.Keys.Select(repository.GetAccessor).ToArray();
 
             var fields = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Select(propertyInfo => new AccessorFieldDefinition(
+                .Select(propertyInfo => new AccessorFieldDeclaration(
                     propertyInfo.Name,
                     propertyInfo.PropertyType,
                     Attribute.GetCustomAttributes(propertyInfo, true)));
 
-            return new AccessorDefinition(type.Name, type,
+            return new AccessorTypeDeclaration(type.Name, type,
                 fields.ToArray(), 
                 Attribute.GetCustomAttributes(type, true),
                 accessor,
                 att.Keys.ToArray());
         }
 
-        internal TypeInfo Build(AccessorDefinition definition)
+        internal TypeInfo Build(AccessorTypeDeclaration typeDeclaration)
         {
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
                 new AssemblyName("DynamicAssembly"),
@@ -53,11 +53,11 @@ namespace ApplicationRegistries2
                 "DynamicModule");
 
             var typeBuilder = moduleBuilder.DefineType(
-                $"{definition.Name}_dynamic",
+                $"{typeDeclaration.Name}_dynamic",
                 TypeAttributes.Public | TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit);
 
             
-            typeBuilder.AddInterfaceImplementation(definition.TargetInterfaceType);
+            typeBuilder.AddInterfaceImplementation(typeDeclaration.TargetInterfaceType);
 
             // Field
             var accessorBaseField = typeBuilder.DefineField(
@@ -82,19 +82,19 @@ namespace ApplicationRegistries2
                 ilGenerator.Emit(OpCodes.Ret);
             }
 
-            foreach (var accessorFieldDefinition in definition.Fields)
+            foreach (var accessorFieldDeclaration in typeDeclaration.Fields)
             {
                 
                 var property = typeBuilder.DefineProperty(
-                    accessorFieldDefinition.Name,
+                    accessorFieldDeclaration.Name,
                     PropertyAttributes.None,
-                    accessorFieldDefinition.Type,
+                    accessorFieldDeclaration.Type,
                     null);
                 var method = typeBuilder.DefineMethod(
-                    $"get_{accessorFieldDefinition.Name}",
+                    $"get_{accessorFieldDeclaration.Name}",
                     MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot |
                     MethodAttributes.SpecialName | MethodAttributes.Virtual | MethodAttributes.Final,
-                    accessorFieldDefinition.Type,
+                    accessorFieldDeclaration.Type,
                     Type.EmptyTypes);
 
                 property.SetGetMethod(method);
@@ -105,19 +105,19 @@ namespace ApplicationRegistries2
                 var baseGetMethod = typeof(AccessorBase).GetMethod("Get", BindingFlags.Instance | BindingFlags.Public) ??
                                 throw new InvalidOperationException();
 
-                ilGenerator.DeclareLocal(accessorFieldDefinition.Type);
+                ilGenerator.DeclareLocal(accessorFieldDeclaration.Type);
 
                 ilGenerator.Emit(OpCodes.Ldarg_0);
                 ilGenerator.Emit(OpCodes.Ldfld, accessorBaseField);
-                ilGenerator.Emit(OpCodes.Ldstr, accessorFieldDefinition.Name);
+                ilGenerator.Emit(OpCodes.Ldstr, accessorFieldDeclaration.Name);
                 ilGenerator.Emit(OpCodes.Callvirt, baseGetMethod);
-                if (accessorFieldDefinition.Type.IsValueType)
+                if (accessorFieldDeclaration.Type.IsValueType)
                 {
-                    ilGenerator.Emit(OpCodes.Unbox_Any, accessorFieldDefinition.Type);
+                    ilGenerator.Emit(OpCodes.Unbox_Any, accessorFieldDeclaration.Type);
                 }
                 else
                 {
-                    ilGenerator.Emit(OpCodes.Castclass, accessorFieldDefinition.Type);
+                    ilGenerator.Emit(OpCodes.Castclass, accessorFieldDeclaration.Type);
                 }
                 ilGenerator.Emit(OpCodes.Stloc_0);
                 ilGenerator.Emit(OpCodes.Ldloc_0);

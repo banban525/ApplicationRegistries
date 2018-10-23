@@ -26,26 +26,26 @@ namespace ApplicationRegistries2.Test
 
         class CustomAccessor : IAccessor
         {
-            public object Read(Type returnType, AccessorDefinition accessorDefinition, AccessorFieldDefinition accessorFieldDefinition)
+            public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
             {
-                if (accessorFieldDefinition.Name == "AssemblyName")
+                if (accessorFieldDeclaration.Name == "AssemblyName")
                 {
                     return Assembly.GetExecutingAssembly().GetName().Name;
                 }
                 throw new DataNotFoundException();
             }
 
-            public bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+            public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
             {
-                return field.Name == "AssemblyName";
+                return accessorFieldDeclaration.Name == "AssemblyName";
             }
 
-            public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+            public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
             {
                 return new EmptyPropertyAccessorReportData("CUSTOM");
             }
 
-            public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+            public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
             {
                 return new EmptyInterfaceAccessorReportData("CUSTOM");
             }

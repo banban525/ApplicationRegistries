@@ -22,14 +22,14 @@ namespace ApplicationRegistries2.Formatters
 
         public IEnumerable<IPropertyFormatter> PropertyFormatters { get; }
 
-        public string FormatProperty(AccessorDefinition definition, AccessorFieldDefinition field, IPropertyAccessorReportData propertyReportData)
+        public string FormatProperty(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration, IPropertyAccessorReportData propertyReportData)
         {
             if (propertyReportData.AccessorKey == BuiltInAccessors.DefaultValue)
             {
                 return "";
             }
             var formatter = PropertyFormatters.First(_=>_.Key == propertyReportData.AccessorKey);
-            return formatter.Format(definition, field, propertyReportData);
+            return formatter.Format(accessorTypeDeclaration, accessorFieldDeclaration, propertyReportData);
         }
 
         public string FormatSummary(string key)
@@ -40,10 +40,10 @@ namespace ApplicationRegistries2.Formatters
             }
 
             var summaryReportDataCollection = Interfaces
-                .Where(typeReport => typeReport.Definition.Keys.Contains(key))
-                .Select(typeReport => new SummaryInterfaceReportData(typeReport.Definition,
+                .Where(typeReport => typeReport.TypeDeclaration.Keys.Contains(key))
+                .Select(typeReport => new SummaryInterfaceReportData(typeReport.TypeDeclaration,
                     typeReport.Description,
-                    _repository.GetAccessor(key).GetInterfaceData(typeReport.Definition),
+                    _repository.GetAccessor(key).GetInterfaceData(typeReport.TypeDeclaration),
                     typeReport.Properties.Select(prop =>
                         CreateSummaryPropertyReports(key, typeReport, prop, _repository)))).ToArray();
             
@@ -56,13 +56,13 @@ namespace ApplicationRegistries2.Formatters
 
         private static SummaryPropertyReportData CreateSummaryPropertyReports(string key, InterfaceReportData parent, PropertyReportData propertyReportData, AccessorRepository repository)
         {
-            return new SummaryPropertyReportData(propertyReportData.FildDefinition,
+            return new SummaryPropertyReportData(propertyReportData.FieldDeclaration,
                 propertyReportData.Description,
-                repository.GetAccessor(key).GetPropertyData(parent.Definition, propertyReportData.FildDefinition)
+                repository.GetAccessor(key).GetPropertyData(parent.TypeDeclaration, propertyReportData.FieldDeclaration)
                 );
         }
 
-        public IEnumerable<string> Keys => Interfaces.SelectMany(_ => _.Definition.Keys).Distinct();
+        public IEnumerable<string> Keys => Interfaces.SelectMany(_ => _.TypeDeclaration.Keys).Distinct();
 
         public string GetAccessorTitle(string key)
         {

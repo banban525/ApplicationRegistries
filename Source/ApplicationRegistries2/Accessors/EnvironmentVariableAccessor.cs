@@ -6,10 +6,10 @@ namespace ApplicationRegistries2.Accessors
     /// <inheritdoc />
     class EnvironmentVariableAccessor : IAccessor
     {
-        public object Read(Type returnType, AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition accessorFieldDefinition)
+        public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var environmentVariableName = GetEnvironmentVariableName(accessorDefinition, accessorFieldDefinition);
+            var environmentVariableName = GetEnvironmentVariableName(accessorTypeDeclaration, accessorFieldDeclaration);
             var val = Environment.GetEnvironmentVariable(environmentVariableName);
 
             if (val == null)
@@ -20,37 +20,37 @@ namespace ApplicationRegistries2.Accessors
             return Convert.ChangeType(val, returnType);
         }
 
-        public bool Exists(Type fieldType, AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var environmentVariableName = GetEnvironmentVariableName(accessorDefinition, field);
+            var environmentVariableName = GetEnvironmentVariableName(accessorTypeDeclaration, accessorFieldDeclaration);
             var val = Environment.GetEnvironmentVariable(environmentVariableName);
 
             return val != null;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorDefinition accessorDefinition, AccessorFieldDefinition field)
+        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
             return new EnvironmentVariableAccessorReportData(BuiltInAccessors.EnvironmenetVariable,
-                GetEnvironmentVariableName(accessorDefinition, field));
+                GetEnvironmentVariableName(accessorTypeDeclaration, accessorFieldDeclaration));
         }
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorDefinition accessorDefinition)
+        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
             return new EmptyInterfaceAccessorReportData(BuiltInAccessors.CommandlineArguments);
         }
 
 
-        private string GetEnvironmentVariableName(AccessorDefinition accessorDefinition,
-            AccessorFieldDefinition field)
+        private string GetEnvironmentVariableName(AccessorTypeDeclaration accessorTypeDeclaration,
+            AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var assemblyName = accessorDefinition.TargetInterfaceType.Assembly.GetName().Name;
-            var interfaceName = accessorDefinition.TargetInterfaceType.Name;
+            var assemblyName = accessorTypeDeclaration.TargetInterfaceType.Assembly.GetName().Name;
+            var interfaceName = accessorTypeDeclaration.TargetInterfaceType.Name;
 
             var environmentVariablePrefixAttribute =
-                accessorDefinition.GetAttribute<EnvironmentVariablePrefixAttribute>();
+                accessorTypeDeclaration.GetAttribute<EnvironmentVariablePrefixAttribute>();
             var prefix = environmentVariablePrefixAttribute?.Prefix ?? $@"{assemblyName}_{interfaceName}";
 
-            var environmentVariableNameAttribute = field.GetAttribute<EnvironmentVariableNameAttribute>();
-            var name = environmentVariableNameAttribute?.Name ?? field.Name;
+            var environmentVariableNameAttribute = accessorFieldDeclaration.GetAttribute<EnvironmentVariableNameAttribute>();
+            var name = environmentVariableNameAttribute?.Name ?? accessorFieldDeclaration.Name;
 
             return $"{prefix}_{name}";
 
