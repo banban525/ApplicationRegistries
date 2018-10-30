@@ -11,20 +11,11 @@ namespace ApplicationRegistries2.Formatters.App
     {
         static void Main(string[] args)
         {
-            var exeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
-                         throw new InvalidOperationException();
-
             var outputPath = "output.html";
             var targetAssemblyPaths = new string[]
             {
-                Assembly.GetExecutingAssembly().Location
             };
-
-
-            var defaultTemplateFilePath = Path.Combine(exeDir,
-                "DefaultTemplate.cshtml");
-
-            var defaultTemplate = File.ReadAllText(defaultTemplateFilePath, Encoding.UTF8);
+      
 
             var targetAssemblies = targetAssemblyPaths.Select(Assembly.LoadFrom).ToArray();
 
@@ -37,36 +28,26 @@ namespace ApplicationRegistries2.Formatters.App
 
             var fomatter = new Formatter();
             
-            var content = fomatter.Format(defaultTemplate, targetTypes);
+            var content = fomatter.Format(ReportTemplate.Default, targetTypes);
             
 
             File.WriteAllText(outputPath, content, Encoding.UTF8);
         }
+
+        
+
     }
 
-    /// <summary>
-    /// システム設定用のパラメータ
-    /// </summary>
-    [ApplicationRegistry(
-        BuiltInAccessors.CommandlineArguments,
-        BuiltInAccessors.EnvironmenetVariable,
-        BuiltInAccessors.UserRegistry,
-        BuiltInAccessors.MachineRegistry,
-        BuiltInAccessors.DefaultValue
-    )]
-    public interface ITest
+    class Options
     {
-        /// <summary>
-        /// ポートNo
-        /// </summary>
-        [DefaultValue(80)]
-        int PortNo { get; }
+        public Options(string[] targetAssemblies, string outputPath)
+        {
+            TargetAssemblies = targetAssemblies;
+            OutputPath = outputPath;
+        }
 
-        /// <summary>
-        /// 設定ファイルのパス
-        /// </summary>
-        [DefaultValue(@"c:\ProgramData\ApplicationRegistries2")]
-        string SettingsFolder { get; }
+        public string[] TargetAssemblies { get; }
+        public string OutputPath { get; }
     }
 
 }

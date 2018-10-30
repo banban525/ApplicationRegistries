@@ -38,7 +38,7 @@ namespace ApplicationRegistries2.Formatters
         {
         }
 
-        public string Format(string razorTemplate, Type[] interfaceTypes)
+        public string Format(ReportTemplate template, Type[] interfaceTypes)
         {
             var repository = _applicationRegistryManager.AccessorRepository;
             var accessorTypeBuilder = new AccessorTypeBuilder();
@@ -49,7 +49,7 @@ namespace ApplicationRegistries2.Formatters
 
             var reportData = new ReportData(interfaceReportDataCollection, _propertyFormatters, repository);
 
-            return RazorEngine.Engine.Razor.RunCompile(razorTemplate, "templateKey", typeof(ReportData), reportData);
+            return RazorEngine.Engine.Razor.RunCompile(template.TemplateRawText, "templateKey", typeof(ReportData), reportData);
         }
 
         private static InterfaceReportData CreateReportData(AccessorTypeDeclaration accessorTypeDeclaration)
@@ -76,6 +76,10 @@ namespace ApplicationRegistries2.Formatters
 
         private static string GetDescription(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration, XElement xDoc)
         {
+            if (xDoc == null)
+            {
+                return "";
+            }
             var summaryElements = xDoc.XPathSelectElements(
                 "/members/member/summary");
             return summaryElements.FirstOrDefault(_ =>
