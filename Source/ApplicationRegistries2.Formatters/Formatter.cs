@@ -17,12 +17,12 @@ namespace ApplicationRegistries2.Formatters
     {
         private readonly ApplicationRegistryManager _applicationRegistryManager;
 
-        private readonly IEnumerable<IPropertyFormatter> _propertyFormatters;
+        private readonly List<IPropertyFormatter> _propertyFormatters;
 
         public Formatter(ApplicationRegistryManager applicationRegistryManager)
         {
             _applicationRegistryManager = applicationRegistryManager;
-            _propertyFormatters = new IPropertyFormatter[]
+            _propertyFormatters = new List<IPropertyFormatter>
             {
                 new CommandlineArgumentFormatter(),
                 new EnvironmentVariableFormatter(),
@@ -36,6 +36,16 @@ namespace ApplicationRegistries2.Formatters
         public Formatter()
         :this(ApplicationRegistry.ApplicationRegistryManager)
         {
+        }
+
+        public void AddFormatter(IPropertyFormatter customFomatter)
+        {
+            _propertyFormatters.Insert(0, customFomatter);
+        }
+
+        public void AddAccessor(string key, IAccessor customAccessor)
+        {
+            _applicationRegistryManager.RegistCustomAccessor(key, customAccessor);
         }
 
         public string Format(ReportTemplate template, Type[] interfaceTypes)
