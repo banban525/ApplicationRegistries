@@ -100,10 +100,13 @@ namespace ApplicationRegistries2
                 property.SetGetMethod(method);
 
                 var ilGenerator = method.GetILGenerator();
-                
 
-                var baseGetMethod = typeof(AccessorBase).GetMethod("Get", BindingFlags.Instance | BindingFlags.Public) ??
-                                throw new InvalidOperationException();
+
+                var baseGetMethod = typeof(AccessorBase).GetMethod("Get", BindingFlags.Instance | BindingFlags.Public);
+                if (baseGetMethod == null)
+                {
+                    throw new InvalidOperationException();
+                }
 
                 ilGenerator.DeclareLocal(accessorFieldDeclaration.Type);
 

@@ -25,7 +25,11 @@ namespace ApplicationRegistries2.Accessors
                 throw new DataNotFoundException();
             }
 
-            var val = settings[propertyData.Name] ?? throw new DataNotFoundException();
+            var val = settings[propertyData.Name];
+            if (val == null)
+            {
+                throw new DataNotFoundException();
+            }
             return Convert.ChangeType(val, returnType);
         }
 
