@@ -9,12 +9,11 @@ namespace ApplicationRegistries2.Formatters
 {
     public class SummaryInterfaceReportData
     {
-        public SummaryInterfaceReportData(AccessorTypeDeclaration accessorTypeDeclaration, string description, IInterfaceAccessorReportData reportData, IEnumerable<SummaryPropertyReportData> properties)
+        public SummaryInterfaceReportData(AccessorTypeDeclaration accessorTypeDeclaration, string description, IEnumerable<SummaryPropertyReportData> properties)
         {
             Properties = properties;
             Description = description;
             TypeDeclaration = accessorTypeDeclaration;
-            ReportData = reportData;
         }
 
         public Type InterfaceType => TypeDeclaration.TargetInterfaceType;
@@ -30,7 +29,5 @@ namespace ApplicationRegistries2.Formatters
         public IEnumerable<SummaryPropertyReportData> Properties { get; }
 
         public string Description { get; }
-
-        public IInterfaceAccessorReportData ReportData { get; } 
     }
 }

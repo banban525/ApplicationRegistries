@@ -48,7 +48,7 @@ namespace ApplicationRegistries2.Accessors
             return true;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
+        public static PropertiesSettingsPropertyData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
             var appConfigTypeAttribute = accessorTypeDeclaration.GetAttribute<PropertiesSettingsTypeAttribute>();
             if (appConfigTypeAttribute == null)
@@ -58,12 +58,11 @@ namespace ApplicationRegistries2.Accessors
             var appConfigNameAttribute = accessorFieldDeclaration.GetAttribute<PropertiesSettingsNameAttribute>();
             var name = appConfigNameAttribute?.Name ?? accessorFieldDeclaration.Name;
 
-            return new PropertiesSettingsPropertyData(BuiltInAccessors.PropertiesSettings,
-                appConfigTypeAttribute.Parent,
+            return new PropertiesSettingsPropertyData(appConfigTypeAttribute.Parent,
                 name);
         }
 
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
+        public static PropertiesSettingsnterfaceData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
             var appConfigTypeAttribute = accessorTypeDeclaration.GetAttribute<PropertiesSettingsTypeAttribute>();
             if (appConfigTypeAttribute == null)
@@ -71,33 +70,27 @@ namespace ApplicationRegistries2.Accessors
                 throw new DataNotFoundException();
             }
 
-            return new PropertiesSettingsnterfaceData(BuiltInAccessors.PropertiesSettings,
-                appConfigTypeAttribute.Parent);
+            return new PropertiesSettingsnterfaceData(appConfigTypeAttribute.Parent);
         }
 
-        public class PropertiesSettingsnterfaceData : IInterfaceAccessorReportData
+        public class PropertiesSettingsnterfaceData
         {
-            public PropertiesSettingsnterfaceData(string accessorKey, Type parent)
+            public PropertiesSettingsnterfaceData(Type parent)
             {
-                AccessorKey = accessorKey;
                 Parent = parent;
             }
 
             public Type Parent { get; }
-            public string AccessorKey { get; }
         }
 
 
-        public class PropertiesSettingsPropertyData : IPropertyAccessorReportData
+        public class PropertiesSettingsPropertyData
         {
-            public PropertiesSettingsPropertyData(string accessorKey, Type parent, string name)
+            public PropertiesSettingsPropertyData(Type parent, string name)
             {
-                AccessorKey = accessorKey;
                 Parent = parent;
                 Name = name;
             }
-
-            public string AccessorKey { get; }
 
             public Type Parent { get; }
 

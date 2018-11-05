@@ -28,18 +28,13 @@ namespace ApplicationRegistries2.Accessors
             return val != null;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
+        public static EnvironmentVariableAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            return new EnvironmentVariableAccessorReportData(BuiltInAccessors.EnvironmenetVariable,
-                GetEnvironmentVariableName(accessorTypeDeclaration, accessorFieldDeclaration));
-        }
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
-        {
-            return new EmptyInterfaceAccessorReportData(BuiltInAccessors.CommandlineArguments);
+            return new EnvironmentVariableAccessorReportData(GetEnvironmentVariableName(accessorTypeDeclaration, accessorFieldDeclaration));
         }
 
 
-        private string GetEnvironmentVariableName(AccessorTypeDeclaration accessorTypeDeclaration,
+        private static string GetEnvironmentVariableName(AccessorTypeDeclaration accessorTypeDeclaration,
             AccessorFieldDeclaration accessorFieldDeclaration)
         {
             var assemblyName = accessorTypeDeclaration.TargetInterfaceType.Assembly.GetName().Name;
@@ -57,16 +52,14 @@ namespace ApplicationRegistries2.Accessors
         }
 
 
-        public class EnvironmentVariableAccessorReportData : IPropertyAccessorReportData
+        public class EnvironmentVariableAccessorReportData
         {
-            public EnvironmentVariableAccessorReportData(string accessorKey, string environmentVariableName)
+            public EnvironmentVariableAccessorReportData(string environmentVariableName)
             {
-                AccessorKey = accessorKey;
                 EnvironmentVariableName = environmentVariableName;
             }
 
             public string EnvironmentVariableName { get; }
-            public string AccessorKey { get; }
         }
 
     }

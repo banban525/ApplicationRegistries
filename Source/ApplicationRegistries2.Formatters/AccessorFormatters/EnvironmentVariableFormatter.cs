@@ -13,9 +13,9 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Key => BuiltInAccessors.EnvironmenetVariable;
         public string Title => Properties.Resources.EnvironmentVariableFormatter_Title;
 
-        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {
-            var data = (EnvironmentVariableAccessor.EnvironmentVariableAccessorReportData)reportData;
+            var data = EnvironmentVariableAccessor.GetPropertyData(typeDeclaration, fieldDeclaration);
 
             var exampleValue = "";
             if (fieldDeclaration.Type == typeof(int))
@@ -37,11 +37,12 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string FormatSummary(IEnumerable<SummaryInterfaceReportData> typeReportCollection)
         {
             var list = typeReportCollection
-                .SelectMany(_ => _.Properties)
-                .Select(propertyReportData =>
+                .SelectMany(_ => _.Properties.Select(prop=>new{_.TypeDeclaration, PropertyReportData=prop}))
+                .Select(_ =>
             {
-                var data =
-                    (EnvironmentVariableAccessor.EnvironmentVariableAccessorReportData)propertyReportData.PropertyReportData;
+                var typeDeclaration = _.TypeDeclaration;
+                var propertyReportData = _.PropertyReportData;
+                var data = EnvironmentVariableAccessor.GetPropertyData(typeDeclaration, propertyReportData.FieldDeclaration);
 
                 return $"<tr><td>{data.EnvironmentVariableName}</td><td>{propertyReportData.Description}</td></tr>\r\n";
 

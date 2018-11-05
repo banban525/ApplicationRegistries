@@ -41,7 +41,7 @@ namespace ApplicationRegistries2.Accessors
             return element != null;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
+        public static XmlFileAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
             var xmlFileAttribute = accessorTypeDeclaration.GetAttribute<XmlFileAttribute>();
 
@@ -54,13 +54,12 @@ namespace ApplicationRegistries2.Accessors
             var xmlNameAttribute = accessorFieldDeclaration.GetAttribute<XmlNameAttribute>();
             var xPath = xmlNameAttribute?.XPath ?? accessorFieldDeclaration.Name;
 
-            return new XmlFileAccessorReportData(BuiltInAccessors.XmlFile, 
-                filePath,
+            return new XmlFileAccessorReportData(filePath,
                 xrootPath,
                 xPath);
         }
 
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
+        public static XmlFileInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
         {
             var xmlFileAttribute = accessorTypeDeclaration.GetAttribute<XmlFileAttribute>();
 
@@ -71,30 +70,26 @@ namespace ApplicationRegistries2.Accessors
             var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorTypeDeclaration.Name;
 
             
-            return new XmlFileInterfaceAccessorReportData(BuiltInAccessors.XmlFile,
-                filePath,
+            return new XmlFileInterfaceAccessorReportData(filePath,
                 xrootPath);
         }
 
-        public class XmlFileInterfaceAccessorReportData : IInterfaceAccessorReportData
+        public class XmlFileInterfaceAccessorReportData
         {
-            public XmlFileInterfaceAccessorReportData(string accessorKey, string filePath, string xmlRootPath)
+            public XmlFileInterfaceAccessorReportData(string filePath, string xmlRootPath)
             {
-                AccessorKey = accessorKey;
                 FilePath = filePath;
                 XmlRootPath = xmlRootPath;
             }
 
-            public string AccessorKey { get; }
             public string FilePath { get; }
             public string XmlRootPath { get; }
         }
 
-        public class XmlFileAccessorReportData : IPropertyAccessorReportData
+        public class XmlFileAccessorReportData
         {
-            public XmlFileAccessorReportData(string accessorKey, string filePath, string xmlRootPath, string xmlValuePath)
+            public XmlFileAccessorReportData(string filePath, string xmlRootPath, string xmlValuePath)
             {
-                AccessorKey = accessorKey;
                 FilePath = filePath;
                 XmlRootPath = xmlRootPath;
                 XmlValuePath = xmlValuePath;
@@ -103,7 +98,6 @@ namespace ApplicationRegistries2.Accessors
             public string FilePath { get; }
             public string XmlRootPath { get; }
             public string XmlValuePath { get; }
-            public string AccessorKey { get; }
         }
     }
 }

@@ -126,9 +126,9 @@
             </tbody>
         </table>
 
-        foreach (IPropertyAccessorReportData propertyAccessorReportData in prop.PropertyAccessors)
+        foreach (string key in prop.Keys)
         {
-            string rawContent = data.FormatProperty(typeData.TypeDeclaration, prop.FieldDeclaration, propertyAccessorReportData);
+            string rawContent = data.FormatProperty(typeData.TypeDeclaration, prop.FieldDeclaration, key);
             @Raw(rawContent)
         }
     }

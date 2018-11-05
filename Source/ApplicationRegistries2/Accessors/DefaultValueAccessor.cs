@@ -26,7 +26,7 @@ namespace ApplicationRegistries2.Accessors
             return defaultValueAttribute != null;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
+        public static DefaultValueAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
             var defaultValueAttribute = accessorFieldDeclaration.GetAttribute<DefaultValueAttribute>();
             if (defaultValueAttribute == null)
@@ -34,24 +34,17 @@ namespace ApplicationRegistries2.Accessors
                 throw new DataNotFoundException();
             }
 
-            return new DefaultValueAccessorReportData(BuiltInAccessors.DefaultValue, defaultValueAttribute.DefaultValue);
-        }
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
-        {
-            return new EmptyInterfaceAccessorReportData(BuiltInAccessors.CommandlineArguments);
+            return new DefaultValueAccessorReportData(defaultValueAttribute.DefaultValue);
         }
 
-
-        public class DefaultValueAccessorReportData : IPropertyAccessorReportData
+        public class DefaultValueAccessorReportData
         {
-            public DefaultValueAccessorReportData(string accessorKey, object value)
+            public DefaultValueAccessorReportData(object value)
             {
-                AccessorKey = accessorKey;
                 Value = value;
             }
 
             public object Value { get; }
-            public string AccessorKey { get; }
         }
     }
 }

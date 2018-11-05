@@ -24,7 +24,7 @@ namespace ApplicationRegistries2.Accessors
         public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
             AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var data = (RegistryAccessorReportData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
+            var data = (RegistryAccessorReportData)GetPropertyData(_registryRoot, accessorTypeDeclaration, accessorFieldDeclaration);
             using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
                 ? Registry.LocalMachine.OpenSubKey(data.Key)
                 : Registry.CurrentUser.OpenSubKey(data.Key))
@@ -40,7 +40,7 @@ namespace ApplicationRegistries2.Accessors
 
         public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var data = (RegistryAccessorReportData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
+            var data = (RegistryAccessorReportData)GetPropertyData(_registryRoot, accessorTypeDeclaration, accessorFieldDeclaration);
             using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
                 ? Registry.LocalMachine.OpenSubKey(data.Key)
                 : Registry.CurrentUser.OpenSubKey(data.Key))
@@ -55,7 +55,7 @@ namespace ApplicationRegistries2.Accessors
             return true;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
+        public static RegistryAccessorReportData GetPropertyData(RegistryRoot registryRoot, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
             var assemblyName = accessorTypeDeclaration.TargetInterfaceType.Assembly.GetName().Name;
             var interfaceName = accessorTypeDeclaration.TargetInterfaceType.Name;
@@ -66,15 +66,13 @@ namespace ApplicationRegistries2.Accessors
             var registoNameAttribute = accessorFieldDeclaration.GetAttribute<RegistryNameAttribute>();
             var name = registoNameAttribute?.Name ?? accessorFieldDeclaration.Name;
 
-            return new RegistryAccessorReportData(
-                _registryRoot == RegistryRoot.LocalMachine ? BuiltInAccessors.MachineRegistry : BuiltInAccessors.UserRegistry,
-                key,
+            return new RegistryAccessorReportData(key,
                 name
                 );
         }
 
 
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
+        public static RegistryInterfaceAccessorReportData GetInterfaceData(RegistryRoot registryRoot, AccessorTypeDeclaration accessorTypeDeclaration)
         {
             var assemblyName = accessorTypeDeclaration.TargetInterfaceType.Assembly.GetName().Name;
             var interfaceName = accessorTypeDeclaration.TargetInterfaceType.Name;
@@ -83,37 +81,30 @@ namespace ApplicationRegistries2.Accessors
             var key = registoKeyAttribute?.Key ?? $@"Software\ApplicationRegistries\{assemblyName}\{interfaceName}";
 
 
-            return new RegistryInterfaceAccessorReportData(
-                _registryRoot == RegistryRoot.LocalMachine ? BuiltInAccessors.MachineRegistry : BuiltInAccessors.UserRegistry,
-                key);
+            return new RegistryInterfaceAccessorReportData(key);
         }
 
-        public class RegistryInterfaceAccessorReportData : IInterfaceAccessorReportData
+        public class RegistryInterfaceAccessorReportData
         {
-            public RegistryInterfaceAccessorReportData(string accessorKey, string key)
+            public RegistryInterfaceAccessorReportData(string key)
             {
-                AccessorKey = accessorKey;
                 Key = key;
             }
-
-            public string AccessorKey { get; }
 
             public string Key { get; }
         }
 
 
-        public class RegistryAccessorReportData : IPropertyAccessorReportData
+        public class RegistryAccessorReportData
         {
-            public RegistryAccessorReportData(string accessorKey, string key, string valueName)
+            public RegistryAccessorReportData(string key, string valueName)
             {
-                AccessorKey = accessorKey;
                 Key = key;
                 ValueName = valueName;
             }
 
             public string Key { get; }
             public string ValueName { get; }
-            public string AccessorKey { get; }
         }
 
 

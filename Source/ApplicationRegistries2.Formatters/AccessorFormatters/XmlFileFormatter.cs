@@ -12,9 +12,9 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Key => BuiltInAccessors.XmlFile;
         public string Title => Properties.Resources.XmlFileFormatter_Title;
 
-        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {
-            var data = (XmlFileAccessor.XmlFileAccessorReportData)reportData;
+            var data = XmlFileAccessor.GetPropertyData(typeDeclaration, fieldDeclaration);
 
             var exampleValue = "";
             if (fieldDeclaration.Type == typeof(int))
@@ -45,13 +45,13 @@ Type: {exampleValue}
             var result = "";
             foreach (var interfaceReportData in typeReportCollection)
             {
-                var typeData =
-                    (XmlFileAccessor.XmlFileInterfaceAccessorReportData)interfaceReportData.ReportData;
+                var typeData = XmlFileAccessor.GetInterfaceData(
+                        interfaceReportData.TypeDeclaration);
 
                 var fieldReports = interfaceReportData.Properties.Select(propertyReportData =>
                 {
-                    var reportData =
-                        (XmlFileAccessor.XmlFileAccessorReportData)propertyReportData.PropertyReportData;
+                    var reportData = XmlFileAccessor.GetPropertyData(
+                            interfaceReportData.TypeDeclaration, propertyReportData.FieldDeclaration);
 
                     return $@"
     <tr>

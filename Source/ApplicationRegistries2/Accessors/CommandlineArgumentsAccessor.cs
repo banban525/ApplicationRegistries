@@ -57,29 +57,22 @@ namespace ApplicationRegistries2.Accessors
             return false;
         }
 
-        public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration field)
+        internal static CommandlineArgumentsAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration field)
         {
             var name = GetCommandlineName(accessorTypeDeclaration, field);
 
-            return new CommandlineArgumentsAccessorReportData(BuiltInAccessors.CommandlineArguments, name);
-        }
-
-        public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
-        {
-            return new EmptyInterfaceAccessorReportData(BuiltInAccessors.CommandlineArguments);
+            return new CommandlineArgumentsAccessorReportData(name);
         }
 
 
-        public class CommandlineArgumentsAccessorReportData : IPropertyAccessorReportData
+        public class CommandlineArgumentsAccessorReportData
         {
-            public CommandlineArgumentsAccessorReportData(string accessorKey, string commandlineArgumentName)
+            public CommandlineArgumentsAccessorReportData(string commandlineArgumentName)
             {
                 CommandlineArgumentName = commandlineArgumentName;
-                AccessorKey = accessorKey;
             }
 
             public string CommandlineArgumentName { get; }
-            public string AccessorKey { get; }
         }
 
         private static string GetCommandlineName(AccessorTypeDeclaration accessorTypeDeclaration,

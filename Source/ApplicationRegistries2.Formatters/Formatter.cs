@@ -76,9 +76,8 @@ namespace ApplicationRegistries2.Formatters
                     _.Parent.Attribute("name").Value == "T:" + accessorTypeDeclaration.TargetInterfaceType.FullName).Value;
             }
 
-            var propertyReportDataList = accessorTypeDeclaration.Fields.Select(_ => new PropertyReportData(_,
-                    GetDescription(accessorTypeDeclaration, _, xDoc),
-                    accessorTypeDeclaration.AccessToList.Select(accessor => accessor.GetPropertyData(accessorTypeDeclaration, _))))
+            var propertyReportDataList = accessorTypeDeclaration.Fields.Select(_ => new PropertyReportData(accessorTypeDeclaration, _,
+                    GetDescription(accessorTypeDeclaration, _, xDoc)))
                 .ToArray();
 
             return new InterfaceReportData(accessorTypeDeclaration, typeDescription, propertyReportDataList);

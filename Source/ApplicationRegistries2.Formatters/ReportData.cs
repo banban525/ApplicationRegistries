@@ -22,14 +22,14 @@ namespace ApplicationRegistries2.Formatters
 
         public IEnumerable<IPropertyFormatter> PropertyFormatters { get; }
 
-        public string FormatProperty(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration, IPropertyAccessorReportData propertyReportData)
+        public string FormatProperty(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration, string key)
         {
-            if (propertyReportData.AccessorKey == BuiltInAccessors.DefaultValue)
+            if (key == BuiltInAccessors.DefaultValue)
             {
                 return "";
             }
-            var formatter = PropertyFormatters.First(_=>_.Key == propertyReportData.AccessorKey);
-            return formatter.Format(accessorTypeDeclaration, accessorFieldDeclaration, propertyReportData);
+            var formatter = PropertyFormatters.First(_=>_.Key == key);
+            return formatter.Format(accessorTypeDeclaration, accessorFieldDeclaration);
         }
 
         public string FormatSummary(string key)
@@ -43,7 +43,6 @@ namespace ApplicationRegistries2.Formatters
                 .Where(typeReport => typeReport.TypeDeclaration.Keys.Contains(key))
                 .Select(typeReport => new SummaryInterfaceReportData(typeReport.TypeDeclaration,
                     typeReport.Description,
-                    _repository.GetAccessor(key).GetInterfaceData(typeReport.TypeDeclaration),
                     typeReport.Properties.Select(prop =>
                         CreateSummaryPropertyReports(key, typeReport, prop, _repository)))).ToArray();
             
@@ -57,8 +56,7 @@ namespace ApplicationRegistries2.Formatters
         private static SummaryPropertyReportData CreateSummaryPropertyReports(string key, InterfaceReportData parent, PropertyReportData propertyReportData, AccessorRepository repository)
         {
             return new SummaryPropertyReportData(propertyReportData.FieldDeclaration,
-                propertyReportData.Description,
-                repository.GetAccessor(key).GetPropertyData(parent.TypeDeclaration, propertyReportData.FieldDeclaration)
+                propertyReportData.Description
                 );
         }
 

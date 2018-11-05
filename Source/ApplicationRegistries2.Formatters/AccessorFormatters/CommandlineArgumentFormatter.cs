@@ -12,9 +12,9 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Key => BuiltInAccessors.CommandlineArguments;
         public string Title => Properties.Resources.CommandlineArgumentFormatter_Title;
 
-        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {
-            var data = (CommandlineArgumentsAccessor.CommandlineArgumentsAccessorReportData)reportData;
+            var data = CommandlineArgumentsAccessor.GetPropertyData(typeDeclaration, fieldDeclaration);
 
             var exampleValue = "";
             if (fieldDeclaration.Type == typeof(int))
@@ -36,12 +36,14 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string FormatSummary(IEnumerable<SummaryInterfaceReportData> typeReportCollection)
         {
             var list = typeReportCollection
-                .SelectMany(_ => _.Properties)
-                .Select(propertyReportData =>
+                .SelectMany(_ => _.Properties.Select(prop=>new{_.TypeDeclaration, PropertyReportData=prop}))
+                .Select(_ =>
             {
-                var data =
-                    (CommandlineArgumentsAccessor.CommandlineArgumentsAccessorReportData) propertyReportData
-                        .PropertyReportData;
+                var typeDeclaration = _.TypeDeclaration;
+                var propertyReportData = _.PropertyReportData;
+
+                var data = CommandlineArgumentsAccessor.GetPropertyData(typeDeclaration,
+                    propertyReportData.FieldDeclaration);
 
                 return $"<tr><td>{data.CommandlineArgumentName}</td><td>{propertyReportData.Description}</td></tr>\r\n";
 

@@ -39,16 +39,7 @@ namespace ApplicationRegistries2.Test
             {
                 return accessorFieldDeclaration.Name == "AssemblyName";
             }
-
-            public IPropertyAccessorReportData GetPropertyData(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
-            {
-                return new EmptyPropertyAccessorReportData("CUSTOM");
-            }
-
-            public IInterfaceAccessorReportData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)
-            {
-                return new EmptyInterfaceAccessorReportData("CUSTOM");
-            }
+            
         }
     }
 }

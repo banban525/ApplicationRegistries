@@ -12,9 +12,9 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Key => BuiltInAccessors.PropertiesSettings;
         public string Title => "Properties.Settings";
 
-        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {
-            var data = (PropertiesSettingsAccessor.PropertiesSettingsPropertyData)reportData;
+            var data = PropertiesSettingsAccessor.GetPropertyData(typeDeclaration, fieldDeclaration);
 
             var exampleValue = "";
             if (fieldDeclaration.Type == typeof(int))
@@ -41,13 +41,12 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
             var result = "";
             foreach (var interfaceReportData in typeReportCollection)
             {
-                var typeData =
-                    (PropertiesSettingsAccessor.PropertiesSettingsnterfaceData) interfaceReportData.ReportData;
+
+                var typeData = PropertiesSettingsAccessor.GetInterfaceData(interfaceReportData.TypeDeclaration);
                 
                 var fieldReports = interfaceReportData.Properties.Select(propertyReportData =>
                 {
-                    var reportData =
-                        (PropertiesSettingsAccessor.PropertiesSettingsPropertyData)propertyReportData.PropertyReportData;
+                    var reportData = PropertiesSettingsAccessor.GetPropertyData(interfaceReportData.TypeDeclaration, propertyReportData.FieldDeclaration);
 
                     return $@"
     <tr>

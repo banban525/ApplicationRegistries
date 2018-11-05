@@ -22,9 +22,11 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Title => _root == RegistoryAccessor.RegistryRoot.LocalMachine ? 
             Properties.Resources.MachineRegistryFormatter_Title: Properties.Resources.UserRegistryFormatter_Title;
 
-        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration, IPropertyAccessorReportData reportData)
+        public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {
-            var data = (RegistoryAccessor.RegistryAccessorReportData)reportData;
+            var data =
+                RegistoryAccessor.GetPropertyData(
+                    _root, typeDeclaration, fieldDeclaration);
 
             var exampleValue = "";
             if (fieldDeclaration.Type == typeof(int))
@@ -56,7 +58,8 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
                 var fieldReports = interfaceReportData.Properties.Select(propertyReportData =>
                 {
                     var reportData =
-                        (RegistoryAccessor.RegistryAccessorReportData) propertyReportData.PropertyReportData;
+                        RegistoryAccessor.GetPropertyData(
+                            _root, interfaceReportData.TypeDeclaration, propertyReportData.FieldDeclaration);
                     key = reportData.Key;
 
                     var typeDescription = "";
