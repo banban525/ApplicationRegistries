@@ -124,44 +124,6 @@ namespace ApplicationRegistries2
                 ilGenerator.Emit(OpCodes.Ret);
             }
             return typeBuilder.CreateTypeInfo();
-            
-
-            {
-
-                var property = typeBuilder.DefineProperty(
-                    "SettingsFolder",
-                    PropertyAttributes.None,
-                    typeof(int),
-                    null);
-                var method = typeBuilder.DefineMethod(
-                    "get_SettingsFolder",
-                    MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot |
-                    MethodAttributes.SpecialName | MethodAttributes.Virtual | MethodAttributes.Final,
-                    typeof(int),
-                    Type.EmptyTypes);
-
-
-                property.SetGetMethod(method);
-
-                var ilGenerator = method.GetILGenerator();
-
-                var baseGetMethod = typeof(AccessorBase).GetMethod("Get", BindingFlags.Instance | BindingFlags.Public) ??
-                                throw new InvalidOperationException();
-
-                LocalBuilder a = ilGenerator.DeclareLocal(typeof(int));
-
-                ilGenerator.Emit(OpCodes.Ldarg_0);
-                ilGenerator.Emit(OpCodes.Ldfld, accessorBaseField);
-                ilGenerator.Emit(OpCodes.Ldstr, "SettingsFolder");
-                ilGenerator.Emit(OpCodes.Callvirt, baseGetMethod);
-                ilGenerator.Emit(OpCodes.Unbox_Any, typeof(int));
-                ilGenerator.Emit(OpCodes.Stloc_0);
-                ilGenerator.Emit(OpCodes.Ldloc_0);
-                ilGenerator.Emit(OpCodes.Ret);
-            }
-
-            var typeInfo = typeBuilder.CreateTypeInfo();
-            return typeInfo;
         }
     }
 }
