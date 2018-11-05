@@ -41,7 +41,7 @@ namespace ApplicationRegistries2.Test
             var listenPortNo = ApplicationRegistry.Get<IDefaultAttributeRegistry>().ListenPortNo;
             Assert.That(listenPortNo, Is.EqualTo(80), "外部設定がない場合はデフォルト値が使われる");
 
-            var xmlContents = $@"<?xml version=""1.0"" encoding=""utf-8"" ?>
+            var xmlContents = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <ApplicationRegisties>
     <IDefaultAttributeRegistry>
         <ListenPortNo>81</ListenPortNo>
@@ -57,6 +57,7 @@ namespace ApplicationRegistries2.Test
             using (var key =
                 Registry.CurrentUser.CreateSubKey(@"Software\ApplicationRegistries\ApplicationRegistries2.Test\IDefaultAttributeRegistry"))
             {
+                // ReSharper disable once PossibleNullReferenceException
                 key.SetValue("ListenPortNo", 82, RegistryValueKind.DWord);
             }
 

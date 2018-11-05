@@ -13,7 +13,7 @@ namespace ApplicationRegistries2.Accessors
         public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
             AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var propertyData = (XmlFileAccessorReportData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
+            var propertyData = GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
             if (File.Exists(propertyData.FilePath) == false)
             {
                 return false;
@@ -28,7 +28,7 @@ namespace ApplicationRegistries2.Accessors
 
         public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var propertyData = (XmlFileAccessorReportData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
+            var propertyData = GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
             if (File.Exists(propertyData.FilePath) == false)
             {
                 return false;

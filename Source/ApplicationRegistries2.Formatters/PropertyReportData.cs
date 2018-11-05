@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using ApplicationRegistries2.Accessors;
 
 namespace ApplicationRegistries2.Formatters

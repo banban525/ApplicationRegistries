@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using ApplicationRegistries2.Attributes;
 using NUnit.Framework;
 
@@ -115,7 +112,7 @@ namespace ApplicationRegistries2.Test
 
 
         [Test]
-        public void XMLのルートパスを変える()
+        public void Xmlのルートパスを変える()
         {
             var xmlContents = $@"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <XmlFileRegistryTest>

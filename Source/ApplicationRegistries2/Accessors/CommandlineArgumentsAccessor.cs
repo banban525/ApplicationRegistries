@@ -96,7 +96,7 @@ namespace ApplicationRegistries2.Accessors
             return _overridedCommandlineArguments ?? Environment.GetCommandLineArgs();
         }
 
-        private static string[] _overridedCommandlineArguments = null;
+        private static string[] _overridedCommandlineArguments;
 
         internal static void OverrideCommandlineArgumentsForUnitTests(string[] arguments)
         {

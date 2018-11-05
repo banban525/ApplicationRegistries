@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ApplicationRegistries2.Accessors;
 using ApplicationRegistries2.Formatters.AccessorFormatters;
 
 namespace ApplicationRegistries2.Formatters
@@ -9,16 +8,13 @@ namespace ApplicationRegistries2.Formatters
     {
         internal ReportData(
             IEnumerable<InterfaceReportData> interfaces, 
-            IEnumerable<IPropertyFormatter> propertyFormatters,
-            AccessorRepository repository)
+            IEnumerable<IPropertyFormatter> propertyFormatters)
         {
             Interfaces = interfaces;
             PropertyFormatters = propertyFormatters;
-            _repository = repository;
         }
 
         public IEnumerable<InterfaceReportData> Interfaces { get; }
-        private readonly AccessorRepository _repository;
 
         public IEnumerable<IPropertyFormatter> PropertyFormatters { get; }
 
@@ -43,17 +39,18 @@ namespace ApplicationRegistries2.Formatters
                 .Where(typeReport => typeReport.TypeDeclaration.Keys.Contains(key))
                 .Select(typeReport => new SummaryInterfaceReportData(typeReport.TypeDeclaration,
                     typeReport.Description,
-                    typeReport.Properties.Select(prop =>
-                        CreateSummaryPropertyReports(key, typeReport, prop, _repository)))).ToArray();
+                    typeReport.Properties.Select(CreateSummaryPropertyReports))).ToArray();
             
             var formatter = PropertyFormatters.FirstOrDefault(_ => _.Key == key);
             
+
+
 
             return formatter.FormatSummary(summaryReportDataCollection);
         }
 
 
-        private static SummaryPropertyReportData CreateSummaryPropertyReports(string key, InterfaceReportData parent, PropertyReportData propertyReportData, AccessorRepository repository)
+        private static SummaryPropertyReportData CreateSummaryPropertyReports(PropertyReportData propertyReportData)
         {
             return new SummaryPropertyReportData(propertyReportData.FieldDeclaration,
                 propertyReportData.Description

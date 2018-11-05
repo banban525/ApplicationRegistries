@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationRegistries2.Accessors;
 
 namespace ApplicationRegistries2.Formatters.AccessorFormatters
 {
     class RegistryFormatter: IPropertyFormatter
     {
-        private RegistoryAccessor.RegistryRoot _root;
+        private readonly RegistoryAccessor.RegistryRoot _root;
 
         public RegistryFormatter(RegistoryAccessor.RegistryRoot root)
         {

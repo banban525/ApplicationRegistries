@@ -60,7 +60,6 @@
     <Compile Include="ReportTemplate.cs" />
     <Compile Include="SummaryInterfaceReportData.cs" />
     <Compile Include="SummaryPropertyReportData.cs" />
-    <Compile Include="SummaryReportData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplicationRegistries2\ApplicationRegistries2.csproj">

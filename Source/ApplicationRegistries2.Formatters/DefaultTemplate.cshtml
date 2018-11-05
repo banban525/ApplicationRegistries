@@ -1,7 +1,5 @@
-﻿@using ApplicationRegistries2
-@using ApplicationRegistries2.Accessors
-@using ApplicationRegistries2.Formatters
-@model ApplicationRegistries2.Formatters.ReportData
+﻿@using ApplicationRegistries2.Formatters
+@model ReportData
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -51,9 +49,9 @@
         div.commandline {
             background-color: #202020;
             border: 4px solid #c0c0c0;
-            border-radius: 5px;
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
+            border-radius: 5px;
             box-shadow: 2px 2px 3px #6e6e6e;
             color: #e2e2e2;
             display: inline-block;
@@ -63,8 +61,8 @@
             width: 95%;
         }
 
-            div.commandline pre {
-                margin: 0px;
+        div.commandline pre {
+                margin: 0;
             }
 
             div.commandline code {
@@ -74,9 +72,9 @@
         div.registry {
             background-color: #f7f7f7;
             border: 4px solid #c0c0c0;
-            border-radius: 5px;
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
+            border-radius: 5px;
             box-shadow: 2px 2px 3px #6e6e6e, 2px 2px 3px #6e6e6e inset;
             color: #202020;
             display: inline-block;
@@ -86,8 +84,8 @@
             width: 95%;
         }
 
-            div.registry pre {
-                margin: 0px;
+        div.registry pre {
+                margin: 0;
             }
 
             div.registry code {

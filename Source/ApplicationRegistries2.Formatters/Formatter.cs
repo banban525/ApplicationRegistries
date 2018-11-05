@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using ApplicationRegistries2.Accessors;
 using ApplicationRegistries2.Formatters.AccessorFormatters;
-using Microsoft.Win32;
 using RazorEngine.Templating;
 
 namespace ApplicationRegistries2.Formatters
@@ -57,7 +54,7 @@ namespace ApplicationRegistries2.Formatters
                 .Select(_ => accessorTypeBuilder.Parse(_, repository))
                 .Select(CreateReportData).ToArray();
 
-            var reportData = new ReportData(interfaceReportDataCollection, _propertyFormatters, repository);
+            var reportData = new ReportData(interfaceReportDataCollection, _propertyFormatters);
 
             return RazorEngine.Engine.Razor.RunCompile(template.TemplateRawText, "templateKey", typeof(ReportData), reportData);
         }
@@ -73,7 +70,8 @@ namespace ApplicationRegistries2.Formatters
                 var summaryElements = xDoc.XPathSelectElements(
                     "/members/member/summary");
                 typeDescription = summaryElements.FirstOrDefault(_ =>
-                    _.Parent.Attribute("name").Value == "T:" + accessorTypeDeclaration.TargetInterfaceType.FullName).Value;
+                                      _?.Parent?.Attribute("name")?.Value ==
+                                      "T:" + accessorTypeDeclaration.TargetInterfaceType.FullName)?.Value ?? "";
             }
 
             var propertyReportDataList = accessorTypeDeclaration.Fields.Select(_ => new PropertyReportData(accessorTypeDeclaration, _,
@@ -92,7 +90,7 @@ namespace ApplicationRegistries2.Formatters
             var summaryElements = xDoc.XPathSelectElements(
                 "/members/member/summary");
             return summaryElements.FirstOrDefault(_ =>
-                _.Parent.Attribute("name").Value == $"P:{accessorTypeDeclaration.TargetInterfaceType.FullName}.{accessorFieldDeclaration.Name}").Value;
+                _?.Parent?.Attribute("name")?.Value == $"P:{accessorTypeDeclaration.TargetInterfaceType.FullName}.{accessorFieldDeclaration.Name}")?.Value ?? "";
 
         }
     }

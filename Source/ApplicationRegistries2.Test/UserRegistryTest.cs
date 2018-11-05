@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ApplicationRegistries2.Attributes;
+﻿using ApplicationRegistries2.Attributes;
 using Microsoft.Win32;
 using NUnit.Framework;
 
@@ -26,6 +21,7 @@ namespace ApplicationRegistries2.Test
             using (var key =
                 Registry.CurrentUser.CreateSubKey(@"Software\ApplicationRegistries\ApplicationRegistries2.Test\IUserRegistryRegistry"))
             {
+                // ReSharper disable once PossibleNullReferenceException
                 key.SetValue("ListenPortNo", 80, RegistryValueKind.DWord);
                 key.SetValue("TestName", TestContext.CurrentContext.Test.Name, RegistryValueKind.String);
             }
@@ -60,6 +56,7 @@ namespace ApplicationRegistries2.Test
             using (var key =
                 Registry.CurrentUser.CreateSubKey(@"Software\ApplicationRegistries\Temp"))
             {
+                // ReSharper disable once PossibleNullReferenceException
                 key.SetValue("ListenPortNo", 81, RegistryValueKind.DWord);
                 key.SetValue("Temp", TestContext.CurrentContext.Test.Name, RegistryValueKind.String);
             }

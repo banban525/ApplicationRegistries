@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
-using System.Reflection;
 using ApplicationRegistries2.Attributes;
 
 namespace ApplicationRegistries2.Accessors
@@ -12,7 +11,7 @@ namespace ApplicationRegistries2.Accessors
         public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
             AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var propertyData = (PropertiesSettingsPropertyData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
+            var propertyData = GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
 
 
             var settings =
@@ -32,7 +31,7 @@ namespace ApplicationRegistries2.Accessors
 
         public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var propertyData = (PropertiesSettingsPropertyData)GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
+            var propertyData = GetPropertyData(accessorTypeDeclaration, accessorFieldDeclaration);
 
             var settings =
                 (ApplicationSettingsBase)Activator.CreateInstance(propertyData.Parent);

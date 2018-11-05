@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationRegistries2.Attributes;
 using NUnit.Framework;
 
@@ -34,6 +30,7 @@ namespace ApplicationRegistries2.Test
             {
                 Environment.SetEnvironmentVariable("ApplicationRegistries2.Test_IEnvironmentVariableRegistry_ListenPortNo", null);
 
+                // ReSharper disable once UnusedVariable
                 var listenPortNo = ApplicationRegistry.Get<IEnvironmentVariableRegistry>().ListenPortNo;
             });
 

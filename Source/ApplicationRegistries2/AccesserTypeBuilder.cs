@@ -111,14 +111,8 @@ namespace ApplicationRegistries2
                 ilGenerator.Emit(OpCodes.Ldfld, accessorBaseField);
                 ilGenerator.Emit(OpCodes.Ldstr, accessorFieldDeclaration.Name);
                 ilGenerator.Emit(OpCodes.Callvirt, baseGetMethod);
-                if (accessorFieldDeclaration.Type.IsValueType)
-                {
-                    ilGenerator.Emit(OpCodes.Unbox_Any, accessorFieldDeclaration.Type);
-                }
-                else
-                {
-                    ilGenerator.Emit(OpCodes.Castclass, accessorFieldDeclaration.Type);
-                }
+                ilGenerator.Emit(accessorFieldDeclaration.Type.IsValueType ? OpCodes.Unbox_Any : OpCodes.Castclass,
+                    accessorFieldDeclaration.Type);
                 ilGenerator.Emit(OpCodes.Stloc_0);
                 ilGenerator.Emit(OpCodes.Ldloc_0);
                 ilGenerator.Emit(OpCodes.Ret);

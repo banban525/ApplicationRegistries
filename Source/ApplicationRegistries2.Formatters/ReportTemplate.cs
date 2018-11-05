@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationRegistries2.Formatters
 {
@@ -27,10 +23,11 @@ namespace ApplicationRegistries2.Formatters
 
         static ReportTemplate()
         {
-            var template = "";
+            string template;
             using (var stream = Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream(typeof(ReportTemplate).Namespace + ".DefaultTemplate.cshtml"))
             {
+                // ReSharper disable once AssignNullToNotNullAttribute
                 using (var streamReader = new StreamReader(stream, Encoding.UTF8))
                 {
                     template = streamReader.ReadToEnd();

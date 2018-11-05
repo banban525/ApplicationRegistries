@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using ApplicationRegistries2.Accessors;
 
 namespace ApplicationRegistries2
@@ -14,7 +13,6 @@ namespace ApplicationRegistries2
                 var define = builder.Parse(typeof(T), AccessorRepository);
                 var typeInfo = builder.Build(define);
 
-                var a = typeInfo.AsType().GetConstructor(new []{typeof(AccessorBase) });
                 var builtResult = Activator.CreateInstance(typeInfo.AsType(), new AccessorBase(define));
 
                 _cache.Add(typeof(T), new RepositoryAccessorInfo(typeof(T), define, builtResult, DateTime.Now));

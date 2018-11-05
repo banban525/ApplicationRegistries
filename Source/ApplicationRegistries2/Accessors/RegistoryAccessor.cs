@@ -24,7 +24,7 @@ namespace ApplicationRegistries2.Accessors
         public object Read(Type returnType, AccessorTypeDeclaration accessorTypeDeclaration,
             AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var data = (RegistryAccessorReportData)GetPropertyData(_registryRoot, accessorTypeDeclaration, accessorFieldDeclaration);
+            var data = GetPropertyData(_registryRoot, accessorTypeDeclaration, accessorFieldDeclaration);
             using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
                 ? Registry.LocalMachine.OpenSubKey(data.Key)
                 : Registry.CurrentUser.OpenSubKey(data.Key))
@@ -40,7 +40,7 @@ namespace ApplicationRegistries2.Accessors
 
         public bool Exists(Type fieldType, AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration)
         {
-            var data = (RegistryAccessorReportData)GetPropertyData(_registryRoot, accessorTypeDeclaration, accessorFieldDeclaration);
+            var data = GetPropertyData(_registryRoot, accessorTypeDeclaration, accessorFieldDeclaration);
             using (var registrykey = _registryRoot == RegistryRoot.LocalMachine
                 ? Registry.LocalMachine.OpenSubKey(data.Key)
                 : Registry.CurrentUser.OpenSubKey(data.Key))

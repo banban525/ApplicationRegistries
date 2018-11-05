@@ -1,6 +1,4 @@
-﻿using ApplicationRegistries2.Accessors;
-
-namespace ApplicationRegistries2.Formatters
+﻿namespace ApplicationRegistries2.Formatters
 {
     public class SummaryPropertyReportData
     {
