@@ -15,13 +15,14 @@ namespace ApplicationRegistries2.Test
         [SetUp]
         public void SetUp()
         {
-            var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (dir == null)
-            {
-                throw new NullReferenceException();
-            }
-            _defaultXmlFilePath = Path.Combine(dir,"ApplicationRegisties.xml");
-            _otherXmlFilePath = Path.Combine(dir,"OtherApplicationRegisties.xml");
+            _defaultXmlFilePath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
+                throw new InvalidOperationException(),
+                "ApplicationRegisties.xml");
+            _otherXmlFilePath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
+                throw new InvalidOperationException(),
+                "OtherApplicationRegisties.xml");
         }
 
         [TearDown]

@@ -45,14 +45,9 @@ namespace ApplicationRegistries2.Accessors
         {
             var xmlFileAttribute = accessorTypeDeclaration.GetAttribute<XmlFileAttribute>();
 
-            var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (assemblyDir == null)
-            {
-                throw new InvalidOperationException();
-            }
-
             var filePath = Path.Combine(
-                assemblyDir,
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
+                throw new InvalidOperationException(),
                 xmlFileAttribute?.FilePath ?? @".\ApplicationRegisties.xml");
             var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorTypeDeclaration.Name;
 
@@ -68,13 +63,9 @@ namespace ApplicationRegistries2.Accessors
         {
             var xmlFileAttribute = accessorTypeDeclaration.GetAttribute<XmlFileAttribute>();
 
-            var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (assemblyDir == null)
-            {
-                throw new InvalidOperationException();
-            }
             var filePath = Path.Combine(
-                assemblyDir,
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
+                throw new InvalidOperationException(),
                 xmlFileAttribute?.FilePath ?? @".\ApplicationRegisties.xml");
             var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorTypeDeclaration.Name;
 

@@ -39,13 +39,7 @@ namespace ApplicationRegistries2
 
         public AccessorFieldDeclaration GetField(string name)
         {
-            var result = Fields.FirstOrDefault(_ => _.Name == name);
-            if (result == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return result;
+            return Fields.FirstOrDefault(_ => _.Name == name) ?? throw new InvalidOperationException();
         }
     }
 }

@@ -15,12 +15,10 @@ namespace ApplicationRegistries2.Test
         [SetUp]
         public void SetUp()
         {
-            var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (dir == null)
-            {
-                throw new InvalidOperationException();
-            }
-            _defaultXmlFilePath = Path.Combine(dir,"ApplicationRegisties.xml");
+            _defaultXmlFilePath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
+                throw new InvalidOperationException(),
+                "ApplicationRegisties.xml");
             Environment.SetEnvironmentVariable("ApplicationRegistries2.Test_IDefaultAttributeRegistry_ListenPortNo", null);
             Accessors.CommandlineArgumentsAccessor.OverrideCommandlineArgumentsForUnitTests(null);
 
