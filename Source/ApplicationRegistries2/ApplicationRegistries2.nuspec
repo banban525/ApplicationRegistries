@@ -15,7 +15,7 @@
     <tags></tags>
   </metadata>
   <files>
-    <file src="ApplicationRegistries2\bin\release\ApplicationRegistries2.dll" target="lib\net45"/>
-    <file src="ApplicationRegistries2.Formatters.App\bin\release\**" target="tools\formatter"/>
+    <file src="bin\release\ApplicationRegistries2.dll" target="lib\net45"/>
+    <file src="..\ApplicationRegistries2.Formatters.App\bin\release\**" target="tools\formatter"/>
   </files>
 </package>
