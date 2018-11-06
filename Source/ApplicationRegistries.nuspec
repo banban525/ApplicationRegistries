@@ -2,27 +2,20 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>ApplicationRegistries</id>
-    <version>1.1.0</version>
+    <version>$version$</version>
     <title>ApplicationRegistries</title>
     <authors>banban525</authors>
     <owners>banban525</owners>
     <licenseUrl>https://github.com/banban525/ApplicationRegistries/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/banban525/ApplicationRegistries</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>ApplicaitonRegistry is a .NET library to abstract the configuration of the application.</description>
-    <releaseNotes>Added feature: It become posible to be changed commandline arguments parsing rule.</releaseNotes>
+    <description>ApplicaitonRegistries is a .NET library that will proxy the application's external settings.</description>
+    <releaseNotes></releaseNotes>
     <copyright>Copyright banban525 2015</copyright>
     <tags></tags>
   </metadata>
   <files>
-    <file src="ApplicationRegistry\bin\release\*" target="lib\net40"/>
-    <file src="..\schemas\1.0.0\*" target="Content\schemas"/>
-    <file src="ApplicationRegistries.Generator\bin\Release\MyTemplate\*" target="tools\MyTemplate"/>
-    <file src="ApplicationRegistries.Generator\bin\Release\templates\*" target="tools\templates"/>
-    <file src="ApplicationRegistries.Generator\bin\Release\Antlr4.StringTemplate.dll" target="tools"/>
-    <file src="ApplicationRegistries.Generator\bin\Release\ApplicationRegistries.dll" target="tools"/>
-    <file src="ApplicationRegistries.Generator\bin\Release\ApplicationRegistries.Generator.exe" target="tools"/>
-    <file src="ApplicationRegistries.Generator\bin\Release\CommandLine.dll" target="tools"/>
-    <file src="ApplicationRegistries.Generator\bin\Release\Readme.txt" target="tools"/>
+    <file src="ApplicationRegistries2\bin\release\ApplicationRegistries2.dll" target="lib\net45"/>
+    <file src="ApplicationRegistries2.Formatters.App\bin\release\**" target="tools\formatter"/>
   </files>
 </package>
