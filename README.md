@@ -5,6 +5,8 @@ ApplicationRegistries
 
 ApplicaitonRegistries is a .NET library that will proxy the application's external settings.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/a0004gg2p46y94ia?svg=true)](https://ci.appveyor.com/project/banban525/applicationregistries)
+
 ## Description
 
 When developing a Windows application, several parameters are implemented so that you can change it later.

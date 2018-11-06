@@ -5,6 +5,8 @@ ApplicationRegistries
 
 ApplicaitonRegistries はアプリケーションの外部設定値のプロキシとなる.NETライブラリです。
 
+[![Build status](https://ci.appveyor.com/api/projects/status/a0004gg2p46y94ia?svg=true)](https://ci.appveyor.com/project/banban525/applicationregistries)
+
 ## 説明
 
 Windowsアプリケーションを開発する場合、後で変更できるようにいくつかのパラメータが実装されています。
