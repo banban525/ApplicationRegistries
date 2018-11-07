@@ -48,7 +48,9 @@
     <Compile Include="AccessorFormatters\RegistryFormatter.cs" />
     <Compile Include="AccessorFormatters\XmlFileFormatter.cs" />
     <Compile Include="Formatter.cs" />
+    <Compile Include="FormatterFinder.cs" />
     <Compile Include="InterfaceReportData.cs" />
+    <Compile Include="IPropertyFormatterFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
