@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using ApplicationRegistries2.Accessors;
 using ApplicationRegistries2.Formatters.AccessorFormatters;
+using RazorEngine.Configuration;
 using RazorEngine.Templating;
 
 namespace ApplicationRegistries2.Formatters
@@ -70,7 +71,36 @@ namespace ApplicationRegistries2.Formatters
 
             var reportData = new ReportData(interfaceReportDataCollection, _propertyFormatters);
 
-            return RazorEngine.Engine.Razor.RunCompile(template.TemplateRawText, "templateKey", typeof(ReportData), reportData);
+            var tempFolders = new List<string>();
+            try
+            {
+                // https://github.com/Antaris/RazorEngine/issues/244
+                var config = new TemplateServiceConfiguration
+                {
+                    DisableTempFileLocking = true,
+                    CachingProvider = new DefaultCachingProvider(t =>
+                    {
+                        tempFolders.Add(t);
+                    })
+                };
+                RazorEngine.Engine.Razor = RazorEngineService.Create(config);
+                return RazorEngine.Engine.Razor.RunCompile(template.TemplateRawText, "templateKey", typeof(ReportData),
+                    reportData);
+            }
+            finally
+            {
+                foreach (var folder in tempFolders)
+                {
+                    try
+                    {
+                        Directory.Delete(folder, true);
+                    }
+                    catch
+                    {
+                        Console.Error.WriteLine($"Failed to delete temporary folder:{folder}");
+                    }
+                }
+            }
         }
 
         private static InterfaceReportData CreateReportData(AccessorTypeDeclaration accessorTypeDeclaration)
