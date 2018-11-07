@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using ApplicationRegistries2.Attributes;
 
 namespace ApplicationRegistries2.Formatters.App
 {
@@ -25,22 +24,22 @@ namespace ApplicationRegistries2.Formatters.App
 
             var targetAssemblies = options.TargetAssemblies.Select(Assembly.LoadFrom).ToArray();
 
-            var targetTypes = targetAssemblies.SelectMany(_ =>
-                    _.GetTypes()
-                        .Where(ApplicationRegistryAttribute.IsDefined)
-                        .Where(type => type.IsInterface))
-                .ToArray();
+
+            var fomatter = new Formatter();
+
+            fomatter.AddRangeFormatters(FormatterFinder.GetFormatters(targetAssemblies));
+
+            var targetTypes = FormatterFinder.GetApplicationRegistriesInterfaceTypes(targetAssemblies);
 
             var reportFormatContent = ReportTemplate.Default;
-            if (string.IsNullOrEmpty(options.FormatFilePath)==false)
+            if (string.IsNullOrEmpty(options.FormatFilePath) == false)
             {
                 reportFormatContent = new ReportTemplate(
-                    ReportTemplate.Types.Razor, 
+                    ReportTemplate.Types.Razor,
                     File.ReadAllText(options.FormatFilePath, Encoding.UTF8));
             }
 
-            var fomatter = new Formatter();
-            
+
             var content = fomatter.Format(reportFormatContent, targetTypes);
             
             File.WriteAllText(options.OutputPath, content, Encoding.UTF8);

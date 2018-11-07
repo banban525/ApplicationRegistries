@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ApplicationRegistries2.Accessors;
 
 namespace ApplicationRegistries2.Formatters.AccessorFormatters
 {
@@ -10,5 +11,7 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         string FormatSummary(IEnumerable<SummaryInterfaceReportData> typeReportCollection);
 
         string Title { get; }
+
+        IAccessor LoadAccessor();
     }
 }

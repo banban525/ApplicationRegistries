@@ -27,6 +27,7 @@ namespace ApplicationRegistries2
             AccessorRepository.RegistCustomAccessor(key, accessor);
         }
 
+
         internal AccessorRepository AccessorRepository{ get; } = new AccessorRepository();
         private readonly RepositoryAccessorCache _cache = new RepositoryAccessorCache();
     }

@@ -40,6 +40,20 @@ namespace ApplicationRegistries2.Formatters
             _propertyFormatters.Insert(0, customFomatter);
         }
 
+        public void AddRangeFormatters(IEnumerable<IPropertyFormatter> customFomatters)
+        {
+            var propertyFormatters = customFomatters as IPropertyFormatter[] ?? customFomatters.ToArray();
+
+            _propertyFormatters.InsertRange(0, propertyFormatters);
+
+            propertyFormatters
+                .Where(_ => _applicationRegistryManager.AccessorRepository.ExistsKey(_.Key) == false)
+                .ToList()
+                .ForEach(_ =>
+                    _applicationRegistryManager.RegistCustomAccessor(_.Key, _.LoadAccessor()));
+
+        }
+
         public void AddAccessor(string key, IAccessor customAccessor)
         {
             _applicationRegistryManager.RegistCustomAccessor(key, customAccessor);
