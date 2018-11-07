@@ -28,6 +28,7 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
             }
 
             var result = $@"
+<h3>{Title}</h3>
 <div class=""commandline"">
   <pre><code> {data.CommandlineArgumentName}={exampleValue} </code></pre>
 </div>";
