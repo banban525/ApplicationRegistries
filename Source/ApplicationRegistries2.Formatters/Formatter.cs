@@ -16,6 +16,7 @@ namespace ApplicationRegistries2.Formatters
         private readonly ApplicationRegistryManager _applicationRegistryManager;
 
         private readonly List<IPropertyFormatter> _propertyFormatters;
+        private TextWriter _logWriter = TextWriter.Null;
 
         public Formatter(ApplicationRegistryManager applicationRegistryManager)
         {
@@ -34,6 +35,11 @@ namespace ApplicationRegistries2.Formatters
         public Formatter()
         :this(ApplicationRegistry.ApplicationRegistryManager)
         {
+        }
+
+        public void RegistLogger(TextWriter logWriter)
+        {
+            _logWriter = logWriter;
         }
 
         public void AddFormatter(IPropertyFormatter customFomatter)
@@ -97,7 +103,7 @@ namespace ApplicationRegistries2.Formatters
                     }
                     catch
                     {
-                        Console.Error.WriteLine($"Failed to delete temporary folder:{folder}");
+                        _logWriter.WriteLine($"Failed to delete temporary folder:{folder}");
                     }
                 }
             }

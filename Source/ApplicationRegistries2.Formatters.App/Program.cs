@@ -26,6 +26,7 @@ namespace ApplicationRegistries2.Formatters.App
 
 
             var fomatter = new Formatter();
+            fomatter.RegistLogger(Console.Error);
 
             fomatter.AddRangeFormatters(FormatterFinder.GetFormatters(targetAssemblies));
 
