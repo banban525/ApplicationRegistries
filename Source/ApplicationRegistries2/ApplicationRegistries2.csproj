@@ -52,7 +52,7 @@
     <Compile Include="Accessors\CommandlineArgumentsAccessor.cs" />
     <Compile Include="Accessors\DefaultValueAccessor.cs" />
     <Compile Include="Accessors\EnvironmentVariableAccessor.cs" />
-    <Compile Include="Accessors\IAccessor.cs" />
+    <Compile Include="IAccessor.cs" />
     <Compile Include="Accessors\XmlFileAccessor.cs" />
     <Compile Include="ApplicationRegistry.cs" />
     <Compile Include="ApplicationRegistryManager.cs" />

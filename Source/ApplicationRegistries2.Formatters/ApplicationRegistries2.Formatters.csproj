@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="AccessorFormatters\CommandlineArgumentFormatter.cs" />
     <Compile Include="AccessorFormatters\EnvironmentVariableFormatter.cs" />
-    <Compile Include="AccessorFormatters\IPropertyFormatter.cs" />
+    <Compile Include="IPropertyFormatter.cs" />
     <Compile Include="AccessorFormatters\PropertiesSettingsFormatter.cs" />
     <Compile Include="AccessorFormatters\RegistryFormatter.cs" />
     <Compile Include="AccessorFormatters\XmlFileFormatter.cs" />

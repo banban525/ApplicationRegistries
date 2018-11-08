@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApplicationRegistries2.Accessors
+namespace ApplicationRegistries2
 {
     /// <summary>
     /// Interface to get various values

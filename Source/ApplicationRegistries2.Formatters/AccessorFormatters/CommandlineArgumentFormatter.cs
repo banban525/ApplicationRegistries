@@ -4,7 +4,7 @@ using ApplicationRegistries2.Accessors;
 
 namespace ApplicationRegistries2.Formatters.AccessorFormatters
 {
-    public class CommandlineArgumentFormatter: IPropertyFormatter
+    class CommandlineArgumentFormatter: IPropertyFormatter
     {
         public string Key => BuiltInAccessors.CommandlineArguments;
         public string Title => Properties.Resources.CommandlineArgumentFormatter_Title;
