@@ -61,7 +61,6 @@ namespace ApplicationRegistries2.Attributes
                 BuiltInAccessors.UserRegistry,
                 BuiltInAccessors.XmlFile,
                 BuiltInAccessors.MachineRegistry,
-                BuiltInAccessors.DefaultValue,
             };
         }
     }

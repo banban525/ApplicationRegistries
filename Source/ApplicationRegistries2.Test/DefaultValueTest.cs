@@ -18,8 +18,7 @@ namespace ApplicationRegistries2.Test
 
 
         [ApplicationRegistry(
-            BuiltInAccessors.CommandlineArguments,
-            BuiltInAccessors.DefaultValue)]
+            BuiltInAccessors.CommandlineArguments)]
         public interface IDefaultValueRegistry
         {
             /// <summary>

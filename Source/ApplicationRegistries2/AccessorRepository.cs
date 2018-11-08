@@ -12,7 +12,6 @@ namespace ApplicationRegistries2
             {BuiltInAccessors.XmlFile, new XmlFileAccessor()},
             {BuiltInAccessors.CommandlineArguments, new CommandlineArgumentsAccessor()},
             {BuiltInAccessors.EnvironmenetVariable, new EnvironmentVariableAccessor()},
-            {BuiltInAccessors.DefaultValue ,new DefaultValueAccessor()},
             {BuiltInAccessors.PropertiesSettings, new PropertiesSettingsAccessor()},
         };
 

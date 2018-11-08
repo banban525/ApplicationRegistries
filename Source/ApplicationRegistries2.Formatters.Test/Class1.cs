@@ -29,8 +29,7 @@ namespace ApplicationRegistries2.Formatters.Test
             BuiltInAccessors.CommandlineArguments,
             BuiltInAccessors.EnvironmenetVariable,
             BuiltInAccessors.UserRegistry,
-            BuiltInAccessors.MachineRegistry,
-            BuiltInAccessors.DefaultValue
+            BuiltInAccessors.MachineRegistry
         )]
         public interface ITest
         {

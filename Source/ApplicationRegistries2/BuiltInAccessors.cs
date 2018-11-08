@@ -29,9 +29,5 @@
         /// Properties.Settings
         /// </summary>
         public const string PropertiesSettings = "PropertiesSettings";
-        /// <summary>
-        /// Default value
-        /// </summary>
-        public const string DefaultValue = "DefaultValue";
     }
 }

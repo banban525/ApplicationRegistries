@@ -20,21 +20,12 @@ namespace ApplicationRegistries2.Formatters
 
         public string FormatProperty(AccessorTypeDeclaration accessorTypeDeclaration, AccessorFieldDeclaration accessorFieldDeclaration, string key)
         {
-            if (key == BuiltInAccessors.DefaultValue)
-            {
-                return "";
-            }
             var formatter = PropertyFormatters.First(_=>_.Key == key);
             return formatter.Format(accessorTypeDeclaration, accessorFieldDeclaration);
         }
 
         public string FormatSummary(string key)
         {
-            if (key == BuiltInAccessors.DefaultValue)
-            {
-                return "";
-            }
-
             var summaryReportDataCollection = Interfaces
                 .Where(typeReport => typeReport.TypeDeclaration.Keys.Contains(key))
                 .Select(typeReport => new SummaryInterfaceReportData(typeReport.TypeDeclaration,

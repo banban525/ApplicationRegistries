@@ -1,4 +1,6 @@
-﻿namespace ApplicationRegistries2
+﻿using ApplicationRegistries2.Accessors;
+
+namespace ApplicationRegistries2
 {
     /// <summary>
     /// Internal class for access to external value
@@ -10,6 +12,8 @@
         {
             _accessorTypeDeclaration = accessorDeclaration;
         }
+
+        private readonly IAccessor _internalDefaultValueAccessor = new DefaultValueAccessor();
 
         /// <summary>
         /// load value
@@ -26,6 +30,11 @@
                 {
                     return accessor.Read(field.Type, _accessorTypeDeclaration, field);
                 }
+            }
+
+            if (_internalDefaultValueAccessor.Exists(field.Type, _accessorTypeDeclaration, field))
+            {
+                return _internalDefaultValueAccessor.Read(field.Type, _accessorTypeDeclaration, field);
             }
 
             throw new DataNotFoundException();
