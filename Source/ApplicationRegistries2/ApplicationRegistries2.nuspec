@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/banban525/ApplicationRegistries</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ApplicaitonRegistries is a .NET library that will proxy the application's external settings.</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>ver.2.0 Changed from Xml based architecture to interface based architecture. Compatibility with version 1.x has been lost.</releaseNotes>
     <copyright>Copyright banban525 2015</copyright>
     <tags></tags>
   </metadata>
