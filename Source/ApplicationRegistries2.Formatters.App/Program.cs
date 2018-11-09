@@ -22,28 +22,36 @@ namespace ApplicationRegistries2.Formatters.App
                 return ex.ExitCode;
             }
 
-            var targetAssemblies = options.TargetAssemblies.Select(Assembly.LoadFrom).ToArray();
-
-
-            var fomatter = new Formatter();
-            fomatter.RegistLogger(Console.Error);
-
-            fomatter.AddRangeFormatters(FormatterFinder.GetFormatters(targetAssemblies));
-
-            var targetTypes = FormatterFinder.GetApplicationRegistriesInterfaceTypes(targetAssemblies);
-
-            var reportFormatContent = ReportTemplate.Default;
-            if (string.IsNullOrEmpty(options.FormatFilePath) == false)
+            if (options.Mode == Options.ExecutionMode.OutputReport)
             {
-                reportFormatContent = new ReportTemplate(
-                    ReportTemplate.Types.Razor,
-                    File.ReadAllText(options.FormatFilePath, Encoding.UTF8));
+                var targetAssemblies = options.TargetAssemblies.Select(Assembly.LoadFrom).ToArray();
+
+
+                var fomatter = new Formatter();
+                fomatter.RegistLogger(Console.Error);
+
+                fomatter.AddRangeFormatters(FormatterFinder.GetFormatters(targetAssemblies));
+
+                var targetTypes = FormatterFinder.GetApplicationRegistriesInterfaceTypes(targetAssemblies);
+
+                var reportFormatContent = ReportTemplate.Default;
+                if (string.IsNullOrEmpty(options.FormatFilePath) == false)
+                {
+                    reportFormatContent = new ReportTemplate(
+                        ReportTemplate.Types.Razor,
+                        File.ReadAllText(options.FormatFilePath, Encoding.UTF8));
+                }
+
+
+                var content = fomatter.Format(reportFormatContent, targetTypes);
+
+                File.WriteAllText(options.OutputPath, content, Encoding.UTF8);
             }
 
-
-            var content = fomatter.Format(reportFormatContent, targetTypes);
-            
-            File.WriteAllText(options.OutputPath, content, Encoding.UTF8);
+            if (options.Mode == Options.ExecutionMode.OutputTemplate)
+            {
+                File.WriteAllText(options.TemplateOutputPath, ReportTemplate.Default.TemplateRawText);
+            }
 
             return 0;
         }
@@ -60,7 +68,7 @@ namespace ApplicationRegistries2.Formatters.App
             {
                 options = Options.Parse(args);
 
-                if (options.ShowHelp)
+                if (options.Mode == Options.ExecutionMode.ShowHelp)
                 {
                     var exeVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
@@ -88,30 +96,56 @@ namespace ApplicationRegistries2.Formatters.App
                 throw new ApplicationExitException(1, message.ToString());
             }
 
-            if (options.TargetAssemblies.All(File.Exists) == false)
+            if (options.Mode == Options.ExecutionMode.OutputReport)
             {
-                var message = new StringWriter();
-                message.WriteLine($"input assemblies are not found: \n{string.Join("\n", options.TargetAssemblies)}");
+                if (options.TargetAssemblies == null)
+                {
+                    throw new ArgumentException("\"-i\" or \"--input\" argument expected.");
+                }
+                if (options.OutputPath == null)
+                {
+                    throw new ArgumentException("\"-o\" or \"--output\" argument expected.");
+                }
 
-                throw new ApplicationExitException(1, message.ToString());
+                if (options.TargetAssemblies.All(File.Exists) == false)
+                {
+                    var message = new StringWriter();
+                    message.WriteLine(
+                        $"input assemblies are not found: \n{string.Join("\n", options.TargetAssemblies)}");
+
+                    throw new ApplicationExitException(1, message.ToString());
+                }
+
+                var outputDir = Path.GetDirectoryName(options.OutputPath);
+                if (string.IsNullOrEmpty(outputDir) && Directory.Exists(outputDir) == false)
+                {
+                    var message = new StringWriter();
+                    message.WriteLine($"output directory is not found: {options.OutputPath}");
+
+                    throw new ApplicationExitException(1, message.ToString());
+                }
+
+
+                if (string.IsNullOrEmpty(options.FormatFilePath) == false &&
+                    File.Exists(options.FormatFilePath) == false)
+                {
+                    var message = new StringWriter();
+                    message.WriteLine($"report format file is not found: {options.TargetAssemblies}");
+
+                    throw new ApplicationExitException(1, message.ToString());
+                }
             }
 
-            var outputDir = Path.GetDirectoryName(options.OutputPath);
-            if (string.IsNullOrEmpty(outputDir) && Directory.Exists(outputDir) == false)
+            if (options.Mode == Options.ExecutionMode.OutputTemplate)
             {
-                var message = new StringWriter();
-                message.WriteLine($"output directory is not found: {options.OutputPath}");
+                var outputDir = Path.GetDirectoryName(options.TemplateOutputPath);
+                if (string.IsNullOrEmpty(outputDir) && Directory.Exists(outputDir) == false)
+                {
+                    var message = new StringWriter();
+                    message.WriteLine($"output directory is not found: {options.TemplateOutputPath}");
 
-                throw new ApplicationExitException(1, message.ToString());
-            }
-
-
-            if (string.IsNullOrEmpty(options.FormatFilePath) == false && File.Exists(options.FormatFilePath) == false)
-            {
-                var message = new StringWriter();
-                message.WriteLine($"report format file is not found: {options.TargetAssemblies}");
-
-                throw new ApplicationExitException(1, message.ToString());
+                    throw new ApplicationExitException(1, message.ToString());
+                }
             }
 
             return options;
@@ -150,26 +184,38 @@ namespace ApplicationRegistries2.Formatters.App
 
     class Options
     {
-        public Options(string[] targetAssemblies, string outputPath, bool showHelp, string formatFilePath)
+        public Options(string[] targetAssemblies, string outputPath,string formatFilePath, string templateOutputPath, ExecutionMode mode)
         {
             TargetAssemblies = targetAssemblies;
             OutputPath = outputPath;
-            ShowHelp = showHelp;
             FormatFilePath = formatFilePath;
+            TemplateOutputPath = templateOutputPath;
+            Mode = mode;
         }
 
         public string[] TargetAssemblies { get; }
         public string OutputPath { get; }
-        public bool ShowHelp { get; }
         public string FormatFilePath { get; }
+        public string TemplateOutputPath { get; }
+
+        internal enum ExecutionMode
+        {
+            OutputReport,
+            OutputTemplate,
+            ShowHelp
+        }
+
+        public ExecutionMode Mode { get; }
 
         public static Options Parse(string[] args)
         {
             string[] targetAssemblies = null;
             string outputPath = null;
             var index = 0;
-            var showHelp = false;
             string formatFilePath = null;
+            string templateOutputPath = null;
+            var executionMode = ExecutionMode.OutputReport;
+
             while (index < args.Length)
             {
                 var arg = args[index];
@@ -206,6 +252,24 @@ namespace ApplicationRegistries2.Formatters.App
                         throw new ArgumentException("output path expected for argument \"-o\"");
                     }
                 }
+                else if (arg.StartsWith("--template="))
+                {
+                    templateOutputPath = arg.Substring("--template=".Length).Trim();
+                    executionMode = ExecutionMode.OutputTemplate;
+                }
+                else if (arg.StartsWith("-t"))
+                {
+                    if (index + 1 < args.Length)
+                    {
+                        templateOutputPath = args[index + 1].Trim();
+                        executionMode = ExecutionMode.OutputTemplate;
+                        index++;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("template output path expected for argument \"-t\"");
+                    }
+                }
                 else if (arg == "-f")
                 {
                     if (index + 1 < args.Length)
@@ -224,38 +288,31 @@ namespace ApplicationRegistries2.Formatters.App
                 }
                 else if (arg == "-h" || arg == "-?" || arg == "--help" || arg == "/?")
                 {
-                    showHelp = true;
+                    executionMode = ExecutionMode.ShowHelp;
                 }
 
                 index++;
             }
-
-            if (targetAssemblies == null)
-            {
-                throw new ArgumentException("\"-i\" or \"--input\" argument expected.");
-            }
-            if (outputPath == null)
-            {
-                throw new ArgumentException("\"-o\" or \"--output\" argument expected.");
-            }
-
-            return new Options(targetAssemblies, outputPath, showHelp, formatFilePath);
+            
+            return new Options(targetAssemblies, outputPath, formatFilePath,templateOutputPath, executionMode);
         }
 
         public static string[] GetUsageHelpMessage(string exeName)
         {
             return new[]{
                 $@"{exeName} --input=<assembly list> --output=<html file path>",
-                $@"{exeName} -i <assembly list> -o <html file path>"
+                $@"{exeName} -i <assembly list> -o <html file path>",
+                $@"{exeName} --template=<report template output path>",
             };
         }
         public static string GetCommandHelpMessage()
         {
             return @"
--i,--input   (required) input assembly file paths.(comma separated)
--o,--output  (required) output html file path.
--f,--format  report format file path.
--h,-?,--help show help.
+-i,--input    (required) input assembly file paths.(comma separated)
+-o,--output   (required) output html file path.
+-f,--format   report template file path.
+-t,--template export default report template file. specified output path.
+-h,-?,--help  show help.
 ";
         }
     }

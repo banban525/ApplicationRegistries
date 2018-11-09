@@ -45,6 +45,10 @@ namespace ApplicationRegistries2.Formatters
         public void AddFormatter(IPropertyFormatter customFomatter)
         {
             _propertyFormatters.Insert(0, customFomatter);
+            if (_applicationRegistryManager.AccessorRepository.ExistsKey(customFomatter.Key) == false)
+            {
+                _applicationRegistryManager.RegistCustomAccessor(customFomatter.Key, customFomatter.LoadAccessor());
+            }
         }
 
         public void AddRangeFormatters(IEnumerable<IPropertyFormatter> customFomatters)

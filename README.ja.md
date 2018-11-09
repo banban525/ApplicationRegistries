@@ -343,7 +343,45 @@ HKLMの場合
 
 ### レポート出力
 
-(Coming Soon)
+定義されたインターフェイスを読み込んでhtmlレポートを生成することができます。
+nugetで取得した場合は、パッケージマネージャコンソールまたはビルド後アクションにパスが通っています。
+
+``` powershell
+> ApplicationRegistries2.Formatters.App.exe --input=<your assembly path> --output=report.html
+```
+
+コマンドライン引数は次の通りです。
+
+```
+-i,--input    (必須) アセンブリファイルパス(カンマ区切り)
+-o,--output   (必須) 出力ファイルパス
+-f,--format   カスタムレポートテンプレートのファイルパス
+-t,--template デフォルトのレポートテンプレートファイルを出力します。そのパスを指定します。
+-h,-?,--help  ヘルプの表示
+```
+
+### レポートのカスタマイズ
+
+`ApplicationRegistries2.Formatters.App.exe` の `--template` オプションでデフォルトのレポートテンプレートを出力できます。
+
+``` powershell
+> ApplicationRegistries2.Formatters.App.exe --template=<output file path>
+```
+
+出力されたレポートテンプレートを変更し、`--format`オプションを指定することで、
+レポートのスタイルや形式を変更することができます。
+
+``` powershell
+> ApplicationRegistries2.Formatters.App.exe --input=<your assembly path> --output=report.html --format=<my template>
+```
+
+### ユーザー定義の外部設定のレポート
+
+ユーザー定義の外部設定をレポート化するために`IPropertyFormatter`を実装して、`ApplicationRegistries2.Formatters.App.exe`の
+`--input`オプションでアセンブリを指定する必要があります。
+
+
+
 
 ## 開発方法
 
