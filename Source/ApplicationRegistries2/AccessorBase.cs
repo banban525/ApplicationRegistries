@@ -8,9 +8,11 @@ namespace ApplicationRegistries2
     public class AccessorBase
     {
         private readonly AccessorTypeDeclaration _accessorTypeDeclaration;
-        internal AccessorBase(AccessorTypeDeclaration accessorDeclaration)
+        private readonly AccessorRepository _repository;
+        internal AccessorBase(AccessorTypeDeclaration accessorDeclaration, AccessorRepository repository)
         {
             _accessorTypeDeclaration = accessorDeclaration;
+            _repository = repository;
         }
 
         private readonly IAccessor _internalDefaultValueAccessor = new DefaultValueAccessor();
@@ -24,8 +26,9 @@ namespace ApplicationRegistries2
         {
             var field = _accessorTypeDeclaration.GetField(name);
 
-            foreach (var accessor in _accessorTypeDeclaration.AccessToList)
+            foreach (var key in _accessorTypeDeclaration.Keys)
             {
+                var accessor = _repository.GetAccessor(key);
                 if (accessor.Exists(field.Type, _accessorTypeDeclaration, field))
                 {
                     return accessor.Read(field.Type, _accessorTypeDeclaration, field);

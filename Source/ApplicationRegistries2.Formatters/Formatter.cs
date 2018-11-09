@@ -13,14 +13,11 @@ namespace ApplicationRegistries2.Formatters
 {
     public class Formatter
     {
-        private readonly ApplicationRegistryManager _applicationRegistryManager;
-
         private readonly List<IPropertyFormatter> _propertyFormatters;
         private TextWriter _logWriter = TextWriter.Null;
 
-        public Formatter(ApplicationRegistryManager applicationRegistryManager)
+        public Formatter()
         {
-            _applicationRegistryManager = applicationRegistryManager;
             _propertyFormatters = new List<IPropertyFormatter>
             {
                 new CommandlineArgumentFormatter(),
@@ -32,11 +29,6 @@ namespace ApplicationRegistries2.Formatters
             };
         }
 
-        public Formatter()
-        :this(ApplicationRegistry.ApplicationRegistryManager)
-        {
-        }
-
         public void RegistLogger(TextWriter logWriter)
         {
             _logWriter = logWriter;
@@ -45,10 +37,6 @@ namespace ApplicationRegistries2.Formatters
         public void AddFormatter(IPropertyFormatter customFomatter)
         {
             _propertyFormatters.Insert(0, customFomatter);
-            if (_applicationRegistryManager.AccessorRepository.ExistsKey(customFomatter.Key) == false)
-            {
-                _applicationRegistryManager.RegistCustomAccessor(customFomatter.Key, customFomatter.LoadAccessor());
-            }
         }
 
         public void AddRangeFormatters(IEnumerable<IPropertyFormatter> customFomatters)
@@ -57,26 +45,14 @@ namespace ApplicationRegistries2.Formatters
 
             _propertyFormatters.InsertRange(0, propertyFormatters);
 
-            propertyFormatters
-                .Where(_ => _applicationRegistryManager.AccessorRepository.ExistsKey(_.Key) == false)
-                .ToList()
-                .ForEach(_ =>
-                    _applicationRegistryManager.RegistCustomAccessor(_.Key, _.LoadAccessor()));
-
         }
-
-        public void AddAccessor(string key, IAccessor customAccessor)
-        {
-            _applicationRegistryManager.RegistCustomAccessor(key, customAccessor);
-        }
-
+        
         public string Format(ReportTemplate template, Type[] interfaceTypes)
         {
-            var repository = _applicationRegistryManager.AccessorRepository;
             var accessorTypeBuilder = new AccessorTypeBuilder();
 
             var interfaceReportDataCollection = interfaceTypes
-                .Select(_ => accessorTypeBuilder.Parse(_, repository))
+                .Select(_ => accessorTypeBuilder.Parse(_))
                 .Select(CreateReportData).ToArray();
 
             var reportData = new ReportData(interfaceReportDataCollection, _propertyFormatters);

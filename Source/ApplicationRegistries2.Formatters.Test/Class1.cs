@@ -90,10 +90,6 @@ namespace ApplicationRegistries2.Formatters.Test
             }
 
             public string Title => "Custom External Setting";
-            public IAccessor LoadAccessor()
-            {
-                return new CustomAccessor();
-            }
         }
 
         public class CustomAccessor : IAccessor

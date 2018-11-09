@@ -18,10 +18,10 @@ namespace ApplicationRegistries2
             if (_cache.Exists(typeof(T))==false)
             {
                 var builder = new AccessorTypeBuilder();
-                var define = builder.Parse(typeof(T), AccessorRepository);
+                var define = builder.Parse(typeof(T));
                 var typeInfo = builder.Build(define);
 
-                var builtResult = Activator.CreateInstance(typeInfo.AsType(), new AccessorBase(define));
+                var builtResult = Activator.CreateInstance(typeInfo.AsType(), new AccessorBase(define, AccessorRepository));
 
                 _cache.Add(typeof(T), new RepositoryAccessorInfo(typeof(T), define, builtResult, DateTime.Now));
                 return (T)_cache.Get(typeof(T)).BuildResult;

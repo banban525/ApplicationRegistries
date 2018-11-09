@@ -10,7 +10,5 @@ namespace ApplicationRegistries2.Formatters
         string FormatSummary(IEnumerable<SummaryInterfaceReportData> typeReportCollection);
 
         string Title { get; }
-
-        IAccessor LoadAccessor();
     }
 }

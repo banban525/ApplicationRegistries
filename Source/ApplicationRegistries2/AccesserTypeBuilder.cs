@@ -10,7 +10,7 @@ namespace ApplicationRegistries2
     class AccessorTypeBuilder
     {
 
-        internal AccessorTypeDeclaration Parse(Type type, AccessorRepository repository)
+        internal AccessorTypeDeclaration Parse(Type type)
         {
             if (type.IsInterface == false)
             {
@@ -24,13 +24,6 @@ namespace ApplicationRegistries2
 
             var att = ApplicationRegistryAttribute.Get(type);
 
-            if (att.Keys.All(repository.ExistsKey) == false)
-            {
-                throw new NotSupportedException();
-            }
-
-            var accessor = att.Keys.Select(repository.GetAccessor).ToArray();
-
             var fields = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Select(propertyInfo => new AccessorFieldDeclaration(
                     propertyInfo.Name,
@@ -40,7 +33,6 @@ namespace ApplicationRegistries2
             return new AccessorTypeDeclaration(type.Name, type,
                 fields.ToArray(), 
                 Attribute.GetCustomAttributes(type, true),
-                accessor,
                 att.Keys.ToArray());
         }
 

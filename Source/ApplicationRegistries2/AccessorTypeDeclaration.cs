@@ -25,11 +25,6 @@ namespace ApplicationRegistries2
         public IEnumerable<AccessorFieldDeclaration> Fields { get; }
 
         /// <summary>
-        /// Accessor collection
-        /// </summary>
-        public IEnumerable<IAccessor> AccessToList { get; }
-
-        /// <summary>
         /// attribute collection
         /// </summary>
         public IEnumerable<Attribute> Attributes;
@@ -46,18 +41,15 @@ namespace ApplicationRegistries2
         /// <param name="targetInterfaceType">interface type object</param>
         /// <param name="fields">field collection</param>
         /// <param name="attributes">attribute collection</param>
-        /// <param name="accessToList">accessor collection</param>
         /// <param name="keys">The keys specified in the ApplicationRegistry attribute</param>
-        public AccessorTypeDeclaration(string name, Type targetInterfaceType, 
-            IReadOnlyCollection<AccessorFieldDeclaration> fields, IReadOnlyCollection<Attribute> attributes, 
-            IReadOnlyCollection<IAccessor> accessToList,
+        public AccessorTypeDeclaration(string name, Type targetInterfaceType,
+            IReadOnlyCollection<AccessorFieldDeclaration> fields, IReadOnlyCollection<Attribute> attributes,
             IReadOnlyCollection<string> keys)
         {
             Name = name;
             TargetInterfaceType = targetInterfaceType;
             Fields = fields;
             Attributes = attributes;
-            AccessToList = accessToList;
             Keys = keys;
         }
 
