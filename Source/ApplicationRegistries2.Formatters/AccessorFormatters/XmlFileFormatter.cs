@@ -8,10 +8,6 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
     {
         public string Key => BuiltInAccessors.XmlFile;
         public string Title => Properties.Resources.XmlFileFormatter_Title;
-        public IAccessor LoadAccessor()
-        {
-            return new XmlFileAccessor();
-        }
 
         public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {

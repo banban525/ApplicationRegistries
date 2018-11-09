@@ -8,10 +8,6 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
     {
         public string Key => BuiltInAccessors.PropertiesSettings;
         public string Title => "Properties.Settings";
-        public IAccessor LoadAccessor()
-        {
-            return new PropertiesSettingsAccessor();
-        }
 
         public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {

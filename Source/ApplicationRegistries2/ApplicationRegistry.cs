@@ -1,6 +1,4 @@
-﻿using ApplicationRegistries2.Accessors;
-
-namespace ApplicationRegistries2
+﻿namespace ApplicationRegistries2
 {
     /// <summary>
     /// The static class to access external settings

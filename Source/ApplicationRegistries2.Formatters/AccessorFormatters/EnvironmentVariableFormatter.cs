@@ -8,10 +8,6 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
     {
         public string Key => BuiltInAccessors.EnvironmenetVariable;
         public string Title => Properties.Resources.EnvironmentVariableFormatter_Title;
-        public IAccessor LoadAccessor()
-        {
-            return new EnvironmentVariableAccessor();
-        }
 
         public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {

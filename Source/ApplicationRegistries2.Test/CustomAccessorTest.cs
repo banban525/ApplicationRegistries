@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using ApplicationRegistries2.Accessors;
 using ApplicationRegistries2.Attributes;
 using NUnit.Framework;
 

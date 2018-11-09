@@ -19,11 +19,6 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
         public string Title => _root == RegistoryAccessor.RegistryRoot.LocalMachine ? 
             Properties.Resources.MachineRegistryFormatter_Title: Properties.Resources.UserRegistryFormatter_Title;
 
-        public IAccessor LoadAccessor()
-        {
-            return new RegistoryAccessor(_root);
-        }
-
         public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {
             var data =

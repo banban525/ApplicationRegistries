@@ -8,10 +8,6 @@ namespace ApplicationRegistries2.Formatters.AccessorFormatters
     {
         public string Key => BuiltInAccessors.CommandlineArguments;
         public string Title => Properties.Resources.CommandlineArgumentFormatter_Title;
-        public IAccessor LoadAccessor()
-        {
-            return new CommandlineArgumentsAccessor();
-        }
 
         public string Format(AccessorTypeDeclaration typeDeclaration, AccessorFieldDeclaration fieldDeclaration)
         {
