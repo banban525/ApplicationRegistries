@@ -61,28 +61,20 @@ namespace ApplicationRegistries2.Accessors
             var interfaceName = accessorTypeDeclaration.TargetInterfaceType.Name;
 
             var registoKeyAttribute = accessorTypeDeclaration.GetAttribute<RegistryKeyAttribute>();
-            var key = registoKeyAttribute?.Key ?? $@"Software\ApplicationRegistries\{assemblyName}\{interfaceName}";
+            var key = string.IsNullOrEmpty(registoKeyAttribute?.Key)
+                ? $@"Software\ApplicationRegistries\{assemblyName}\{interfaceName}"
+                : registoKeyAttribute.Key;
 
             var registoNameAttribute = accessorFieldDeclaration.GetAttribute<RegistryNameAttribute>();
-            var name = registoNameAttribute?.Name ?? accessorFieldDeclaration.Name;
+            var name = string.IsNullOrEmpty(registoNameAttribute?.Name)
+                ? accessorFieldDeclaration.Name
+                : registoNameAttribute.Name;
 
             return new RegistryAccessorReportData(key,
                 name
                 );
         }
-
-
-        public static RegistryInterfaceAccessorReportData GetInterfaceData(RegistryRoot registryRoot, AccessorTypeDeclaration accessorTypeDeclaration)
-        {
-            var assemblyName = accessorTypeDeclaration.TargetInterfaceType.Assembly.GetName().Name;
-            var interfaceName = accessorTypeDeclaration.TargetInterfaceType.Name;
-
-            var registoKeyAttribute = accessorTypeDeclaration.GetAttribute<RegistryKeyAttribute>();
-            var key = registoKeyAttribute?.Key ?? $@"Software\ApplicationRegistries\{assemblyName}\{interfaceName}";
-
-
-            return new RegistryInterfaceAccessorReportData(key);
-        }
+        
 
         public class RegistryInterfaceAccessorReportData
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace ApplicationRegistries2.Attributes
 {
@@ -11,15 +12,16 @@ namespace ApplicationRegistries2.Attributes
         /// <summary>
         /// Rename registry value name
         /// </summary>
-        /// <param name="name">new registry value name</param>
-        public RegistryNameAttribute(string name)
+        /// <param name="name">new registry value name. if empty string, use property name.</param>
+        public RegistryNameAttribute([NotNull]string name)
         {
-            Name = name;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         /// <summary>
-        /// new registry value name
+        /// new registry value name. if empty string, use property name.
         /// </summary>
+        [NotNull]
         public string Name { get; }
     }
 }

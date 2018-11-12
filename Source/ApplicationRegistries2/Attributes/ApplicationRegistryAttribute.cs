@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace ApplicationRegistries2.Attributes
 {
@@ -13,7 +14,7 @@ namespace ApplicationRegistries2.Attributes
         /// Constructor
         /// </summary>
         /// <param name="keys">Priority for Accessor Keys</param>
-        public ApplicationRegistryAttribute(params string[] keys)
+        public ApplicationRegistryAttribute([NotNull]params string[] keys)
         {
             if (keys.Length == 0)
             {
@@ -25,6 +26,7 @@ namespace ApplicationRegistries2.Attributes
         /// <summary>
         /// Priority for Accessor Keys.
         /// </summary>
+        [NotNull]
         public IEnumerable<string> Keys { get; }
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace ApplicationRegistries2.Attributes
         /// </summary>
         /// <param name="type">target interface type</param>
         /// <returns>if defined, return attribute object, other is returned null.</returns>
+        [CanBeNull]
         public static ApplicationRegistryAttribute Get(Type type)
         {
             return (ApplicationRegistryAttribute)GetCustomAttribute(type, typeof(ApplicationRegistryAttribute),
@@ -52,6 +55,7 @@ namespace ApplicationRegistries2.Attributes
         /// Get Default Settuings of Keys
         /// </summary>
         /// <returns>Default Settuings os Keys</returns>
+        [NotNull]
         public static string[] GetDefaultKeys()
         {
             return new[]

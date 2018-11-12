@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace ApplicationRegistries2.Attributes
 {
@@ -12,7 +13,7 @@ namespace ApplicationRegistries2.Attributes
         /// Default value, when other values ​​can not be accessed
         /// </summary>
         /// <param name="defaultValue">Default value</param>
-        public DefaultValueAttribute(object defaultValue)
+        public DefaultValueAttribute([CanBeNull]object defaultValue)
         {
             DefaultValue = defaultValue;
         }
@@ -20,6 +21,7 @@ namespace ApplicationRegistries2.Attributes
         /// <summary>
         /// Default value
         /// </summary>
+        [CanBeNull]
         public object DefaultValue { get; }
     }
 }

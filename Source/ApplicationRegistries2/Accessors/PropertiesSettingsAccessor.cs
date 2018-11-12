@@ -55,10 +55,11 @@ namespace ApplicationRegistries2.Accessors
                 throw new DataNotFoundException();
             }
             var appConfigNameAttribute = accessorFieldDeclaration.GetAttribute<PropertiesSettingsNameAttribute>();
-            var name = appConfigNameAttribute?.Name ?? accessorFieldDeclaration.Name;
+            var name = string.IsNullOrEmpty(appConfigNameAttribute?.Name)
+                ? accessorFieldDeclaration.Name
+                : appConfigNameAttribute.Name;
 
-            return new PropertiesSettingsPropertyData(appConfigTypeAttribute.Parent,
-                name);
+            return new PropertiesSettingsPropertyData(appConfigTypeAttribute.Parent, name);
         }
 
         public static PropertiesSettingsnterfaceData GetInterfaceData(AccessorTypeDeclaration accessorTypeDeclaration)

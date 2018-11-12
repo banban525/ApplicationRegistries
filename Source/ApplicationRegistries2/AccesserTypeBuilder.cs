@@ -23,6 +23,10 @@ namespace ApplicationRegistries2
             }
 
             var att = ApplicationRegistryAttribute.Get(type);
+            if (att == null)
+            {
+                throw new InvalidOperationException();
+            }
 
             var fields = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Select(propertyInfo => new AccessorFieldDeclaration(

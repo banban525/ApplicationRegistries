@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace ApplicationRegistries2.Attributes
 {
@@ -12,14 +13,15 @@ namespace ApplicationRegistries2.Attributes
         /// Specify the type of Properties.Settings
         /// </summary>
         /// <param name="parent">Properties.Settings type</param>
-        public PropertiesSettingsTypeAttribute(Type parent = null)
+        public PropertiesSettingsTypeAttribute([NotNull]Type parent)
         {
-            Parent = parent;
+            Parent = parent ?? throw new ArgumentNullException(nameof(parent));
         }
 
         /// <summary>
         /// Properties.Settings type
         /// </summary>
+        [NotNull]
         public Type Parent { get; }
     }
 }

@@ -48,11 +48,17 @@ namespace ApplicationRegistries2.Accessors
             var filePath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
                 throw new InvalidOperationException(),
-                xmlFileAttribute?.FilePath ?? @".\ApplicationRegisties.xml");
-            var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorTypeDeclaration.Name;
+                string.IsNullOrEmpty(xmlFileAttribute?.FilePath)
+                    ? @".\ApplicationRegisties.xml"
+                    : xmlFileAttribute.FilePath);
+            var xrootPath = string.IsNullOrEmpty(xmlFileAttribute?.XRootPath)
+                ? "/ApplicationRegisties/" + accessorTypeDeclaration.Name
+                : xmlFileAttribute.XRootPath;
 
             var xmlNameAttribute = accessorFieldDeclaration.GetAttribute<XmlNameAttribute>();
-            var xPath = xmlNameAttribute?.XPath ?? accessorFieldDeclaration.Name;
+            var xPath = string.IsNullOrEmpty(xmlNameAttribute?.XPath)
+                ? accessorFieldDeclaration.Name
+                : xmlNameAttribute.XPath;
 
             return new XmlFileAccessorReportData(filePath,
                 xrootPath,
@@ -66,8 +72,12 @@ namespace ApplicationRegistries2.Accessors
             var filePath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
                 throw new InvalidOperationException(),
-                xmlFileAttribute?.FilePath ?? @".\ApplicationRegisties.xml");
-            var xrootPath = xmlFileAttribute?.XRootPath ?? "/ApplicationRegisties/" + accessorTypeDeclaration.Name;
+                string.IsNullOrEmpty(xmlFileAttribute?.FilePath)
+                    ? @".\ApplicationRegisties.xml"
+                    : xmlFileAttribute?.FilePath);
+            var xrootPath = string.IsNullOrEmpty(xmlFileAttribute?.XRootPath)
+                ? "/ApplicationRegisties/" + accessorTypeDeclaration.Name
+                : xmlFileAttribute.XRootPath;
 
             
             return new XmlFileInterfaceAccessorReportData(filePath,

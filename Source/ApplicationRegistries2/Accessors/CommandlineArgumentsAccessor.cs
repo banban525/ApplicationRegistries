@@ -82,11 +82,13 @@ namespace ApplicationRegistries2.Accessors
 
             var commandlineArgumentPrefixAttribute =
                 accessorTypeDeclaration.GetAttribute<CommandlineArgumentPrefixAttribute>();
-            var prefix = commandlineArgumentPrefixAttribute?.Prefix ?? $@"{interfaceName}";
+            var prefix = commandlineArgumentPrefixAttribute?.Prefix ?? interfaceName;
 
             var commandlineArgumentNameAttribute =
                 accessorFieldDeclaration.GetAttribute<CommandlineArgumentNameAttribute>();
-            var name = commandlineArgumentNameAttribute?.Name ?? accessorFieldDeclaration.Name;
+            var name = string.IsNullOrEmpty(commandlineArgumentNameAttribute?.Name)
+                ? accessorFieldDeclaration.Name
+                : commandlineArgumentNameAttribute.Name;
 
             return prefix == "" ? $"--{name}" : $"--{prefix}_{name}";
         }

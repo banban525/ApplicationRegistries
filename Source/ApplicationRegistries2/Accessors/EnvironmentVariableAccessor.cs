@@ -45,9 +45,11 @@ namespace ApplicationRegistries2.Accessors
             var prefix = environmentVariablePrefixAttribute?.Prefix ?? $@"{assemblyName}_{interfaceName}";
 
             var environmentVariableNameAttribute = accessorFieldDeclaration.GetAttribute<EnvironmentVariableNameAttribute>();
-            var name = environmentVariableNameAttribute?.Name ?? accessorFieldDeclaration.Name;
+            var name = string.IsNullOrEmpty(environmentVariableNameAttribute?.Name)
+                ? accessorFieldDeclaration.Name
+                : environmentVariableNameAttribute.Name;
 
-            return $"{prefix}_{name}";
+            return string.IsNullOrEmpty(prefix) ? name : $"{prefix}_{name}";
 
         }
 

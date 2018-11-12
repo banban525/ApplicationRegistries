@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace ApplicationRegistries2.Attributes
 {
@@ -11,15 +12,16 @@ namespace ApplicationRegistries2.Attributes
         /// <summary>
         /// Change prefix of environment variable name
         /// </summary>
-        /// <param name="prefix">new prefix of environment variable name</param>
-        public EnvironmentVariablePrefixAttribute(string prefix = null)
+        /// <param name="prefix">new prefix of environment variable name. If empty string, prefix is empty.</param>
+        public EnvironmentVariablePrefixAttribute([NotNull]string prefix)
         {
-            Prefix = prefix;
+            Prefix = prefix ?? throw new ArgumentNullException(nameof(prefix));
         }
 
         /// <summary>
-        /// new prefix of environment variable name
+        /// new prefix of environment variable name. If empty string, prefix is empty.
         /// </summary>
+        [NotNull]
         public string Prefix { get; }
     }
 }

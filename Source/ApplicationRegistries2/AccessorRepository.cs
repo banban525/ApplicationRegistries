@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ApplicationRegistries2.Accessors;
 
 namespace ApplicationRegistries2
@@ -29,6 +30,16 @@ namespace ApplicationRegistries2
 
         public void RegistCustomAccessor(string key, IAccessor accessor)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (accessor == null)
+            {
+                throw new ArgumentNullException(nameof(accessor));
+            }
+
             _accessors[key] = accessor;
         }
 

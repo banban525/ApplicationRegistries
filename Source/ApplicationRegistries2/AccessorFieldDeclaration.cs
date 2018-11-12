@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace ApplicationRegistries2
 {
@@ -11,19 +12,21 @@ namespace ApplicationRegistries2
         /// <summary>
         /// field name
         /// </summary>
+        [NotNull]
         public string Name { get; }
         /// <summary>
         /// field type
         /// </summary>
+        [NotNull]
         public Type Type { get; }
 
         private readonly Attribute[] _attributes;
 
-        internal AccessorFieldDeclaration(string name, Type type, Attribute[] attributes)
+        internal AccessorFieldDeclaration([NotNull]string name, [NotNull]Type type, [NotNull]Attribute[] attributes)
         {
-            Name = name;
-            Type = type;
-            _attributes = attributes;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Type = type ?? throw new ArgumentNullException(nameof(type));
+            _attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
         }
 
         /// <summary>
@@ -31,6 +34,7 @@ namespace ApplicationRegistries2
         /// </summary>
         /// <typeparam name="T">attribute type</typeparam>
         /// <returns>attribute</returns>
+        [CanBeNull]
         public T GetAttribute<T>() where T : Attribute
         {
             return (T)_attributes.FirstOrDefault(_ => _ is T);

@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace ApplicationRegistries2.Attributes
 {
@@ -11,15 +12,16 @@ namespace ApplicationRegistries2.Attributes
         /// <summary>
         /// Rename command line arguments
         /// </summary>
-        /// <param name="name">new name</param>
-        public CommandlineArgumentNameAttribute(string name)
+        /// <param name="name">new name. if empty string, use property name.</param>
+        public CommandlineArgumentNameAttribute([NotNull]string name)
         {
-            Name = name;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         /// <summary>
-        /// command line argument name
+        /// command line argument name. if empty string, use property name.
         /// </summary>
+        [NotNull]
         public string Name { get; }
     }
 }

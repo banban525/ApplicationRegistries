@@ -1,4 +1,6 @@
-﻿namespace ApplicationRegistries2
+﻿using JetBrains.Annotations;
+
+namespace ApplicationRegistries2
 {
     /// <summary>
     /// The static class to access external settings
@@ -12,6 +14,7 @@
         /// </summary>
         /// <typeparam name="T">external settings interface type</typeparam>
         /// <returns>external setting proxy</returns>
+        /// <exception cref="DataNotFoundException">no matched data</exception>
         public static T Get<T>() where T : class
         {
             return ApplicationRegistryManager.Get<T>();
@@ -22,7 +25,7 @@
         /// </summary>
         /// <param name="key">accessor key</param>
         /// <param name="accessor">custom accessor</param>
-        public static void RegistCustomAccessor(string key, IAccessor accessor)
+        public static void RegistCustomAccessor([NotNull]string key, [NotNull]IAccessor accessor)
         {
             ApplicationRegistryManager.RegistCustomAccessor(key, accessor);
         }
