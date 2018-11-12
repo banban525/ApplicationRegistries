@@ -49,10 +49,6 @@
       <Project>{73a58166-9f5b-454c-8f4c-fae0d253bf62}</Project>
       <Name>ApplicationRegistries2.Formatters.App</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ApplicationRegistries2.Standard\ApplicationRegistries2.Standard.csproj">
-      <Project>{0e4b39e2-d867-4b18-a486-49e029353625}</Project>
-      <Name>ApplicationRegistries2.Standard</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ApplicationRegistries2\ApplicationRegistries2.csproj">
       <Project>{c40c3c1d-3ec9-4d03-b230-f16669388c8f}</Project>
       <Name>ApplicationRegistries2</Name>

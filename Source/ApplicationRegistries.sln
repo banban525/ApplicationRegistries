@@ -24,6 +24,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationRegistries2.Standard", "ApplicationRegistries2.Standard\ApplicationRegistries2.Standard.csproj", "{0E4B39E2-D867-4B18-A486-49E029353625}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationRegistries2.Nuget", "ApplicationRegistries2.Nuget\ApplicationRegistries2.Nuget.csproj", "{68798B0D-F396-4FD5-9133-7EE9517F90C3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0E4B39E2-D867-4B18-A486-49E029353625} = {0E4B39E2-D867-4B18-A486-49E029353625}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
