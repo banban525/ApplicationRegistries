@@ -341,7 +341,43 @@ If you want to read the setting values from application-specific database or con
 
 ### Reporting
 
-(Coming Soon)
+
+You can generate an html report from the external settings interface.
+If you get from nuget, the path goes to Package Manager Console or post-build action.
+
+``` powershell
+> ApplicationRegistries2.Formatters.App.exe --input=<your assembly path> --output=report.html
+```
+
+The command line arguments are as follows.
+
+```
+-i,--input    (required) input assembly file paths.(comma separated)
+-o,--output   (required) output html file path.
+-f,--format   report template file path.
+-t,--template export default report template file. specified output path.
+-h,-?,--help  show help.
+```
+
+### Customize reports
+
+You can export the default report template with `--template` option of `ApplicationRegistries2.Formatters.App.exe`.
+
+``` powershell
+> ApplicationRegistries2.Formatters.App.exe --template=<output file path>
+```
+
+You can change the style and format of the report by specifying the modified template file with the `--format` option.
+
+``` powershell
+> ApplicationRegistries2.Formatters.App.exe --input=<your assembly path> --output=report.html --format=<my template>
+```
+
+### User defined external settings report
+
+Implement `IPropertyFormatter` to report user-defined external settings.
+And you need to specify the assembly with the `--input` option of `ApplicationRegistries2.Formatters.App.exe`.
+
 
 ## Contribution
 
