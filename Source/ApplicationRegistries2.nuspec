@@ -15,10 +15,10 @@
     <tags></tags>
   </metadata>
   <files>
-    <file src="..\ApplicationRegistries2\bin\release\ApplicationRegistries2.dll" target="lib\net45"/>
-    <file src="..\ApplicationRegistries2\bin\release\ApplicationRegistries2.xml" target="lib\net45"/>
-    <file src="..\ApplicationRegistries2.Standard\bin\release\netstandard2.0\ApplicationRegistries2.dll" target="lib\netstandard2.0"/>
-    <file src="..\ApplicationRegistries2.Standard\bin\release\netstandard2.0\ApplicationRegistries2.xml" target="lib\netstandard2.0"/>
-    <file src="..\ApplicationRegistries2.Formatters.App\bin\release\**" target="tools"/>
+    <file src="ApplicationRegistries2\bin\release\ApplicationRegistries2.dll" target="lib\net45"/>
+    <file src="ApplicationRegistries2\bin\release\ApplicationRegistries2.xml" target="lib\net45"/>
+    <file src="ApplicationRegistries2.Standard\bin\release\netstandard2.0\ApplicationRegistries2.dll" target="lib\netstandard2.0"/>
+    <file src="ApplicationRegistries2.Standard\bin\release\netstandard2.0\ApplicationRegistries2.xml" target="lib\netstandard2.0"/>
+    <file src="ApplicationRegistries2.Formatters.App\bin\release\**" target="tools"/>
   </files>
 </package>
