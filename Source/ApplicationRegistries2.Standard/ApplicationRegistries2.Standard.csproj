@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>banban525</Authors>
+    <Product>ApplicationRegistries2</Product>
+    <Copyright>(c) banban525 2015</Copyright>
+    <PackageLicenseUrl>https://github.com/banban525/ApplicationRegistries/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/banban525/ApplicationRegistries</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/banban525/ApplicationRegistries.git</RepositoryUrl>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <RootNamespace>ApplicationRegistries2</RootNamespace>
+    <AssemblyName>ApplicationRegistries2</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\ApplicationRegistries2.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\ApplicationRegistries2.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

@@ -22,7 +22,6 @@ namespace ApplicationRegistries2.Formatters
             {
                 new CommandlineArgumentFormatter(),
                 new EnvironmentVariableFormatter(),
-                new PropertiesSettingsFormatter(),
                 new RegistryFormatter(RegistoryAccessor.RegistryRoot.CurrentUser),
                 new RegistryFormatter(RegistoryAccessor.RegistryRoot.LocalMachine),
                 new XmlFileFormatter(),

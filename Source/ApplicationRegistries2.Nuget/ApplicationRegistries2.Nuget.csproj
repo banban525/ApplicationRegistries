@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B138F496-404E-4790-B58E-B58325F91542}</ProjectGuid>
+    <ProjectGuid>{68798B0D-F396-4FD5-9133-7EE9517F90C3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApplicationRegistries2.Test</RootNamespace>
-    <AssemblyName>ApplicationRegistries2.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>ApplicationRegistries2.Nuget</RootNamespace>
+    <AssemblyName>ApplicationRegistries2.Nuget</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -41,37 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandLineTest.cs" />
-    <Compile Include="CustomAccessorTest.cs" />
-    <Compile Include="DefaultValueTest.cs" />
-    <Compile Include="EnvironmentVariableTest.cs" />
-    <Compile Include="UserRegistryTest.cs" />
-    <Compile Include="PriorityTest.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="XmlFileTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApplicationRegistries2.Formatters.App\ApplicationRegistries2.Formatters.App.csproj">
+      <Project>{73a58166-9f5b-454c-8f4c-fae0d253bf62}</Project>
+      <Name>ApplicationRegistries2.Formatters.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationRegistries2.Standard\ApplicationRegistries2.Standard.csproj">
+      <Project>{0e4b39e2-d867-4b18-a486-49e029353625}</Project>
+      <Name>ApplicationRegistries2.Standard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationRegistries2\ApplicationRegistries2.csproj">
       <Project>{c40c3c1d-3ec9-4d03-b230-f16669388c8f}</Project>
       <Name>ApplicationRegistries2</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="NUnit">
-      <Version>3.10.1</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -43,37 +43,88 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccesserTypeBuilder.cs" />
-    <Compile Include="AccessorBase.cs" />
-    <Compile Include="AccessorTypeDeclaration.cs" />
-    <Compile Include="AccessorRepository.cs" />
-    <Compile Include="Accessors\PropertiesSettingsAccessor.cs" />
-    <Compile Include="Accessors\RegistoryAccessor.cs" />
-    <Compile Include="Accessors\CommandlineArgumentsAccessor.cs" />
-    <Compile Include="Accessors\DefaultValueAccessor.cs" />
-    <Compile Include="Accessors\EnvironmentVariableAccessor.cs" />
-    <Compile Include="IAccessor.cs" />
-    <Compile Include="Accessors\XmlFileAccessor.cs" />
-    <Compile Include="ApplicationRegistry.cs" />
-    <Compile Include="ApplicationRegistryManager.cs" />
-    <Compile Include="Attributes\PropertiesSettingsNameAttribute.cs" />
-    <Compile Include="Attributes\PropertiesSettingsTypeAttribute.cs" />
-    <Compile Include="Attributes\ApplicationRegistryAttribute.cs" />
-    <Compile Include="Attributes\CommandlineArgumentNameAttribute.cs" />
-    <Compile Include="Attributes\CommandlineArgumentPrefixAttribute.cs" />
-    <Compile Include="Attributes\DefaultValueAttribute.cs" />
-    <Compile Include="Attributes\EnvironmentVariableNameAttribute.cs" />
-    <Compile Include="Attributes\EnvironmentVariablePrefixAttribute.cs" />
-    <Compile Include="Attributes\RegistryKeyAttribute.cs" />
-    <Compile Include="Attributes\RegistryNameAttribute.cs" />
-    <Compile Include="Attributes\XmlFileAttribute.cs" />
-    <Compile Include="Attributes\XmlNameAttribute.cs" />
-    <Compile Include="BuiltInAccessors.cs" />
-    <Compile Include="AccessorFieldDeclaration.cs" />
-    <Compile Include="DataNotFoundException.cs" />
+    <Compile Include="..\ApplicationRegistries2.Standard\AccesserTypeBuilder.cs">
+      <Link>AccesserTypeBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\AccessorBase.cs">
+      <Link>AccessorBase.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\AccessorFieldDeclaration.cs">
+      <Link>AccessorFieldDeclaration.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\AccessorRepository.cs">
+      <Link>AccessorRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Accessors\CommandlineArgumentsAccessor.cs">
+      <Link>Accessors\CommandlineArgumentsAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Accessors\DefaultValueAccessor.cs">
+      <Link>Accessors\DefaultValueAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Accessors\EnvironmentVariableAccessor.cs">
+      <Link>Accessors\EnvironmentVariableAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Accessors\RegistoryAccessor.cs">
+      <Link>Accessors\RegistoryAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Accessors\XmlFileAccessor.cs">
+      <Link>Accessors\XmlFileAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\AccessorTypeDeclaration.cs">
+      <Link>AccessorTypeDeclaration.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\ApplicationRegistry.cs">
+      <Link>ApplicationRegistry.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\ApplicationRegistryManager.cs">
+      <Link>ApplicationRegistryManager.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\ApplicationRegistryAttribute.cs">
+      <Link>Attributes\ApplicationRegistryAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\CommandlineArgumentNameAttribute.cs">
+      <Link>Attributes\CommandlineArgumentNameAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\CommandlineArgumentPrefixAttribute.cs">
+      <Link>Attributes\CommandlineArgumentPrefixAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\DefaultValueAttribute.cs">
+      <Link>Attributes\DefaultValueAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\EnvironmentVariableNameAttribute.cs">
+      <Link>Attributes\EnvironmentVariableNameAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\EnvironmentVariablePrefixAttribute.cs">
+      <Link>Attributes\EnvironmentVariablePrefixAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\RegistryKeyAttribute.cs">
+      <Link>Attributes\RegistryKeyAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\RegistryNameAttribute.cs">
+      <Link>Attributes\RegistryNameAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\XmlFileAttribute.cs">
+      <Link>Attributes\XmlFileAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\Attributes\XmlNameAttribute.cs">
+      <Link>Attributes\XmlNameAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\BuiltInAccessors.cs">
+      <Link>BuiltInAccessors.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\DataNotFoundException.cs">
+      <Link>DataNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\IAccessor.cs">
+      <Link>IAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\RepositoryAccessorCache.cs">
+      <Link>RepositoryAccessorCache.cs</Link>
+    </Compile>
+    <Compile Include="..\ApplicationRegistries2.Standard\RepositoryAccessorInfo.cs">
+      <Link>RepositoryAccessorInfo.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryAccessorCache.cs" />
-    <Compile Include="RepositoryAccessorInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations">

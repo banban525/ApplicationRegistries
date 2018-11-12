@@ -25,9 +25,5 @@
         /// command line arguments
         /// </summary>
         public const string CommandlineArguments = "CommandlineArguments";
-        /// <summary>
-        /// Properties.Settings
-        /// </summary>
-        public const string PropertiesSettings = "PropertiesSettings";
     }
 }

@@ -13,7 +13,6 @@ namespace ApplicationRegistries2
             {BuiltInAccessors.XmlFile, new XmlFileAccessor()},
             {BuiltInAccessors.CommandlineArguments, new CommandlineArgumentsAccessor()},
             {BuiltInAccessors.EnvironmenetVariable, new EnvironmentVariableAccessor()},
-            {BuiltInAccessors.PropertiesSettings, new PropertiesSettingsAccessor()},
         };
 
         public IEnumerable<string> AllKeys => _accessors.Keys;
