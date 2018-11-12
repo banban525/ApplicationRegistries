@@ -7,6 +7,8 @@ ApplicaitonRegistries はアプリケーションの外部設定値のプロキ�
 
 [![Build status](https://ci.appveyor.com/api/projects/status/a0004gg2p46y94ia?svg=true)](https://ci.appveyor.com/project/banban525/applicationregistries)
 [![NuGet version](https://badge.fury.io/nu/ApplicationRegistries.svg)](https://badge.fury.io/nu/ApplicationRegistries)
+[![NuGet Download](https://img.shields.io/nuget/dt/ApplicationRegistries.svg)](https://www.nuget.org/packages/ApplicationRegistries)
+[![MIT License](https://img.shields.io/github/license/banban525/ApplicationRegistries.svg)](LICENSE)
 
 ## 説明
 
