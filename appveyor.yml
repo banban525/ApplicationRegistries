@@ -1,0 +1,26 @@
+version: 2.0.{build}
+image: Visual Studio 2017
+configuration: Release
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+before_build:
+- cmd: msbuild Source\ApplicationRegistries.sln /t:restore
+build:
+  verbosity: minimal
+after_build:
+- cmd: nuget pack "Source\ApplicationRegistries2.nuspec" -Version %APPVEYOR_BUILD_VERSION%
+artifacts:
+- path: '**/*.nupkg'
+  name: nupkg
