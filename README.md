@@ -69,13 +69,18 @@ class Program
 ## Dependency
 
 ApplicationRegistries2.dll depends only on .NET Framework 4.5.
+ApplicationRegistries2.dll will be distributed with your application.
+
+Other support tools distributed with nuget depend on the following libraries.
+* RazorEngine
+
 
 ## How to install
 
-You can install using nuget. (Unimplemented)
+You can install using nuget.
 
 ```
-PM> Install-Package ApplicationRegistries2
+PM> Install-Package ApplicationRegistries
 ```
 
 

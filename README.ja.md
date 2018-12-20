@@ -71,10 +71,10 @@ ApplicationRegistries2.dll は、.NET Framework 4.5 のみに依存します。
 
 ## インストール方法
 
-以下のコマンドでnugetからインストールできます。 (未実装)
+以下のコマンドでnugetからインストールできます。
 
 ```
-PM> Install-Package ApplicationRegistries2
+PM> Install-Package ApplicationRegistries
 ```
 
 
